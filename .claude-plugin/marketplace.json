@@ -1,0 +1,7 @@
+{
+  "name": "Primer",
+  "owner": { "name": "Andrew Block" },
+  "plugins": [
+    { "name": "education", "source": "./education" }
+  ]
+}
