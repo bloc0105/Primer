@@ -1,5 +1,5 @@
 ---
-name: code-reviewer
+name: researcher
 description: Researcher Agent
 model: opus
 tools: Agent, Read, Grep, Glob, WebSearch, WebFetch, Bash
