@@ -10,7 +10,30 @@ This is a command to establish a learning plan to bridge the gap from what they 
 # The Process
 
 
-## Step 1. Assessment of the Subject
+The process is diagrammed here in the following state chart:
+
+```mermaid
+stateDiagram-v2
+    state "Task Analysis" as task
+    state "User Interview" as interview
+    state "Topic Research" as Research
+    state "Compare Curriculum to Task" as matcher
+    state "Topic Code Review" as source
+
+    [*] --> task
+    task --> interview: Task Scoped
+    interview --> Research: User Assessed
+    Research --> matcher: Material Complete
+    matcher --> [*]: Curriculum matches task
+    matcher --> Research: Problems with Curriculum
+    Research --> interview: Sub-Topic Discovered
+    Research --> source: Something's wrong with Doc
+    source --> Research: Adjudicated by code review
+    
+```
+Each of the Steps and transitions is discussed Below
+
+## Task Analysis
 
 The AI will establish what the user is trying to achieve. It might be something like:
 
@@ -27,21 +50,19 @@ The user will form their request as a prompt entered as a parameter to this comm
 - If the user describes a goal with no existing code ("I want to build X"), this is **Proposal Mode**. Invoke the `propose-stack` skill.
 - If the request is ambiguous, ask the user directly which situation applies before proceeding.
 
-Both skills produce the same output: a **Tech Stack List**, the set of software components, tools, and concepts that make up the system, i.e. everything someone would need to know in order to work on it. This list is what Steps 2 through 4 operate on, regardless of which mode produced it.
-
-Do not proceed to Step 2 until the Tech Stack List has been produced and, in Proposal Mode, confirmed by the user.
+Both skills produce the same output: a **Tech Stack List**, the set of subjects, concepts, Topics, and tools (SCTTs) that make up the system, i.e. everything someone would need to know in order to work on it. 
 
 Output: Tech Stack List
 
-## Step 2. Assessment of the User's knowledge base
+## User Interview
 
-Once the Tech Stack has been established, it's time to see how well the user knows it.  At this point, the AI should ask the user questions that determine how well the user knows what something does.  This could be any series of questions ranging from "what does this code do?" and showing a snippet or "Write a function in Java that does ____" or it could even involve "What's the derivative of $x^2$ in terms of $x$.  The questions are entirely at the discretion of the AI, as long as they determine how well the user knows the system.  The AI may ask any number of questions, and these question should not feel like the user is getting "tested" or "grilled" but more like "here, let's see what you know so that I can help fill in the blanks for you". 
+It's time to see how well the user knows the SCTT stack.  At this point, the AI, using the `interviewer` agent, should ask the user questions that determine how well the user knows that component.
 
 Output: List of what the user knows about each component of the tech stack and what they don't.
 
-## Step 3. The Search
+## Topic Research
 
-The AI then goes out and does research on each software component. The research process will consist of at least the following
+The AI then goes out and does research on each SCTT and forms a useful curriculum for the user. The research process will use the `researcher` agent and consist of at least the following
 
 - Reading the online documentation on the component. 
 - Reading the Forums or articles on the component. 
@@ -49,41 +70,24 @@ The AI then goes out and does research on each software component. The research 
 
 The research process will likely be recursive. eg: in order to know PostGres, you need to know SQL.  So the AI can stop the research once they've reached something the user knows.
 
-Output: List of all the pertinent documentation to the tech stack, relative to the user's knowledge base. 
+It may be possible that the *Topic Research* process discovers further prerequisites to a given SCTT.  If this happens, it may be necessary to go back to the *User Interview* and ask more questions to the user. 
 
-## Step 4. Forming the List
+Output: List of all the pertinent documentation to the tech stack, relative to the user's knowledge base, in the order that they should learn it. 
 
-The final step is to form a curriculum of what the user has to do in order to learn each software component and in what order.  There's a certain complexity here. The AI needs to 
+## Compare Curriculum to Task
 
-- Take the information that has been gathered. 
-- Take the user's knowledge about each software component.  
-- Cross reference each of the and establish what the user needs to do 
-    - What parts of the documentation do they need to read?
-    - What tutorials will help them learn?
-    - After the reading and tutorials, how can they **immediately** apply their newly found skills to the problem that they originally faced.  
-
-For Example, a learning plan might look something like this:
-
-1. Read PostGres Chapter 1.
-1. Perform the Postgres tutorial included in Chapter 1.
-    - Apply what you learned to line __ in file ___.py in order to apply this to your problem.
-1. Read Postgres Chapter 4. 
-    - Apply what you learned to the application in order to fix _____ bug.  
-
-And it continues from there until everything the user would need to know is stacked into a curriculum they can follow.  
-
-Note that there could be steps in the learning that are skipped if the user already knows them.
-
-The ordering has to respect prerequisite structure, not just be freeform,so that the user can follow the curriculum exactly. 
+The curriculum is then compared to the user's potential experience. This is performed by the `skeptical-student` agent.  The task is to compare all of the documentation in the list to the task at hand. Look through every piece of documentation, and figure out whether it is truly sufficient and applicable to the user's learning plan.  
 
 Output: The curriculum for the user to follow. 
 
-## Iteration Process
+## Topic Code Review
 
-The *Step 2. Assessment of the User's knowledge base*  and *Step 3. The Search* could potentially iterate back and forth if the research uncovers something that needs to be assessed against the user's knowledge.  
+The *Topic Research* may find what the documentation says simply does not align with a piece of docuemntation, or that there are different docs out there that don't agree.  In this case, we must look at the source code for whatever SCTT is in question to determine the truth. 
 
-There are a couple of possibilities that could happen as the research carries on through these iterations. 
+During this phase, the documentation must be directly compared to the source code for the SCTT.  This determines which documentation is right about what actually happens.  
 
-The stopping side: at some point a node's depth exceeds what's actually load-bearing for the goal. You don't need to understand how the C compiler translates to assembly to write C, you just need to trust it works. It's a key distinction between *user* and *developer*.  Once you reach the user level, you don't need to keep going to the developer level. 
+If the *Topic Code Review* yields problems, it will send those problems back to the *Topic Research* stage for further research to find a better explanation that gets at those problems. 
 
-The expansion side: a node turns out to have a prerequisite that's actually necessary, not just interesting, and skipping it would mean the person hits a wall later that the curriculum should have prevented. This is the case where the loop between assessment and search genuinely needs to add a new node to the map rather than close one out.
+## Transitions
+
+Most of the Transitions in the state chart are clear, but the ones below have further explanation
