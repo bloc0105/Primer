@@ -84,7 +84,9 @@ Output: The curriculum for the user to follow.
 
 The *Topic Research* may find what the documentation says simply does not align with a piece of docuemntation, or that there are different docs out there that don't agree.  In this case, we must look at the source code for whatever SCTT is in question to determine the truth. 
 
-During this phase, the documentation must be directly compared to the source code for the SCTT.  This determines which documentation is right about what actually happens.  
+During this phase, the documentation must be directly compared to the source code for the SCTT.  This determines which documentation is right about what actually happens. 
+
+In order to do this, clone the source code for the SCTT to the home directory from wherever it is on the internet and then have the `code-reader` agent read through it.  
 
 If the *Topic Code Review* yields problems, it will send those problems back to the *Topic Research* stage for further research to find a better explanation that gets at those problems. 
 
