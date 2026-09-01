@@ -9,6 +9,25 @@ This is a command to establish a learning plan to bridge the gap from what they 
 
 # The Process
 
+The following Class diagram shows how each of the agents relate. Lines without arrows represent a persistent relationship — the same agent instance stays addressable across multiple rounds, the way a person has an ongoing conversation with the main agent rather than a single exchange. Lines with a directional arrow indicate a one-shot subagent: the main agent spawns it, it completes a single task and reports its findings back, and that instance is not addressed again.
+
+```mermaid
+classDiagram
+  class person
+  class main-agent
+  class deep-researcher
+  class code-recon
+  class interviewer
+  class skeptical-student
+
+  person -- main-agent
+
+  main-agent -- interviewer
+  main-agent --> code-recon
+  main-agent -- deep-researcher
+  main-agent -- skeptical-student
+
+```
 
 The process is diagrammed here in the following state chart:
 
@@ -67,7 +86,7 @@ Output: List of what the user knows about each component of the tech stack and w
 
 ## Topic Research
 
-The AI then goes out and does research on each subject/concept/topic/tool and forms a useful curriculum for the user. The research process will use the `researcher` agent and consist of at least the following
+The AI then goes out and does research on each subject/concept/topic/tool and forms a useful curriculum for the user. The research process will use the `deep-researcher` agent and consist of at least the following
 
 - Reading the online documentation on the component. 
 - Reading the Forums or articles on the component. 
