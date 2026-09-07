@@ -103,7 +103,7 @@ Output: List of all the pertinent documentation to the tech stack, relative to t
 The curriculum is then compared to the user's potential experience. This is performed by the `skeptical-student` agent. The task is to compare all of the documentation in the list to the task at hand. Look through every piece of documentation, and figure out whether it is truly sufficient and applicable to the user's learning plan. Like `code-reader`, this agent has no shell or git access — if verifying sufficiency requires checking the user's own project source, that source must already be materialized as plain, readable files (see *Topic Code Review*) before this agent is invoked.
  
 
-Output: The curriculum for the user to follow. 
+Output: Final approval on the curriculum for the user to follow, or — if approval is withheld — a set of change-requests sent back to whoever owns the affected content.
 
 ## Topic Code Review
 
