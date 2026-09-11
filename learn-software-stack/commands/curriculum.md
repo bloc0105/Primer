@@ -5,7 +5,7 @@ description: The process to establish what the users path will be to learn a new
 
 # Overall
 
-This is a command to establish a learning plan to bridge the gap from what they know to what they don't
+This is a command to establish a learning plan to bridge the gap from what they know to what they don't. The learning plan will consist of documentation and an accompanying practical portion to complete for each lesson.
 
 # The Process
 
@@ -94,21 +94,30 @@ The AI then goes out and does research on each subject/concept/topic/tool and fo
 
 The research process will likely be recursive. eg: in order to know PostGres, you need to know SQL.  So the AI can stop the research once they've reached something the user knows.
 
+For each subject/concept/topic/tool, it is not simply enough to have the documentation in order.  True knowledge is only gained by applying it.  Therefore everything that is taught must have a practical application in the project that the user is working on.  This means that everything that user learns must have an *applied* portion in which the user does something to the project applying the skills that are learned in the lesson. 
+
 It may be possible that the *Topic Research* process discovers further prerequisites to a given subject/concept/topic/tool.  If this happens, it may be necessary to go back to the *User Interview* and ask more questions to the user. This loop-back must resume the same `interviewer` agent instance used for the original interview, not spawn a new one — the agent needs the full history of prior answers to fold the new question into one coherent determination, rather than producing a second, disconnected assessment.
 
-Output: List of all the pertinent documentation to the tech stack, relative to the user's knowledge base, in the order that they should learn it. 
+Output: A full lesson plan for the tech stack, relative to the user's knowledge base, in the order that they should learn it. 
 
 ## Compare Curriculum to Task
 
-The curriculum is then compared to the user's potential experience. This is performed by the `skeptical-student` agent. The task is to compare all of the documentation in the list to the task at hand. Look through every piece of documentation, and figure out whether it is truly sufficient and applicable to the user's learning plan. Like `code-reader`, this agent has no shell or git access — if verifying sufficiency requires checking the user's own project source, that source must already be materialized as plain, readable files (see *Topic Code Review*) before this agent is invoked.
+The curriculum is then compared to the user's potential experience. This is performed by the `skeptical-student` agent. The task is to compare all of the lessons in the list to the task at hand. Look through every piece of documentation, and figure out whether it is truly sufficient and applicable to the user's learning plan. Like `code-reader`, this agent has no shell or git access — if verifying sufficiency requires checking the user's own project source, that source must already be materialized as plain, readable files (see *Topic Code Review*) before this agent is invoked.
+
+In addition, for every lesson, read the practical portion and consider the following:
+- Does this apply the lessons learned from the documentation?
+- Does this move the project forward?
+- Is this appropriate to the user's knowledge level?
  
 
 Output: Final approval on the curriculum for the user to follow, or — if approval is withheld — a set of change-requests sent back to whoever owns the affected content.
 
 ## Topic Code Review
 
-The *Topic Research* may find what the documentation says simply does not align with a piece of documentation, or that there are different docs out there that don't agree. In this case, we must look at the source code for whatever subject/concept/topic/tool is in question to determine the truth. This state also covers the more common case for an existing-codebase task: any claim made anywhere in this pipeline about the user's own project — in the Tech Stack List, in an interview question, in the research findings — must be verified against that project's actual source before the curriculum treats it as fact, regardless of whether Topic Research flagged it as uncertain. A confidently stated claim is not evidence it was checked.
+The *Topic Research* may find what the documentation says simply does not align with the actual functionality of the subject/concept/topic/tool, or that there are different docs out there that don't agree. In this case, we must look at the source code for whatever subject/concept/topic/tool is in question to determine the truth. If there's something we don't know about SQLAlchemy, for instance, maybe we have to look at the source for it.  This should be expected to be a vary rare occurrence. 
+
+This state also covers the more common case for an existing-codebase task: any claim made anywhere in this pipeline about the user's own project — in the Tech Stack List, in an interview question, in the research findings — must be verified against that project's actual source before the curriculum treats it as fact, regardless of whether Topic Research flagged it as uncertain. A confidently stated claim is not evidence it was checked.
 
 In order to do this, first materialize the real source as plain files somewhere the agent can read them directly — for a third-party subject/concept/topic/tool, clone its repository to the home directory; for the user's own project, check out the correct branch into a worktree, since a mid-branch git ref is not something these agents can resolve themselves. Then have the `code-reader` agent read through it. Neither `code-reader` nor the `skeptical-student` agent used in *Compare Curriculum to Task* has shell or git access — both can only read files placed directly in front of them. Any state that needs either agent to check real source must complete this preparation first; neither agent can be told to "check the repo" and be expected to locate or check it out on its own.
 
-This state is not limited to resolving items Topic Research explicitly flagged as uncertain. It must also spot-check any code claim baked into the User Interview questions or Topic Research findings against the actual source, regardless of whether anyone flagged it — a confidently stated claim is not evidence it was verified.
+This state is not limited to resolving items Topic Research explicitly flagged as uncertain. It must also spot-check any code claim baked into the User Interview questions or Topic Research findings against the actual source, regardless of whether anyone flagged it — a confidently stated claim is not evidence it was verified. This applies with equal weight to claims embedded in an applied portion — a file path, a command, a predicted output, or a described failure mode is exactly the kind of claim this state exists to verify, and getting one wrong is worse here than in a reading list, since the user acts on it directly.
