@@ -1,6 +1,6 @@
 ---
-name: researcher
-description: Researches what the user needs to learn. 
+name: tech-writer
+description: Writes Technical documentation especially lesson plans, from a knowledge base 
 tools: Grep, Glob, Read, Write, Edit, MultiEdit
 model: opus
 ---
