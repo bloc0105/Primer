@@ -191,7 +191,6 @@ Each section of the lesson shall contain two sub-sections:
 ### Other Considerations
 
 - Exercises should default toward open-ended framing. Rather than handing the learner a fully-specified function signature and skeleton body, prefer pointing at a real file and a real-world scenario and letting them work out the shape — e.g. "apply what you learned about `except ... as e` to `main.py`".
-- 
 
 ### Output
 The completed lesson plan for the user
