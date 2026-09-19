@@ -2,7 +2,6 @@
 name: curriculum
 description: The process to establish what the users path will be to learn a new subject or codebase.
 ---
-
 # Overall
 
 This is a command to establish a learning plan to bridge the gap from what they know to what they don't. The learning plan will consist of documentation and an accompanying practical portion to complete for each lesson.
@@ -24,10 +23,12 @@ classDiagram
   class interviewer
   class skeptical-student
   class tech-writer
+  class simple-interviewer
 
   person -- main-agent
 
   main-agent -- interviewer
+  main-agent -- simple-interviewer
   main-agent --> code-recon
   main-agent -- deep-researcher
   main-agent -- skeptical-student
@@ -40,6 +41,7 @@ The process is diagrammed here in the following state chart:
 ```mermaid
 stateDiagram-v2
     state "Task Analysis" as task
+    state "Basic Assessment" as assess
     state "User Interview" as interview
     state "Topic Research" as Research
     state "Compare Curriculum to Task" as matcher
@@ -47,7 +49,8 @@ stateDiagram-v2
     state "Write the Lesson Plan" as write
 
     [*] --> task
-    task --> interview: Task Scoped
+    task --> assess: Task Scoped
+    assess --> interview: Basic Knowledge Gathered
     interview --> Research: User Assessed
     Research --> write: Research is compiled
     write --> matcher: Material Complete
@@ -101,24 +104,47 @@ Both skills produce the same output: a **Tech Stack List**, the set of subjects,
 
 The output of the initial assessment should be the **Tech Stack list.**  This is the list of subject/concept/topic/tools that are used in the project.  Each subject/concept/topic/tool should be listed, followed by a brief paragraph describing how that tool is used in the project. 
 
+## Basic Assessment
+
+### Basics
+- Performed by the `simple-interviewer` Agent.
+
+### Input
+The Tech Stack List from the Task Analysis
+
+### The Process
+
+This is an informal assessment of the skill level on the tech stack of the learner. It's simply meant to establish the level of knowledge that the user feels they have about a subject. 
+
+### Output
+
+A basic assessment of the user's skillset, relative to what would be necessary to complete the objectives of the proposed work on the project. 
+
+Therefore, the List is now each subject/concept/topic/tool, plus a paragraph about how much it is used in the project, and another paragraph about how much the user knows about the subject.
+
 ## User Interview
 
 ### Basics
 - Performed by the `interviewer` Agent.
 
 ### Input
-The Tech Stack List from the Task Analysis
+The Basic Assessment of the learner's skill-set.
 
 ### The Process
-It's time to see how well the user knows the subject/concept/topic/tool stack. At this point, the user is interviewed to determine their knowledge of the various subjects/concepts/topics/tools. The interview shall be invoked iteratively: one question per call, with the main agent relaying that question to the user, then relaying the user's answer back to that same agent instance before requesting the next question. 
 
-The main does not choose what to ask, interpret an answer, or decide when the interview ends — that authority belongs to the `interviewer` agent alone, which also produces the final determination itself, from having tracked the interview throughout, rather than the AI reconstructing it afterward.
+The purpose of the basic assessment was to determine roughly what the user knows about a subject. Now is the point to narrow that understanding with precision.
+
+At this point, the user is interviewed to determine their knowledge of the various subjects/concepts/topics/tools. The interview shall be invoked iteratively: one question per call, with the main agent relaying that question to the user, then relaying the user's answer back to that same agent instance before requesting the next question. 
+
+Since the basic assessment already covered some topics, the interview should account for this, which will expedite the interviewer process.  For instance, if the user explicitly said they know nothing about a certain subject/concept/topic/tool, it's probably not necessary to ask them about it.  
+
+The main agent does not choose what to ask, interpret an answer, or decide when the interview ends — that authority belongs to the `interviewer` agent alone, which also produces the final determination itself, from having tracked the interview throughout, rather than the AI reconstructing it afterward.
+
+The `interviewer` may, however, need to establish relevance of its questions to the project itself, and should be asking the main agent, who may forward questions to other agents, whether it's question has pertinence, so as to not ask questions that have no bearing on the project. 
 
 ### Output
 
-This will be the same list as the Tech Stack List, but now that it has been determined how much the user knows about each subject, That information is now included. 
-
-Therefore, the List is now each subject/concept/topic/tool, plus a paragraph about how much it is used in the project, and another paragraph about how much the user knows about the subject, and whether this is sufficient to be able to do the work for the project.
+This will be the same list as the list that was established by the basic assessment, but with significantly more precision, describing exactly which sub-topics of a subject/concept/topic/tool the user is familiar with, and where the gaps lie.  Also, the interview can tell exactly what things they need to learn in orer to complete the work necessary to accomplish the objectives of the project.
 
 ## Topic Research
 
@@ -134,8 +160,7 @@ Now the task is the research on each subject/concept/topic/tool to establish the
 - Reading the online documentation on the component from the official website. 
 - Reading the Forums or articles on the component. 
 
-The research process will likely be recursive. eg: in order to know PostGres, you need to know SQL.  So the research can stop once it crosses into the knowledge base of the user.
-
+The research process will likely be recursive. eg: in order to know Postgres, you need to know SQL.  So the research can stop once it crosses into the knowledge base of the user.
 
 It may be possible that the *Topic Research* process discovers further prerequisites to a given subject/concept/topic/tool.  This could be either a situation where a new prerequisite subject/concept/topic/tool is discovered, or there is simply more information about the subject/concept/topic/tool that wasn't assessed relative to the user's knowledge. In either case, it may be necessary to go back to the *User Interview* and ask more questions to the user. This loop-back shall resume the same `interviewer` agent instance used for the original interview, not spawn a new one — the agent needs the full history of prior answers to fold the new question into one coherent determination, rather than producing a second, disconnected assessment.
 
@@ -162,6 +187,11 @@ Each section of the lesson shall contain two sub-sections:
 
 1. The documentation that the user needs to read in order to be effective with that subject. If only a specific section of the 
 2. A practical application of the lesson in the project itself.  This will tell the user where to practice what they have just learned, and how to apply it. The work should be pertinent to that section of the lesson and not be dependent on things that have not been learned yet. 
+
+### Other Considerations
+
+- Exercises should default toward open-ended framing. Rather than handing the learner a fully-specified function signature and skeleton body, prefer pointing at a real file and a real-world scenario and letting them work out the shape — e.g. "apply what you learned about `except ... as e` to `main.py`".
+- 
 
 ### Output
 The completed lesson plan for the user
