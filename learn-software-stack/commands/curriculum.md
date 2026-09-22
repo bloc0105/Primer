@@ -144,7 +144,7 @@ The `interviewer` may, however, need to establish relevance of its questions to 
 
 ### Output
 
-This will be the same list as the list that was established by the basic assessment, but with significantly more precision, describing exactly which sub-topics of a subject/concept/topic/tool the user is familiar with, and where the gaps lie.  Also, the interview can tell exactly what things they need to learn in orer to complete the work necessary to accomplish the objectives of the project.
+This will be the same list as the list that was established by the basic assessment, but with significantly more precision, describing exactly which sub-topics of a subject/concept/topic/tool the user is familiar with, and where the gaps lie. The user's conceptual knowledge will be separate from their vocabulary knowldge.  This means that if a user knows how to do something, but doesn't know the terminology for it, this is considered different from actually not knowing the subject/concept/tool/topic.  From this, the interview can tell exactly what things the user must learn in orer to complete the work necessary to accomplish the objectives of the project.
 
 ## Topic Research
 
@@ -177,7 +177,8 @@ The list of Documentation that is necessary to get the user from their current s
 
 ### Input
 
-The curriculum from the Research State. 
+- The curriculum from the Research State.
+- The interview assessmentof the user.
 
 ### The Process
 
@@ -191,6 +192,7 @@ Each section of the lesson shall contain two sub-sections:
 ### Other Considerations
 
 - Exercises should default toward open-ended framing. Rather than handing the learner a fully-specified function signature and skeleton body, prefer pointing at a real file and a real-world scenario and letting them work out the shape — e.g. "apply what you learned about `except ... as e` to `main.py`".
+- Always tune a lession section to bridge the gap between the user's existing knowledge and what they do not know.  Sometimes that might be as simple as "here's the vocabulary for what you already know" or "here's the code to do what you already understand" or "here's a refresher on a concepy you were mostly good, but a little fuzzy on".  Some times it might be "you said you don't know anything about this subject, so let's start at the beginning".  Always tune approporaitely. 
 
 ### Output
 The completed lesson plan for the user
