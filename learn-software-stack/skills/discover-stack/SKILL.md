@@ -8,7 +8,7 @@ agent: code-recon
 
 ## Job
 
-Read the codebase and report, as fact, what it's actually built with. This is an observation task, not a recommendation task. Do not suggest alternatives or improvements, only report what is there.
+Read the codebase and report, as fact, what it's actually built with. This is an observation task, not a recommendation task: report facts, including when a pattern is objectively wrong, deprecated, or buggy — that's still something that's there, not a suggestion. What's off-limits is proposing the fix: do not suggest alternatives, redesigns, or how something should have been done instead.
 
 ## Process
 
