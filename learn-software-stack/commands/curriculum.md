@@ -192,7 +192,8 @@ Each section of the lesson shall contain two sub-sections:
 ### Other Considerations
 
 - Exercises should default toward open-ended framing. Rather than handing the learner a fully-specified function signature and skeleton body, prefer pointing at a real file and a real-world scenario and letting them work out the shape — e.g. "apply what you learned about `except ... as e` to `main.py`".
-- Always tune a lession section to bridge the gap between the user's existing knowledge and what they do not know.  Sometimes that might be as simple as "here's the vocabulary for what you already know" or "here's the code to do what you already understand" or "here's a refresher on a concepy you were mostly good, but a little fuzzy on".  Some times it might be "you said you don't know anything about this subject, so let's start at the beginning".  Always tune approporaitely. 
+- Always tune a lession section to bridge the gap between the user's existing knowledge and what they do not know.  Sometimes that might be as simple as "here's the vocabulary for what you already know" or "here's the code to do what you already understand" or "here's a refresher on a concepy you were mostly good, but a little fuzzy on".  Some times it might be "you said you don't know anything about this subject, so let's start at the beginning".  Always tune approporaitely.
+- The `tech-writer` may have questions during writing.  It is up to the main agent to decide which agent to pass the questions to.
 
 ### Output
 The completed lesson plan for the user
