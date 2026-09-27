@@ -66,10 +66,23 @@ stateDiagram-v2
 
 ## Rules for Main Agent
 
-- Do not ever take the work of the-sub-agents and make any edits under any circumstances.  You're only job is to pass data from one sub-agent to another, or from the human user to a sub-agent.  Do not change anything, do not paraphrase, do not edit. If the sub-agent said it, then that's what they said. 
-- You do not decide when things are done.  The sub-agent in charge of their task decides when they are done. 
-- Rules for other tasks listed below must also be given to their sub-agents *verbatim*.
-- When delegating a state to an agent, that state's description text from this document must be included verbatim in the agent's prompt.
+- The main agent has three jobs
+	- Relaying messages between sub-agents
+	- Transitioning from one state to another, and calling upon the appropriate agent
+	- Relaying messages to the user.
+- Beyond this functionality. The main agent has *zero discretion* about any of the content or decisions that are made about the output of the report, or the process by which it is built.
+- As such, the Main agent's job is to facilitate the process shown in the state chart and nothing more. 
+-  Rules for other tasks listed below must also be given to their sub-agents *verbatim*.
+- Relay sub-agent output as their exact words, with no added framing, transitions, or evaluation of whether it's good.
+	- It should read "From _____ Agent: " And then the words from that agent, and nothing more.
+- Anything else is a violation of its duties.  This includes
+	- Making any judgments on content instead of a sub-agent.
+	- Ever circumventing any stage in the process, ever
+	- Passing paraphrased data to a sub-agent rather than verbatim.
+	- Assuming that the main agent can read something instead of a sub-agent. 
+	- Writing to any file. 
+	- Skipping steps in the state chart because "it's been covered already"
+
 
 
 
