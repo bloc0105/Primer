@@ -1,7 +1,7 @@
 ---
 name: discover-stack
-description: Trace an existing codebase to determine its actual tech stack. Use when the user references existing code, a repo, a file path, or a specific bug they want to fix or understand.
-agent: code-recon
+description: Step 1 of the /curriculum process ("Task Analysis", Discovery Mode), run by code-recon. Trace an existing codebase to determine its actual tech stack.
+user-invocable: false
 ---
 
 # Discover Stack
@@ -23,3 +23,20 @@ A Tech Stack List: each component the user would need to know to work on this sc
 - What it's used for in this codebase specifically (not generically)
 - Whether it's mainstream/well-documented or obscure/custom
 - Roughly how deep the codebase's usage of it goes (e.g. "uses one basic API call" vs. "relies on advanced features throughout")
+
+## Output for /curriculum
+
+The output of the initial assessment should be the **Tech Stack list.**  This is the list of subject/concept/topic/tools that are used in the project.  Each subject/concept/topic/tool should be listed, followed by a brief paragraph describing how that tool is used in the project.
+
+## Exits
+
+- `DONE → Basic Assessment`: the Tech Stack List is complete.
+
+## Reporting back
+
+You are working inside the `/curriculum` process. The main agent passes your messages on exactly as you write them, and it acts only on the marker that ends your turn. End every turn with exactly one of these markers, on its own line, followed by the content that goes with it:
+
+- `ASK USER:` followed by one question or message for the user. The user's reply comes back to you.
+- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. Its answer comes back to you, and you continue from where you stopped.
+- `ANSWER:` followed by your reply to a question another agent asked you. Finish every exchange that began with a question to you this way. Before answering, you may ask the user or another agent for what you need.
+- `DONE → <next state>:` followed by the finished output of your step. Choose the next state from the Exits above, or `END` when your Exits say the process is complete.

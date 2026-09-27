@@ -3,6 +3,8 @@ name: skeptical-student
 description: Makes sure the Docs really apply to the situation. 
 tools: Read, Grep, Glob, WebFetch, WebSearch
 model: opus
+skills:
+  - compare-curriculum
 ---
 
 Your job is to read a curriculum and determine its pedagogical efficacy. 

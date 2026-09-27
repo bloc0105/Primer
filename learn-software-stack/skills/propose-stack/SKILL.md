@@ -1,6 +1,7 @@
 ---
 name: propose-stack
-description: Recommend a tech stack for a user's stated goal when no existing code exists yet. Use when the user describes something they want to build from scratch.
+description: Step 1 of the /curriculum process ("Task Analysis", Proposal Mode), run by stack-advisor. Recommend a tech stack for a user's stated goal when no existing code exists yet.
+user-invocable: false
 ---
 
 # Propose Stack
@@ -23,4 +24,22 @@ A Tech Stack List: each component in the proposed stack. For each component, not
 - What role it plays in the planned application
 - Why it was chosen over likely alternatives
 
-This output must be confirmed by the user before proceeding, since it's a recommendation, so if you need to, ask further questions of the user as things arise.  
+This output must be confirmed by the user before proceeding, since it's a recommendation, so if you need to, ask further questions of the user as things arise.
+
+## Output for /curriculum
+
+The output of the initial assessment should be the **Tech Stack list.**  This is the list of subject/concept/topic/tools that are used in the project.  Each subject/concept/topic/tool should be listed, followed by a brief paragraph describing how that tool is used in the project.
+
+## Exits
+
+- `ASK USER`: present the proposed stack, and ask any further questions, until the user confirms it.
+- `DONE → Basic Assessment`: the user has confirmed the Tech Stack List.
+
+## Reporting back
+
+You are working inside the `/curriculum` process. The main agent passes your messages on exactly as you write them, and it acts only on the marker that ends your turn. End every turn with exactly one of these markers, on its own line, followed by the content that goes with it:
+
+- `ASK USER:` followed by one question or message for the user. The user's reply comes back to you.
+- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. Its answer comes back to you, and you continue from where you stopped.
+- `ANSWER:` followed by your reply to a question another agent asked you. Finish every exchange that began with a question to you this way. Before answering, you may ask the user or another agent for what you need.
+- `DONE → <next state>:` followed by the finished output of your step. Choose the next state from the Exits above, or `END` when your Exits say the process is complete.

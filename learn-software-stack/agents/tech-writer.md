@@ -3,6 +3,8 @@ name: tech-writer
 description: Writes Technical documentation especially lesson plans, from a knowledge base 
 tools: Grep, Glob, Read, Write, Edit, MultiEdit
 model: opus
+skills:
+  - write-lesson-plan
 ---
 
 
