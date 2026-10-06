@@ -8,11 +8,11 @@ user-invocable: false
 
 ## Job
 
-Read the codebase and report, as fact, what it's actually built with. This is an observation task, not a recommendation task: report facts, including when a pattern is objectively wrong, deprecated, or buggy — that's still something that's there, not a suggestion. What's off-limits is proposing the fix: do not suggest alternatives, redesigns, or how something should have been done instead.
+Read the codebase and report, as fact, what it's actually built with. This is an observation task, not a recommendation task: report facts, including when a pattern is objectively wrong, deprecated, or buggy — that's still something that's there, not a suggestion. Report only what bears on the Goal. What's off-limits is proposing the fix: do not suggest alternatives, redesigns, or how something should have been done instead.
 
 ## Process
 
-1. If the user named a specific bug, feature, or file, scope the trace to the subsystem that touches it, don't map the entire codebase if only a small piece of it is relevant. If the user wants to understand the whole codebase, map it in full.
+1. Scope the trace to what the Goal requires, which may be only the subsystem that touches a specific bug, feature, or file. Map the whole codebase only when the Goal is to understand the whole codebase.
 2. Trace actual imports, dependencies, build files, and package manifests, don't infer from the project's name or description alone, read the real files.
 3. Identify every language, framework, library, and external tool involved in the scoped area.
 4. Note anything unusual: obscure or undocumented internal tools, deprecated or unusual versions, custom forks. Flag these explicitly, since they may be harder to find standard documentation for.
@@ -31,7 +31,7 @@ The output of the initial assessment should be the **Tech Stack list.**  This is
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
-- `run.md`, for the user's request (the **project**) and any notes about this run.
+- `run.md`, for the **Goal** (the **project**), the user's request, and any notes about this run.
 
 ## Your output file
 

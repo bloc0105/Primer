@@ -110,6 +110,7 @@ In `--only` mode, the run ends when the starting step's agent sends `DONE`. Chec
 2. **Enter every state the agents send you to.** Treat every state as required, even one whose topic has come up before. Each state's agent does work the earlier states did not.
 3. **Send every question to the agent the `ASK` marker names.** That agent owns the answer. Your part is delivering the question and bringing the answer back.
 4. **Leave all content writing to the agents.** Your file operations are setting up the run folder, keeping `run.md` up to date, appending exact messages to `transcript.md`, and *Preparing source*.
+5. **Start Task Analysis only after `run.md` records a Goal.**
 
 # Starting a run
 
@@ -124,14 +125,14 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
 1. **Read the mode from the arguments:**
    - `--from <step> <source-run> [notes]`: start at `<step>` and run to the end.
    - `--only <step> <source-run> [notes]`: run `<step>` alone, then stop.
-   - Anything else is a **full** run, and the arguments are the user's request. When the arguments are empty, ask the user what they're looking to do, and use their answer as the request.
+   - Anything else is a **full** run, and the arguments are the user's request. A full run shall start from a goal: what the user wants to be able to do or have when the process ends, such as fixing a named bug, building a named thing, or changing a named behavior. Test: complete the sentence "The user wants to ___" using only the user's own words. A named repo, branch, file or tool is a target, and "understand" or "learn" with no outcome stated is also a target, so neither completes the sentence. When the arguments are empty, or the sentence can't be completed, ask the user "What are you trying to do with `<target>`?" (or "What are you looking to do?" when there is no target) and repeat until it can be completed. Record the completed sentence as the goal.
 2. **For `--from` and `--only`, check the step and the source run:**
    - `<step>` is one of these skill names, each with the number of its output file: `discover-stack` (01), `propose-stack` (01), `basic-assessment` (02), `user-interview` (03), `topic-research` (04), `write-lesson-plan` (06), `compare-curriculum` (07).
    - When `<step>` is `topic-code-review`, tell the user that code review only happens when `deep-researcher` asks for it, so it can't be a starting step. To tune it, they can run `--only topic-research` on a request where the documentation is known to be wrong. Stop there, without creating a run folder.
    - When `<step>` is any other name that isn't in the list, tell the user the valid step names and stop there.
    - `<source-run>` is a folder under `./runs/`, or a path to one. It contains a `run.md`. When it can't be found, tell the user and stop there.
 3. **Create `./runs/` if it doesn't exist.** At the same time, write `./runs/.gitignore` containing the single line `*`. This keeps runs out of git in any repo, without touching the repo's own `.gitignore`.
-4. **Create the run folder,** named `<YYYY-MM-DD>-<slug>`: today's date, then three to five lowercase words from the request joined by hyphens. When a folder with that name exists, add `-2`, `-3` and so on.
+4. **Create the run folder,** named `<YYYY-MM-DD>-<slug>`: today's date, then three to five lowercase words from the goal (or, for --from and --only, the request) joined by hyphens. When a folder with that name exists, add `-2`, `-3` and so on.
 5. **For `--from` and `--only`, copy files from the source run:** every numbered file whose number is *below* the starting step's number. For example, a start at `topic-research` (04) copies the `01-`, `02-` and `03-` files. Copy nothing else, so every other file in the new folder comes from this run.
 6. **Write `run.md`:**
 
@@ -139,6 +140,7 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
    # Run: <run folder name>
 
    - **Request:** <the user's request, word for word; for --from and --only, copied from the source run's run.md>
+   - **Goal:** <the completed sentence "The user wants to ___", in the user's words; for --from and --only, copied from the source run's run.md>
    - **Mode:** full | from <step> | only <step>
    - **Source run:** <source run folder, or "none">
    - **Notes:** <the notes from the arguments, word for word, or "none">
@@ -181,7 +183,7 @@ The main agent will establish what the user is trying to achieve. It might be so
 - Using a similar but different tool in a codebase.
 - Learning a new software tool.
 
-The user will form their request as a prompt entered as a parameter to this command. If the user doesn't provide a prompt, ask them what they're looking to do. The user's goal is referred to as the **project**.
+The user's goal, established in *Starting a run*, is referred to as the **project**.
 
 **First, determine the mode:**
 

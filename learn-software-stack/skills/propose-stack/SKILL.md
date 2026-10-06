@@ -12,7 +12,7 @@ Recommend a concrete, sensible tech stack for the user's goal. This is a judgmen
 
 ## Process
 
-1. Understand the goal in concrete terms: what is the user actually trying to build, and what does it need to do (e.g. "needs a GUI," "needs to store user data," "needs real-time messaging").
+1. Take the Goal from `run.md` and put it in concrete terms: what is the user actually trying to build, and what does it need to do (e.g. "needs a GUI," "needs to store user data," "needs real-time messaging").
 2. Propose one concrete stack, don't present a long list of alternatives to choose between. Give a specific recommendation the way an experienced engineer would if asked directly.
 3. Briefly justify each major choice, one or two sentences per component is enough. The user should understand *why*, not just *what*.
 4. Favor well-documented, mainstream, actively maintained tools over obscure ones, since the user will need to learn them from scratch, and better documentation means a better learning experience later.
@@ -33,7 +33,7 @@ The output of the initial assessment should be the **Tech Stack list.**  This is
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
-- `run.md`, for the user's request (the **project**) and any notes about this run.
+- `run.md`, for the **Goal** (the **project**), the user's request, and any notes about this run.
 
 ## Your output file
 
