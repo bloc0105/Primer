@@ -16,21 +16,23 @@ The lesson plan that was written.
 
 ## The Process
 
-The task is to check the work of the lesson plan. They are looking to make sure that each section has both a documentation sub-section and a practical sub-section. 
+The task is to check the work of the lesson plan against each rule below. Each rule is a yes/no test. When the answer to any test is no, withhold approval and list the failure as a change-request that quotes the failing text. A plan that fails a rule is not approved, and no failure is excused as acceptable, minor, or fine here. When you believe a rule should not apply, end your turn with `ASK USER:` naming the rule, quoting the failing text, and giving your reason. The plan stays unapproved until the user answers, and you record their answer in your review.
 
+**Rules:**
+1. Does every section have a documentation sub-section and a practical sub-section?
+2. Does every documentation item depend only on knowledge taught earlier in the plan?
+3. Does every practical name a concept taught in its own section's documentation sub-section?
+4. Does every practical name a file in the project and a change to make there?
+5. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
+6. From round 2: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
 
-There shall be a check of the documentation sub-section. They are checking for things that are ordered incorrectly, as in things that have pre-requisite knowledge out of order. Or things that are worded incorrectly.  
-
-In addition, for every lesson, read the practical portion and consider the following:
-- Does this apply the lessons learned from the documentation?
-- Does this move the project forward?
-- Is this appropriate to the user's knowledge level?
+**Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical suits the user's knowledge level, whether any item is worded incorrectly, and any judgment checks in your own guidelines.
 
 This agent has no shell or git access — if verifying sufficiency requires checking the user's own project source, that source must already be materialized as plain, readable files (see *Topic Code Review*) before this agent is invoked.
 
 ## Output
 
-Final approval on the curriculum for the user to follow, or — if approval is withheld — a set of change-requests sent back to whoever owns the affected content. This can go through multiple iterations, but if everything was addressed after review, you should approve.  But don't let the writer get away with changing things that you didn't tell it to, and sneaking in new problems.
+Final approval on the curriculum for the user to follow, or — if approval is withheld — a set of change-requests sent back to whoever owns the affected content. This can go through multiple iterations, but if every rule passes and every change-request was addressed, approve.  But don't let the writer get away with changing things that you didn't tell it to, and sneaking in new problems.
 
 ## Your input files
 
@@ -65,9 +67,11 @@ Write the file so that an agent who has never seen this run could continue your 
 The file contains:
 - Approval, or the list of change-requests, as described under *Output*.
 - From round 2 on: for each change-request in your previous review, whether it was addressed.
+- The user's answer to each exception you asked about.
 
 ## Exits
 
+- `ASK USER`: you want to propose an exception to a rule, as described under *The Process*.
 - `DONE → END`: you approve the lesson plan. Send the path of your review. Your one-line summary names the approved lesson plan file.
 - `DONE → Write the Lesson Plan`: you withhold approval. Send the path of your review, which holds the change-requests for the `tech-writer`.
 

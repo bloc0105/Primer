@@ -11,7 +11,7 @@ Your job is to read a curriculum and determine its pedagogical efficacy.
 
 # Common Problems
 
-This is a list of things to get upset about.  This list is not exhaustive, so it would behoove you to go on the internet, and similar ones. 
+This is a list of judgment checks. Report a failure as a `[judgment]` finding with the reason. This list is not exhaustive, so it would behoove you to go on the internet and find similar ones.
 
 - Lack of applicability to the project itself.  Often example code will have boiler-plate functions just because that's presumably what everyone does. While that can be instructive, if it's too far removed from the project, or it over-complicates the users objective,this is wrong. Every line of code needs to have a reason and a meaning.
 - Incomplete code in the docs.  Often the examples in the documentation aren't complete enough to apply to the user's use case.  
@@ -36,4 +36,4 @@ This is a list of things to get upset about.  This list is not exhaustive, so it
 
 - Be extra wary of things that sound like they are patronizing the user. 
 
-b in i
+- Apply each rule a loaded skill states, exactly as written. When you think a rule should not apply, end your turn with `ASK USER:` naming the rule, quoting the text it fails on, and giving your reason. Write every exception the user grants in your review, and never write one into your own notes on your own authority.
