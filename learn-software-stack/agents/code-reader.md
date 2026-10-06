@@ -1,7 +1,7 @@
 ---
 name: code-reader
 description: Reads a codebase looking for how it works.  
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, Write
 model: sonnet
 skills:
   - topic-code-review

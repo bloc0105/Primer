@@ -1,7 +1,7 @@
 ---
 name: deep-researcher
 description: Researches what the user needs to learn. 
-tools: WebFetch, WebSearch
+tools: WebFetch, WebSearch, Read, Write, Edit, Glob
 model: opus
 skills:
   - topic-research

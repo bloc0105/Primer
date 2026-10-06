@@ -1,7 +1,7 @@
 ---
 name: stack-advisor
 description: Recommends a tech stack for a project that has no existing code yet.
-tools: WebFetch, WebSearch
+tools: WebFetch, WebSearch, Read, Write, Edit, Glob
 model: opus
 skills:
   - propose-stack

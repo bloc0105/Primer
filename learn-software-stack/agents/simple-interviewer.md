@@ -1,7 +1,7 @@
 ---
 name: simple-interviewer
 description: Does a very basic interview to establish a baseline
-tools: WebFetch, WebSearch
+tools: WebFetch, WebSearch, Read, Write, Edit, Glob
 model: sonnet
 skills:
   - basic-assessment

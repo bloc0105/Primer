@@ -1,7 +1,7 @@
 ---
 name: code-recon
 description: Reads a codebase to determine its dependencies. 
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, Write
 model: opus
 skills:
   - discover-stack

@@ -1,7 +1,7 @@
 ---
 name: interviewer
 description: Determines the user's level of knowledge and skill in a topic or subject. 
-tools: WebFetch, WebSearch
+tools: WebFetch, WebSearch, Read, Write, Edit, Glob
 model: opus
 skills:
   - user-interview

@@ -1,7 +1,7 @@
 ---
 name: skeptical-student
 description: Makes sure the Docs really apply to the situation. 
-tools: Read, Grep, Glob, WebFetch, WebSearch
+tools: Read, Grep, Glob, WebFetch, WebSearch, Write
 model: opus
 skills:
   - compare-curriculum
