@@ -19,6 +19,13 @@ user-invocable: false
 
 This is where the lesson plan is actually created.  Everything from the curriculum must have a practical application to the project. 
 
+The lesson plan shall read as a textbook for a general audience that happens to have one reader. Each of these shall be true of the plan file, and each can be checked by searching it:
+
+1. It does not mention the interview, a review, a revision round, or how the plan was made.
+2. It does not contain "you" or "your", outside quotations.
+3. Every label, abbreviation and term of art it uses is defined in the plan, or is standard in the field.
+4. An analogy to a language or tool the reader knows is written in the abstract ("similar to Java static class variables"), without reference to the reader.
+
 Each section of the lesson shall contain two sub-sections:
 
 1. The documentation that the user needs to read in order to be effective with that subject. If only a specific section of the 
@@ -27,7 +34,7 @@ Each section of the lesson shall contain two sub-sections:
 ## Other Considerations
 
 - Exercises should default toward open-ended framing. Rather than handing the learner a fully-specified function signature and skeleton body, prefer pointing at a real file and a real-world scenario and letting them work out the shape — e.g. "apply what you learned about `except ... as e` to `main.py`".
-- Always tune a lession section to bridge the gap between the user's existing knowledge and what they do not know.  Sometimes that might be as simple as "here's the vocabulary for what you already know" or "here's the code to do what you already understand" or "here's a refresher on a concepy you were mostly good, but a little fuzzy on".  Some times it might be "you said you don't know anything about this subject, so let's start at the beginning".  Always tune approporaitely.
+- Always tune a lession section to bridge the gap between the user's existing knowledge and what they do not know.  Sometimes that might be as simple as "here's the vocabulary for what you already know" or "here's the code to do what you already understand" or "here's a refresher on a concepy you were mostly good, but a little fuzzy on".  Some times it might be "this section starts at the beginning, with no assumed background".  Always tune approporaitely, and keep the wording within the rules above: the tuning shows in what the section covers, never in addressing the reader or retelling what they said.
 - The `tech-writer` may have questions during writing.  It is up to the main agent to decide which agent to pass the questions to.
 
 ## Output
@@ -46,7 +53,7 @@ The main agent gives you the path of the run folder. Read these files from it be
 
 Write your output to `06-lesson-plan-r<N>.md` in the run folder the main agent gave you. `<N>` is the round number. Round 1 is your first draft. When a review sends the plan back, write the revision as a new file with the next round number, and leave the earlier rounds as they are.
 
-Start the file with this header:
+Start the file with this header, and put nothing else between it and the plan's title:
 
 ```
 ---
@@ -58,14 +65,15 @@ inputs:
 ---
 ```
 
-After the header, write the content described below. End the file with a `## How I got here` section that explains how you reached your conclusions: what you looked at, what you weighed, and why you decided as you did.
+After the header, the file contains the full lesson plan, as described under *Output*, and nothing else. The plan is the one deliverable the user reads, so it holds no process record.
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
-The file contains:
-- The full lesson plan, as described under *Output*.
+Append the rest to `notes.md` in the run folder, under the heading `## Write the Lesson Plan, tech-writer, round <N>`. Read `notes.md` only when the main agent's message tells you to. The entry contains:
+- What you looked at, what you weighed, and why you decided as you did.
 - From round 2 on: a **Changes made** list. It names each change-request from `07-review-r<N-1>.md` and says what you changed in response.
 - One section for each question you asked another agent, naming who you asked, what you asked, and the file their answer is in.
+- When you answer a question as `ANSWER`, the answer goes in this entry and not in the plan file.
 
 ## Exits
 

@@ -71,7 +71,7 @@ stateDiagram-v2
 
 ## State table
 
-Each agent below starts with its state's skill already loaded, so starting or resuming the agent is all it takes to put it to work. When you start an agent, give it the path of the run folder. Each agent reads its own input files from the run folder and writes its own output file there.
+Each agent below starts with its state's skill already loaded, so starting or resuming the agent is all it takes to put it to work. When you start an agent, give it the path of the run folder. Each agent reads its own input files from the run folder and writes its own output file there. Each agent also appends its reasoning to `notes.md` in the run folder, a log that no agent reads unless a message tells it to.
 
 | # | State | Agent | Skill | Instance | Output file |
 |---|---|---|---|---|---|
@@ -151,7 +151,7 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
    ```
 
    List every copied file. Files this run produces are added as they arrive (see *Running the process*).
-7. **Create `transcript.md`** containing only the heading `# Transcript: <run folder name>`.
+7. **Create `transcript.md`** containing only the heading `# Transcript: <run folder name>`. Create `notes.md` containing only the heading `# Notes: <run folder name>`. Neither file is copied from the source run.
 8. **Start the process:**
    - **Full run:** begin at *Task Analysis*, below.
    - **`--from` or `--only`:** start the agent for `<step>` from the state table, and send it the path of the run folder. For `discover-stack` start `code-recon`, and for `propose-stack` start `stack-advisor`.

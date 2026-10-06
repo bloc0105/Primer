@@ -40,7 +40,7 @@ The main agent gives you the path of the run folder. Read these files from it be
 - `04-curriculum.md`, the curriculum.
 - Every `05-code-review-*.md` file in the folder, if there are any.
 - The lesson plan with the highest round number, `06-lesson-plan-r<N>.md`.
-- Your earlier reviews, `07-review-r*.md`, if there are any. Check each earlier change-request against the new round, and check the **Changes made** list against what actually changed.
+- Your earlier reviews, `07-review-r*.md`, if there are any. Check each earlier change-request against the new round, and check the **Changes made** list against what actually changed. The list is in the tech-writer's entry for the previous round in `notes.md`; read that entry.
 
 ## Your output file
 
@@ -58,7 +58,7 @@ inputs:
 ---
 ```
 
-After the header, write the content described below. End the file with a `## How I got here` section that explains how you reached your conclusions: what you looked at, what you weighed, and why you decided as you did.
+After the header, write the content described below. Do not put your reasoning in this file. Append it to `notes.md` in the run folder, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), covering what you looked at, what you weighed, and why you decided as you did. Read `notes.md` only when the main agent's message tells you to.
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 

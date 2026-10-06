@@ -52,7 +52,7 @@ inputs:
 ---
 ```
 
-After the header, write the content described below. End the file with a `## How I got here` section that explains how you reached your conclusions: what you looked at, what you weighed, and why you decided as you did.
+After the header, write the content described below. Do not put your reasoning in this file. Append it to `notes.md` in the run folder, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), covering what you looked at, what you weighed, and why you decided as you did. Read `notes.md` only when the main agent's message tells you to.
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
