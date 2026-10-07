@@ -56,7 +56,7 @@ After the header, write the content described below. Do not put your reasoning i
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
 The file contains:
-- The Tech Stack List, as described under *Output* and *Output for /curriculum*.
+- The Tech Stack List, as described under *Output* and *Output for /curriculum*, and no summary paragraph or table of packages.
 - The user's confirmations and objections, word for word, and what you changed in response.
 
 ## Exits

@@ -8,6 +8,8 @@ user-invocable: false
 
 ## Job
 
+At its core this skill produces a list: each dependency the project needs, and the parts of it the codebase uses. For example, a project that uses matplotlib only for 2D plots lists matplotlib and the 2D plotting it uses, not all of matplotlib.
+
 Read the codebase and report, as fact, what it's actually built with. This is an observation task, not a recommendation task: report facts, including when a pattern is objectively wrong, deprecated, or buggy — that's still something that's there, not a suggestion. Report only what bears on the Goal. What's off-limits is proposing the fix: do not suggest alternatives, redesigns, or how something should have been done instead.
 
 ## Process
@@ -19,10 +21,12 @@ Read the codebase and report, as fact, what it's actually built with. This is an
 
 ## Output
 
-A Tech Stack List: each component the user would need to know to work on this scoped part of the codebase. For each component, note:
-- What it's used for in this codebase specifically (not generically)
-- Whether it's mainstream/well-documented or obscure/custom
-- Roughly how deep the codebase's usage of it goes (e.g. "uses one basic API call" vs. "relies on advanced features throughout")
+A Tech Stack List: each component the user would need to know to work on this scoped part of the codebase. Each component is one block with a heading (its name and version) and these parts, in this order:
+- **Evidence:** the files that show it is used.
+- **How it's used here:** what it's used for in this codebase specifically (not generically), and the parts of it the codebase uses, such as the features, calls or options.
+- **Documentation caveat:** include this only when the component is obscure, custom or deprecated, or when its documentation will not match the code (for example, a library whose current docs use a different style than the code). Otherwise leave it out.
+
+A block describes only its own component. How a component is run or installed belongs in the block of the tool that does the running or installing.
 
 ## Output for /curriculum
 
@@ -53,9 +57,7 @@ After the header, write the content described below. Do not put your reasoning i
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
-The file contains:
-- The Tech Stack List, as described under *Output* and *Output for /curriculum*.
-- Every bug, deprecated pattern, or construct that doesn't do what it looks like it does, that you found while tracing.
+The file shall contain only these sections, in this order: one line stating the scope of the trace, the Tech Stack List as described under *Output* and *Output for /curriculum*, and the list of every bug, deprecated pattern, or construct that doesn't do what it looks like it does that you found while tracing and that bears on the Goal. A summary paragraph about the project, a package layout note, or a table of packages is a failure of this rule.
 
 ## Exits
 
