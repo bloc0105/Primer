@@ -31,6 +31,11 @@ Each section of the lesson shall contain two sub-sections:
 1. The documentation that the user needs to read in order to be effective with that subject. If only a specific section of a page is what the user doesn't already know, assign that section and not the whole page, and say which one.
 2. A practical application of the lesson in the project itself.  This will tell the user where the work is and what to fix or add, and not much more. The work should be pertinent to that section of the lesson.
 
+Each reading item shall satisfy every rule below, and each is a yes/no test:
+
+1. It names the parent section first, links to it, and then lists the subsections to read, such as "go to section X.1, read X.1.2, X.1.4 and X.1.5", with the link on the parent section.2. It names what to read by section number or heading, and does not describe how the page looks (a box, a sidebar, a table).
+3. Every term in the assigned reading that neither the reading nor an earlier part of the plan defines is either defined in the plan or marked at the point where it appears as safe to ignore, such as "metaclasses appear here and can be ignored".
+
 The plan shall begin with Unit 0, whose practical is running the project as it stands and observing how it behaves, so that later results can be compared with it. Unit 0 includes the setup needed to run the project only when `03-interview.md` shows the user cannot run it already. Its documentation sub-section is whatever the user needs to run the project at all. Its outcome is that the project runs, so rule 2 below does not apply to it.
 
 Each practical step shall satisfy every rule below, and each is a yes/no test:

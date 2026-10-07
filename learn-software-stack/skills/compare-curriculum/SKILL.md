@@ -28,8 +28,11 @@ The task is to check the work of the lesson plan against each rule below. Each r
 7. Does every practical avoid creating a scratch file, folder or throwaway edit?
 8. Does every practical use only concepts taught earlier, apart from later-unit code that the step names, with the unit, where the code appears?
 9. Does the plan begin with a unit whose practical is running the project unchanged, with setup steps included if and only if `03-interview.md` shows the user cannot run it already?
-10. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
-11. From round 2: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
+10. Does every reading item that lists several sections name the parent section first, link to it, and then list the subsections to read?
+11. Does every reading item name what to read by section number or heading, without describing how the page looks (a box, a sidebar, a table)?
+12. Is every term in an assigned reading that neither the reading nor an earlier part of the plan defines either defined in the plan or marked, where it appears, as safe to ignore?
+13. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
+14. From round 2: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
 
 **Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical moves the project toward the Goal (the writer records the intended link in its notebook entry), whether each practical suits the user's knowledge level, whether any item is worded incorrectly, and any judgment checks in your own guidelines.
 
