@@ -22,13 +22,15 @@ The research process will likely be recursive. eg: in order to know Postgres, yo
 
 It may be possible that the *Topic Research* process discovers further prerequisites to a given subject/concept/topic/tool.  This could be either a situation where a new prerequisite subject/concept/topic/tool is discovered, or there is simply more information about the subject/concept/topic/tool that wasn't assessed relative to the user's knowledge. In either case, it may be necessary to go back to the *User Interview* and ask more questions to the user. This loop-back shall resume the same `interviewer` agent instance used for the original interview, not spawn a new one — the agent needs the full history of prior answers to fold the new question into one coherent determination, rather than producing a second, disconnected assessment.
 
+The `tech-writer` may ask you whether a topic can be practiced in the project, and where. Answer from the Tech Stack List and your research. When that isn't enough, `ASK code-reader` for the real location, and report what it found.
+
 ## Output
 The list of Documentation that is necessary to get the user from their current state to the state in which they know enough to complete the task for the project. This will be referred to as the curriculum. The curriculum shall be in an order in which the human user is expected to read the material. This means that no subject shall contain material that has not been learned in a previous subject.
 
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
-- `run.md`, for the user's request (the **project**) and any notes about this run.
+- `run.md`, for the **Goal** (the **project**) and any notes about this run.
 - `01-tech-stack.md`, the Tech Stack List.
 - `02-basic-assessment.md`, the basic assessment.
 - `03-interview.md`, the interview record, including any Follow-up sections.

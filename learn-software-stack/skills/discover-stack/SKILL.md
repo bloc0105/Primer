@@ -31,7 +31,7 @@ The output of the initial assessment should be the **Tech Stack list.**  This is
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
-- `run.md`, for the **Goal** (the **project**), the user's request, and any notes about this run.
+- `run.md`, for the **Goal** (the **project**) and any notes about this run.
 
 ## Your output file
 

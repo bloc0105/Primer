@@ -31,7 +31,7 @@ This will be the same list as the list that was established by the basic assessm
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
-- `run.md`, for the user's request (the **project**) and any notes about this run.
+- `run.md`, for the **Goal** (the **project**) and any notes about this run.
 - `01-tech-stack.md`, the Tech Stack List.
 - `02-basic-assessment.md`, the basic assessment.
 - `03-interview.md`, if it already exists. It holds the interview so far, and you continue from it: build on its questions, answers and assessment as your own.

@@ -13,7 +13,7 @@ This state is not limited to resolving items Topic Research explicitly flagged a
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
-- `run.md`, for the user's request (the **project**) and any notes about this run.
+- `run.md`, for the **Goal** (the **project**) and any notes about this run.
 - The question from `deep-researcher`, which the main agent passes to you. It names the claim to check.
 - The source the main agent prepared for you as plain files. The main agent tells you where it is.
 

@@ -22,11 +22,16 @@ The task is to check the work of the lesson plan against each rule below. Each r
 1. Does every section have a documentation sub-section and a practical sub-section?
 2. Does every documentation item depend only on knowledge taught earlier in the plan?
 3. Does every practical name a concept taught in its own section's documentation sub-section?
-4. Does every practical name a file in the project and a change to make there?
-5. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
-6. From round 2: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
+4. Does every practical (Unit 0 excepted) name the file or area of the project where the work happens and state a change to make there?
+5. Does every practical state a result the learner can observe, and how to observe it?
+6. Is every practical's completion independent of any written output (a note, list, explanation, prediction or decision)?
+7. Does every practical avoid creating a scratch file, folder or throwaway edit?
+8. Does every practical use only concepts taught earlier, apart from later-unit code that the step names, with the unit, where the code appears?
+9. Does the plan begin with a unit whose practical is running the project unchanged, with setup steps included if and only if `03-interview.md` shows the user cannot run it already?
+10. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
+11. From round 2: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
 
-**Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical suits the user's knowledge level, whether any item is worded incorrectly, and any judgment checks in your own guidelines.
+**Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical moves the project toward the Goal (the writer records the intended link in its notebook entry), whether each practical suits the user's knowledge level, whether any item is worded incorrectly, and any judgment checks in your own guidelines.
 
 This agent has no shell or git access — if verifying sufficiency requires checking the user's own project source, that source must already be materialized as plain, readable files (see *Topic Code Review*) before this agent is invoked.
 
@@ -37,7 +42,7 @@ Final approval on the curriculum for the user to follow, or — if approval is w
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
-- `run.md`, for the user's request (the **project**) and any notes about this run.
+- `run.md`, for the **Goal** (the **project**) and any notes about this run.
 - `01-tech-stack.md`, `02-basic-assessment.md` and `03-interview.md`, for the project and the user's knowledge.
 - `04-curriculum.md`, the curriculum.
 - Every `05-code-review-*.md` file in the folder, if there are any.

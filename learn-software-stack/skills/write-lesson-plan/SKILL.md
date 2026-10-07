@@ -28,8 +28,23 @@ The lesson plan shall read as a textbook for a general audience that happens to 
 
 Each section of the lesson shall contain two sub-sections:
 
-1. The documentation that the user needs to read in order to be effective with that subject. If only a specific section of the 
-2. A practical application of the lesson in the project itself.  This will tell the user where to practice what they have just learned, and how to apply it. The work should be pertinent to that section of the lesson and not be dependent on things that have not been learned yet. 
+1. The documentation that the user needs to read in order to be effective with that subject. If only a specific section of a page is what the user doesn't already know, assign that section and not the whole page, and say which one.
+2. A practical application of the lesson in the project itself.  This will tell the user where the work is and what to fix or add, and not much more. The work should be pertinent to that section of the lesson.
+
+The plan shall begin with Unit 0, whose practical is running the project as it stands and observing how it behaves, so that later results can be compared with it. Unit 0 includes the setup needed to run the project only when `03-interview.md` shows the user cannot run it already. Its documentation sub-section is whatever the user needs to run the project at all. Its outcome is that the project runs, so rule 2 below does not apply to it.
+
+Each practical step shall satisfy every rule below, and each is a yes/no test:
+
+1. It names the file or area of the project where the work happens.
+2. It states a change to make there as a result (fix this, add that), and leaves the method to the learner.
+3. It states a result the learner can observe, and how to observe it: a command's output, a test passing, or how the running project behaves.
+4. Its completion never depends on a written output: a note, list, explanation, prediction or decision.
+5. It creates no scratch file, folder, or throwaway edit. Running the project, its tests, or a tool is fine when it serves the change.
+6. It uses only concepts taught earlier in the plan, with one exception: it may use code from a later unit when the step says so by name where the code appears, such as "write this code, don't worry about what it means yet, it is covered in Unit 6; the point here is X".
+
+One more check cannot be made yes/no, so it is a stated judgment: the change should move the project toward the Goal. In your notebook entry, record for each practical which part of the Goal it advances.
+
+When a topic in the curriculum has no project change to practice, ask whether it belongs and where it can be practiced. Never drop it silently, and never invent a practical for it.
 
 ## Other Considerations
 
@@ -43,7 +58,7 @@ The completed lesson plan for the user
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
-- `run.md`, for the user's request (the **project**) and any notes about this run.
+- `run.md`, for the **Goal** (the **project**) and any notes about this run.
 - `01-tech-stack.md`, `02-basic-assessment.md` and `03-interview.md`, for the project and the user's knowledge.
 - `04-curriculum.md`, the curriculum.
 - Every `05-code-review-*.md` file in the folder, if there are any.
@@ -78,7 +93,7 @@ Append the rest to `notes.md` in the run folder, under the heading `## Write the
 ## Exits
 
 - `DONE → Compare Curriculum to Task`: the lesson plan for this round is written.
-- `ASK deep-researcher` (round trip, "Need more information"): you need more information to write a section. The researcher sends you the path of its answer, and you continue writing.
+- `ASK <agent>` (round trip): you need an answer to write a section. Ask the agent that owns it: the `deep-researcher` for a fact, a source, or a place in the project where a practical can apply, and the `interviewer` for whether the user already knows a topic. The agent sends you the path of its answer, and you continue writing.
 
 ## Reporting back
 
