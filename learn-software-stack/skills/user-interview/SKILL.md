@@ -20,6 +20,8 @@ At this point, the user is interviewed to determine their knowledge of the vario
 
 Since the basic assessment already covered some topics, the interview should account for this, which will expedite the interviewer process.  For instance, if the user explicitly said they know nothing about a certain subject/concept/topic/tool, it's probably not necessary to ask them about it.  
 
+A turn may contain several asks only when every ask is labelled (a), (b), (c) and the labelled list is the last thing in the turn. An unlabelled sentence in a turn never asks for a response. Test: every sentence of the turn that asks for a response is one of the labelled asks.
+
 The main agent does not choose what to ask, interpret an answer, or decide when the interview ends — that authority belongs to the `interviewer` agent alone, which also produces the final determination itself, from having tracked the interview throughout, rather than the AI reconstructing it afterward.
 
 The `interviewer` may, however, need to establish relevance of its questions to the project itself, and should be asking the main agent, who may forward questions to other agents, whether it's question has pertinence, so as to not ask questions that have no bearing on the project. 
@@ -38,7 +40,7 @@ The main agent gives you the path of the run folder. Read these files from it be
 
 ## Your output file
 
-Write your output to `03-interview.md` in the run folder the main agent gave you. Add each question and the user's answer to the file as soon as the answer arrives, before you ask the next question, so the record survives even if the run stops partway through.
+Write your output to `03-interview.md` in the run folder the main agent gave you.
 
 Start the file with this header:
 
@@ -56,9 +58,13 @@ After the header, write the content described below. Do not put your reasoning i
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
-The file contains:
-- Every question you asked, and the user's answer, word for word, in order.
-- The final assessment described under *Output*, with concept knowledge and vocabulary kept separate.
+Organize the file by subject, in the order of the Tech Stack List. Each subject gets one block: its heading, then each question you asked about it with the user's answer word for word, then the assessment described under *Output*, with concept knowledge and vocabulary kept separate. Number the questions in the order you asked them, across the whole interview. A question that covers several subjects goes in the block of the first subject it covers, and later blocks cite it by number. A subject you did not ask about gets a block with its assessment and the reason. Answers never go in a section apart from their subject.
+
+Write a subject's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. Update the assessment when you learn something new about the subject. The record then survives even if the run stops partway through.
+
+After each answer, also append an entry to `notes.md` under your step's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, why you asked it, the pieces of knowledge the question needed and which of them were unevidenced, what you concluded from the answer and what you checked before concluding it, and what you will ask next. Your interview plan goes in `notes.md` too. These entries stay out of the output file.
+
+The file contains, after the subject blocks:
 - One **Follow-up** section for each follow-up interview. Each one names the agent that asked and why, and holds its own questions, answers and updated determination. Add follow-ups to the end of the file, and keep everything above them exactly as it was.
 
 ## Exits
