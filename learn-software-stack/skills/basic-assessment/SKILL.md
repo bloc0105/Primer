@@ -30,7 +30,7 @@ The main agent gives you the path of the run folder. Read these files from it be
 
 ## Your output file
 
-Write your output to `02-basic-assessment.md` in the run folder the main agent gave you. Add each question and the user's answer to the file as soon as the answer arrives, before you ask the next question, so the record survives even if the run stops partway through.
+Write your output to `02-basic-assessment.md` in the run folder the main agent gave you.
 
 Start the file with this header:
 
@@ -48,9 +48,11 @@ After the header, write the content described below. Do not put your reasoning i
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
-The file contains:
-- Every question you asked, and the user's answer, word for word, in order.
-- The assessment described under *Output*.
+Organize the file by subject, in the order of the Tech Stack List. Each subject gets one block: its heading, then each question you asked about it with the user's answer word for word, then the assessment described under *Output*. Number the questions in the order you asked them, across the whole interview. A question that covers several subjects goes in the block of the first subject it covers, and later blocks cite it by number. A subject you did not ask about gets a block with its assessment and the reason, for example "not asked: covered by item 5". Answers never go in a section apart from their subject.
+
+Write a subject's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. Write the assessment when you finish the subject. The record then survives even if the run stops partway through.
+
+After each answer, also append an entry to `notes.md` under your step's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, why you asked it, what you concluded from the answer, and what you will ask next. Read in order, these entries tell the story of the interview as it happened. They stay out of the output file.
 
 ## Exits
 
