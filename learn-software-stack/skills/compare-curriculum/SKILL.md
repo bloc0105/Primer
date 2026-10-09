@@ -34,7 +34,7 @@ The task is to check the work of the lesson plan against each rule below. Each r
 13. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
 14. From round 2: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
 
-**Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical moves the project toward the Goal (the writer records the intended link in its notebook entry), whether each practical suits the user's knowledge level, whether any item is worded incorrectly, and any judgment checks in your own guidelines.
+**Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical moves the project toward the Goal (the writer records the intended link in its `notes.md` entry), whether each practical suits the user's knowledge level, whether any item is worded incorrectly, and any judgment checks in your own guidelines.
 
 This agent has no shell or git access — if verifying sufficiency requires checking the user's own project source, that source must already be materialized as plain, readable files (see *Topic Code Review*) before this agent is invoked.
 
@@ -68,7 +68,7 @@ inputs:
 ---
 ```
 
-After the header, write the content described below. Do not put your reasoning in this file. Append it to `notes.md` in the run folder, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), covering what you looked at, what you weighed, and why you decided as you did. Read `notes.md` only when the main agent's message tells you to.
+After the header, write the content described below. Keep this file to that content. In `notes.md`, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), list the files and sources you opened. For each choice in the output file, quote the evidence it rests on — a path and the passage you used, a source, or the user's words — and state what that evidence shows. Read `notes.md` only when the main agent's message tells you to.
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 

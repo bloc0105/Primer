@@ -53,7 +53,7 @@ inputs:
 ---
 ```
 
-After the header, write the content described below. Do not put your reasoning in this file. Append it to `notes.md` in the run folder, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), covering what you looked at, what you weighed, and why you decided as you did. Read `notes.md` only when the main agent's message tells you to.
+After the header, write the content described below. Keep this file to that content. In `notes.md`, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), list the files and sources you opened. For each choice in the output file, quote the evidence it rests on — a path and the passage you used, a source, or the user's words — and state what that evidence shows. Read `notes.md` only when the main agent's message tells you to.
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 

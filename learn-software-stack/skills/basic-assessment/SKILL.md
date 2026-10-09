@@ -44,7 +44,7 @@ inputs:
 ---
 ```
 
-After the header, write the content described below. Do not put your reasoning in this file. Append it to `notes.md` in the run folder, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), covering what you looked at, what you weighed, and why you decided as you did. Read `notes.md` only when the main agent's message tells you to.
+After the header, write the content described below. Keep this file to that content. In `notes.md`, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), list the files and sources you opened. For each choice in the output file, quote the evidence it rests on — a path and the passage you used, a source, or the user's words — and state what that evidence shows. Read `notes.md` only when the main agent's message tells you to.
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
@@ -52,7 +52,7 @@ Organize the file by subject, in the order of the Tech Stack List. Each subject 
 
 Write a subject's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. Write the assessment when you finish the subject. The record then survives even if the run stops partway through.
 
-After each answer, also append an entry to `notes.md` under your step's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, why you asked it, what you concluded from the answer, and what you will ask next. Read in order, these entries tell the story of the interview as it happened. They stay out of the output file.
+After each answer, also append an entry to `notes.md` under your step's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, the Tech Stack item the question checks, one sentence of what that answer shows about what the user knows (quote the words it comes from, as in "from this answer, the user can write a SELECT with a WHERE clause"), the assessment sentence you wrote for that item in the output file, and the next question. These entries stay out of the output file.
 
 ## Exits
 

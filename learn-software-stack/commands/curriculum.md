@@ -71,7 +71,7 @@ stateDiagram-v2
 
 ## State table
 
-Each agent below starts with its state's skill already loaded, so starting or resuming the agent is all it takes to put it to work. When you start an agent, give it the path of the run folder. Each agent reads its own input files from the run folder and writes its own output file there. Each agent also appends its reasoning to `notes.md` in the run folder, a log that no agent reads unless a message tells it to.
+Each agent below starts with its state's skill already loaded, so starting or resuming the agent is all it takes to put it to work. When you start an agent, give it the path of the run folder. Each agent reads its own input files from the run folder and writes its own output file there. Each agent also appends a note to `notes.md` in the run folder. The note lists the files it opened and, for each choice in its output file, quotes the evidence that choice rests on. No agent reads that note unless a message tells it to.
 
 | # | State | Agent | Skill | Instance | Output file |
 |---|---|---|---|---|---|

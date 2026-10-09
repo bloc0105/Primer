@@ -54,7 +54,7 @@ inputs:
 ---
 ```
 
-After the header, write the content described below. Do not put your reasoning in this file. Append it to `notes.md` in the run folder, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), covering what you looked at, what you weighed, and why you decided as you did. Read `notes.md` only when the main agent's message tells you to.
+After the header, write the content described below. Keep this file to that content. In `notes.md`, under the heading `## <step>, <agent>, round <N>` (leave out the round for a step that has none), list the files and sources you opened. For each choice in the output file, quote the evidence it rests on — a path and the passage you used, a source, or the user's words — and state what that evidence shows. Read `notes.md` only when the main agent's message tells you to.
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
@@ -62,7 +62,7 @@ Organize the file by subject, in the order of the Tech Stack List. Each subject 
 
 Write a subject's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. Update the assessment when you learn something new about the subject. The record then survives even if the run stops partway through.
 
-After each answer, also append an entry to `notes.md` under your step's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, why you asked it, the pieces of knowledge the question needed and which of them were unevidenced, what you concluded from the answer and what you checked before concluding it, and what you will ask next. Your interview plan goes in `notes.md` too. These entries stay out of the output file.
+After each answer, also append an entry to `notes.md` under your step's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, the Tech Stack item and the sub-topic the question checks, what that answer shows, kept separate for concept knowledge and for vocabulary and each part quoting the words it comes from, the concept-knowledge line and the vocabulary line you wrote for that item in the output file, and the next question. The list of remaining questions goes in `notes.md` too, as questions only. These entries stay out of the output file.
 
 The file contains, after the subject blocks:
 - One **Follow-up** section for each follow-up interview. Each one names the agent that asked and why, and holds its own questions, answers and updated determination. Add follow-ups to the end of the file, and keep everything above them exactly as it was.

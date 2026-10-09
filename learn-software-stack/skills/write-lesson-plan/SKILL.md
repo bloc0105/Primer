@@ -47,7 +47,7 @@ Each practical step shall satisfy every rule below, and each is a yes/no test:
 5. It creates no scratch file, folder, or throwaway edit. Running the project, its tests, or a tool is fine when it serves the change.
 6. It uses only concepts taught earlier in the plan, with one exception: it may use code from a later unit when the step says so by name where the code appears, such as "write this code, don't worry about what it means yet, it is covered in Unit 6; the point here is X".
 
-One more check cannot be made yes/no, so it is a stated judgment: the change should move the project toward the Goal. In your notebook entry, record for each practical which part of the Goal it advances.
+One more check cannot be made yes/no, so it is a stated judgment: the change should move the project toward the Goal. In your `notes.md` entry, record for each practical which part of the Goal it advances.
 
 When a topic in the curriculum has no project change to practice, ask whether it belongs and where it can be practiced. Never drop it silently, and never invent a practical for it.
 
@@ -90,8 +90,9 @@ After the header, the file contains the full lesson plan, as described under *Ou
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
 Append the rest to `notes.md` in the run folder, under the heading `## Write the Lesson Plan, tech-writer, round <N>`. Read `notes.md` only when the main agent's message tells you to. The entry contains:
-- What you looked at, what you weighed, and why you decided as you did.
-- From round 2 on: a **Changes made** list. It names each change-request from `07-review-r<N-1>.md` and says what you changed in response.
+- The files you opened.
+- For each practical, the part of the Goal it advances.
+- From round 2 on: a **Changes made** list. It names each change-request from `07-review-r<N-1>.md` and the text you changed in the plan.
 - One section for each question you asked another agent, naming who you asked, what you asked, and the file their answer is in.
 - When you answer a question as `ANSWER`, the answer goes in this entry and not in the plan file.
 
