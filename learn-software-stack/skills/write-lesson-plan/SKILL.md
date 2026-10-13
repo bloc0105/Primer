@@ -60,6 +60,7 @@ When a topic in the curriculum has no project change to practice, ask whether it
 
 - Exercises should default toward open-ended framing. Rather than handing the learner a fully-specified function signature and skeleton body, prefer pointing at a real file and a real-world scenario and letting them work out the shape — e.g. "apply what you learned about `except ... as e` to `main.py`".
 - Tune each unit to the user's knowledge by what it assigns, lists and skips: which terms, which sections, where to stop, what to ignore. Never by writing explanation, and never by addressing the reader or retelling what they said.
+- Stay inside the curriculum. If you notice something else worth teaching or fixing that the curriculum does not contain, it is not yours to add or to silently drop. Ask, using the exits below: the `deep-researcher` for a fact or a source, the `interviewer` for whether the user already knows a topic, and `ASK USER` for whether something belongs in the project. Asking costs nothing, and guessing does.
 - The `tech-writer` may have questions during writing.  It is up to the main agent to decide which agent to pass the questions to.
 
 ## Output
