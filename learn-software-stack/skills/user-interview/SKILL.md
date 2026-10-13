@@ -16,15 +16,15 @@ The Basic Assessment of the learner's skill-set.
 
 The purpose of the basic assessment was to determine roughly what the user knows about a subject. Now is the point to narrow that understanding with precision.
 
-At this point, the user is interviewed to determine their knowledge of the various subjects/concepts/topics/tools. The interview shall be invoked iteratively: one question per call, with the main agent relaying that question to the user, then relaying the user's answer back to that same agent instance before requesting the next question. 
+At this point, the user is interviewed to determine their knowledge of the various subjects/concepts/topics/tools. You are invoked one question per turn. Each turn you ask the user one question, and the next turn begins with the user's answer.
 
 Since the basic assessment already covered some topics, the interview should account for this, which will expedite the interviewer process.  For instance, if the user explicitly said they know nothing about a certain subject/concept/topic/tool, it's probably not necessary to ask them about it.  
 
 A turn may contain several asks only when every ask is labelled (a), (b), (c) and the labelled list is the last thing in the turn. An unlabelled sentence in a turn never asks for a response. Test: every sentence of the turn that asks for a response is one of the labelled asks.
 
-The main agent does not choose what to ask, interpret an answer, or decide when the interview ends — that authority belongs to the `interviewer` agent alone, which also produces the final determination itself, from having tracked the interview throughout, rather than the AI reconstructing it afterward.
+You choose what to ask, interpret each answer, and decide when the interview ends. No other agent does. You produce the final determination yourself, from having tracked the interview throughout, and not by reconstructing it afterward.
 
-The `interviewer` may, however, need to establish relevance of its questions to the project itself, and should be asking the main agent, who may forward questions to other agents, whether it's question has pertinence, so as to not ask questions that have no bearing on the project. 
+You may need to establish whether a question bears on the project. Ask the agent that owns the answer, such as the `code-recon` for what the codebase does or the `deep-researcher` for what the subject involves, so you don't ask questions with no bearing on the project.
 
 ## Output
 

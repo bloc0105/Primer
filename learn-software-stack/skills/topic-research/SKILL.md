@@ -22,7 +22,7 @@ The research process will likely be recursive. eg: in order to know Postgres, yo
 
 It may be possible that the *Topic Research* process discovers further prerequisites to a given subject/concept/topic/tool.  This could be either a situation where a new prerequisite subject/concept/topic/tool is discovered, or there is simply more information about the subject/concept/topic/tool that wasn't assessed relative to the user's knowledge. In either case, it may be necessary to go back to the *User Interview* and ask more questions to the user. This loop-back shall resume the same `interviewer` agent instance used for the original interview, not spawn a new one — the agent needs the full history of prior answers to fold the new question into one coherent determination, rather than producing a second, disconnected assessment.
 
-The `tech-writer` may ask you whether a topic can be practiced in the project, and where. Answer from the Tech Stack List and your research. When that isn't enough, `ASK code-reader` for the real location, and report what it found.
+Another agent may ask you whether a topic can be practiced in the project, and where. Answer from the Tech Stack List and your research. When that isn't enough, `ASK code-reader` for the real location, and report what it found.
 
 ## Output
 The list of Documentation that is necessary to get the user from their current state to the state in which they know enough to complete the task for the project. This will be referred to as the curriculum. The curriculum shall be in an order in which the human user is expected to read the material. This means that no subject shall contain material that has not been learned in a previous subject.
@@ -70,9 +70,9 @@ The file contains:
 ## Exits
 
 - `DONE → Write the Lesson Plan`: the research is compiled into the curriculum.
-- `ASK interviewer` (round trip, "Sub-Topic Discovered"): you found a prerequisite, or more about a subject/concept/topic/tool, that the interview did not assess. Name the sub-topic. The interviewer records the follow-up in `03-interview.md` and sends you the path, and you continue your research.
+- `ASK interviewer` (round trip, "Sub-Topic Discovered"): you found a prerequisite, or more about a subject/concept/topic/tool, that the interview did not assess. Name the sub-topic. The interviewer records the follow-up in the interview file and sends you its path, and you continue your research.
 - `ASK code-reader` (round trip, "Something's wrong with Doc"): the documentation disagrees with itself or with how the subject/concept/topic/tool actually behaves. Name the repository (with a URL), the version or branch, and the exact claim to check. The code-reader sends you the path of its findings file, and you continue your research.
-- `ANSWER`: when `tech-writer` asks you for more information, research it, record what you found in `04-curriculum.md`, and answer with the path.
+- `ANSWER`: when another agent asks you for more information, research it, record what you found in your output file, and answer with its path.
 
 ## Reporting back
 

@@ -14,7 +14,7 @@ This state is not limited to resolving items Topic Research explicitly flagged a
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
-- The question from `deep-researcher`, which the main agent passes to you. It names the claim to check.
+- The question that asked you to check a claim, which the main agent passes to you. It names the claim to check.
 - The source the main agent prepared for you as plain files. The main agent tells you where it is.
 
 ## Your output file
@@ -44,7 +44,7 @@ The file contains:
 
 ## Exits
 
-- `ANSWER`: this state is always a round trip. `deep-researcher` asks you to check a claim. Write your findings file, then answer with its path.
+- `ANSWER`: this state is always a round trip. Another agent asks you to check a claim. Write your findings file, then answer with its path.
 
 ## Reporting back
 
