@@ -28,10 +28,6 @@ A Tech Stack List: each component the user would need to know to work on this sc
 
 A block describes only its own component. How a component is run or installed belongs in the block of the tool that does the running or installing.
 
-## Output for /curriculum
-
-The output of the initial assessment should be the **Tech Stack list.**  This is the list of subject/concept/topic/tools that are used in the project.  Each subject/concept/topic/tool should be listed, followed by a brief paragraph describing how that tool is used in the project.
-
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
@@ -57,7 +53,7 @@ After the header, write the content described below. Keep this file to that cont
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
-The file shall contain only these sections, in this order: one line stating the scope of the trace, the Tech Stack List as described under *Output* and *Output for /curriculum*, and the list of every bug, deprecated pattern, or construct that doesn't do what it looks like it does that you found while tracing and that bears on the Goal. A summary paragraph about the project, a package layout note, or a table of packages is a failure of this rule.
+The file shall contain only these sections, in this order: one line stating the scope of the trace, the Tech Stack List as described under *Output*, and the list of every bug, deprecated pattern, or construct that doesn't do what it looks like it does that you found while tracing and that bears on the Goal. A summary paragraph about the project, a package layout note, or a table of packages is a failure of this rule.
 
 ## Exits
 

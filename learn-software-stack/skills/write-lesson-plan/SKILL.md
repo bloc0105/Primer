@@ -13,7 +13,7 @@ user-invocable: false
 ## Input
 
 - The curriculum from the Research State.
-- The interview assessmentof the user.
+- The interview assessment of the user.
 
 ## The Process
 

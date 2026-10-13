@@ -13,7 +13,7 @@ user-invocable: false
 The Interview results with each subject/concept/topic/tool, and the user's knowledge of it. 
 
 ## The Process
-Now the task is the research on each subject/concept/topic/tool to establish the curriculum of documentation that the user would need to get from their current state of knowledge, to the state of knowledge necessary to complete the work for the project.  The following are some of the place that the researcher could go in order to 
+Now the task is the research on each subject/concept/topic/tool to establish the curriculum of documentation that the user would need to get from their current state of knowledge, to the state of knowledge necessary to complete the work for the project.  The following are some of the place that the researcher could go in order to find documentation.
 
 - Reading the online documentation on the component from the official website. 
 - Reading the Forums or articles on the component. 

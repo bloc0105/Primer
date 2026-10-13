@@ -26,10 +26,6 @@ A Tech Stack List: each component in the proposed stack. For each component, not
 
 This output must be confirmed by the user before proceeding, since it's a recommendation, so if you need to, ask further questions of the user as things arise.
 
-## Output for /curriculum
-
-The output of the initial assessment should be the **Tech Stack list.**  This is the list of subject/concept/topic/tools that are used in the project.  Each subject/concept/topic/tool should be listed, followed by a brief paragraph describing how that tool is used in the project.
-
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
@@ -56,7 +52,7 @@ After the header, write the content described below. Keep this file to that cont
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
 The file contains:
-- The Tech Stack List, as described under *Output* and *Output for /curriculum*, and no summary paragraph or table of packages.
+- The Tech Stack List, as described under *Output*, and no summary paragraph or table of packages.
 - The user's confirmations and objections, word for word, and what you changed in response.
 
 ## Exits
