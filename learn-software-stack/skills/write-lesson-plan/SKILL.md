@@ -31,7 +31,7 @@ The lesson plan shall be a list of citations to documentation, plus a practical 
 
 Each unit of the lesson shall contain three sub-sections, in this order:
 
-1. **Vocabulary:** each term that the unit's readings use, that the learner needs, and that the interview assessment does not show the user already using correctly. Each entry is the term, the defining sentence quoted from its source, and a link to that source. A term appears in the unit where it is first needed and nowhere else. When no source defines a term, `ASK deep-researcher` for one before writing a correction note. A unit that needs no terms says so.
+1. **Vocabulary:** each term that the unit's readings use, that the learner needs, and that the interview assessment does not show the user already using correctly. Each entry is the term, the defining sentence quoted from its source, and a link to that source, all taken from the Terms of the curriculum entries the unit covers. A term appears in the unit where it is first needed and nowhere else. When the curriculum has no source for a term, or says no source defines it, `ASK deep-researcher` for one before writing a correction note. A unit that needs no terms says so.
 2. **Reading:** the documentation that the user needs to read in order to be effective with that subject. If only a specific section of a page is what the user doesn't already know, assign that section and not the whole page, and say which one.
 3. **Practical:** a practical application of the lesson in the project itself.  This will tell the user where the work is and what to fix or add, and not much more. The work should be pertinent to that section of the lesson.
 
@@ -39,7 +39,7 @@ Each reading item shall satisfy every rule below, and each is a yes/no test:
 
 1. It names the parent section first, links to it, and then lists the subsections to read, such as "go to section X.1, read X.1.2, X.1.4 and X.1.5", with the link on the parent section.
 2. It names what to read by section number or heading, and does not describe how the page looks (a box, a sidebar, a table).
-3. It lists anything in the assigned sections that the learner does not need and that no Vocabulary entry defines, marked at the point where it appears as safe to ignore, such as "metaclasses appear here and can be ignored".
+3. It lists anything in the assigned sections that the learner does not need and that no Vocabulary entry defines, marked at the point where it appears as safe to ignore, such as "metaclasses appear here and can be ignored". The curriculum entry's Ignorable list is where to start.
 
 The plan shall begin with Unit 0, whose practical is running the project as it stands and observing how it behaves, so that later results can be compared with it. Unit 0 includes the setup needed to run the project only when the interview assessment shows the user cannot run it already. Its Vocabulary and Reading sub-sections are whatever the user needs to run the project at all, and either may say that none is needed. Its outcome is that the project runs, so rule 2 below does not apply to it.
 

@@ -27,6 +27,11 @@ The `tech-writer` may ask you whether a topic can be practiced in the project, a
 ## Output
 The list of Documentation that is necessary to get the user from their current state to the state in which they know enough to complete the task for the project. This will be referred to as the curriculum. The curriculum shall be in an order in which the human user is expected to read the material. This means that no subject shall contain material that has not been learned in a previous subject.
 
+Each entry in the curriculum shall carry two lists:
+
+1. **Terms:** each term the learner needs from the entry's section that no earlier entry defines. A term is needed when the interview assessment shows the user does not use it correctly, or when the section uses it and cannot be followed without it. Each term is listed with the defining sentence quoted verbatim from its source, and the source and section it comes from. When no source defines the term, the entry says "no source defines this" and does not supply a definition of its own.
+2. **Ignorable:** what in the assigned section the learner does not need, such as terms or subsections, so the writer can mark each as safe to ignore.
+
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
