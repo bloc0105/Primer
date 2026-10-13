@@ -19,24 +19,29 @@ user-invocable: false
 
 This is where the lesson plan is actually created.  Everything from the curriculum must have a practical application to the project. 
 
-The lesson plan shall read as a textbook for a general audience that happens to have one reader. Each of these shall be true of the plan file, and each can be checked by searching it:
+The lesson plan shall be a list of citations to documentation, plus a practical for each unit. The documentation teaches, and the plan says what to read. Each of these shall be true of the plan file, and each can be checked by searching it:
 
 1. It does not mention the interview, a review, a revision round, or how the plan was made.
 2. It does not contain "you" or "your", outside quotations.
-3. Every label, abbreviation and term of art it uses is defined in the plan, or is standard in the field.
-4. An analogy to a language or tool the reader knows is written in the abstract ("similar to Java static class variables"), without reference to the reader.
+3. Every item in a Vocabulary or Reading sub-section is one citation.
+4. Each citation carries at most one sentence of the plan's own words, which says what the learner gets from it.
+5. No Vocabulary or Reading sub-section contains a code block, definition or analogy that the plan wrote. A definition is quoted verbatim from its source, with a link.
 
-Each section of the lesson shall contain two sub-sections:
+**One exception.** When the cited documentation is wrong for this project, or does not explain something the learner needs, a citation may carry a note of up to two sentences. The note says what is wrong or missing and what is true instead, and names the section it corrects. Your `notes.md` entry lists each note with the reason.
 
-1. The documentation that the user needs to read in order to be effective with that subject. If only a specific section of a page is what the user doesn't already know, assign that section and not the whole page, and say which one.
-2. A practical application of the lesson in the project itself.  This will tell the user where the work is and what to fix or add, and not much more. The work should be pertinent to that section of the lesson.
+Each unit of the lesson shall contain three sub-sections, in this order:
+
+1. **Vocabulary:** each term that the unit's readings use, that the learner needs, and that the interview assessment does not show the user already using correctly. Each entry is the term, the defining sentence quoted from its source, and a link to that source. A term appears in the unit where it is first needed and nowhere else. When no source defines a term, `ASK deep-researcher` for one before writing a correction note. A unit that needs no terms says so.
+2. **Reading:** the documentation that the user needs to read in order to be effective with that subject. If only a specific section of a page is what the user doesn't already know, assign that section and not the whole page, and say which one.
+3. **Practical:** a practical application of the lesson in the project itself.  This will tell the user where the work is and what to fix or add, and not much more. The work should be pertinent to that section of the lesson.
 
 Each reading item shall satisfy every rule below, and each is a yes/no test:
 
-1. It names the parent section first, links to it, and then lists the subsections to read, such as "go to section X.1, read X.1.2, X.1.4 and X.1.5", with the link on the parent section.2. It names what to read by section number or heading, and does not describe how the page looks (a box, a sidebar, a table).
-3. Every term in the assigned reading that neither the reading nor an earlier part of the plan defines is either defined in the plan or marked at the point where it appears as safe to ignore, such as "metaclasses appear here and can be ignored".
+1. It names the parent section first, links to it, and then lists the subsections to read, such as "go to section X.1, read X.1.2, X.1.4 and X.1.5", with the link on the parent section.
+2. It names what to read by section number or heading, and does not describe how the page looks (a box, a sidebar, a table).
+3. It lists anything in the assigned sections that the learner does not need and that no Vocabulary entry defines, marked at the point where it appears as safe to ignore, such as "metaclasses appear here and can be ignored".
 
-The plan shall begin with Unit 0, whose practical is running the project as it stands and observing how it behaves, so that later results can be compared with it. Unit 0 includes the setup needed to run the project only when `03-interview.md` shows the user cannot run it already. Its documentation sub-section is whatever the user needs to run the project at all. Its outcome is that the project runs, so rule 2 below does not apply to it.
+The plan shall begin with Unit 0, whose practical is running the project as it stands and observing how it behaves, so that later results can be compared with it. Unit 0 includes the setup needed to run the project only when the interview assessment shows the user cannot run it already. Its Vocabulary and Reading sub-sections are whatever the user needs to run the project at all, and either may say that none is needed. Its outcome is that the project runs, so rule 2 below does not apply to it.
 
 Each practical step shall satisfy every rule below, and each is a yes/no test:
 
@@ -54,7 +59,7 @@ When a topic in the curriculum has no project change to practice, ask whether it
 ## Other Considerations
 
 - Exercises should default toward open-ended framing. Rather than handing the learner a fully-specified function signature and skeleton body, prefer pointing at a real file and a real-world scenario and letting them work out the shape — e.g. "apply what you learned about `except ... as e` to `main.py`".
-- Always tune a lession section to bridge the gap between the user's existing knowledge and what they do not know.  Sometimes that might be as simple as "here's the vocabulary for what you already know" or "here's the code to do what you already understand" or "here's a refresher on a concepy you were mostly good, but a little fuzzy on".  Some times it might be "this section starts at the beginning, with no assumed background".  Always tune approporaitely, and keep the wording within the rules above: the tuning shows in what the section covers, never in addressing the reader or retelling what they said.
+- Tune each unit to the user's knowledge by what it assigns, lists and skips: which terms, which sections, where to stop, what to ignore. Never by writing explanation, and never by addressing the reader or retelling what they said.
 - The `tech-writer` may have questions during writing.  It is up to the main agent to decide which agent to pass the questions to.
 
 ## Output

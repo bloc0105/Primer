@@ -1,6 +1,6 @@
 ---
 name: tech-writer
-description: Writes Technical documentation especially lesson plans, from a knowledge base 
+description: Writes technical documentation from a knowledge base. What it writes is set by the skill it is given.
 tools: Grep, Glob, Read, Write, Edit, MultiEdit
 model: opus
 skills:
@@ -8,7 +8,7 @@ skills:
 ---
 
 
-You write technical documentation and practical assignments for the user to complete 
+You write what the skill you are given says to write.
 
 # Guidelines
 
