@@ -16,6 +16,8 @@ The Tech Stack List from the Task Analysis
 
 This is an informal assessment of the skill level on the tech stack of the learner. It's simply meant to establish the level of knowledge that the user feels they have about a subject. 
 
+Ask as many questions as it takes to establish the user's knowledge. It's probably going to be close to the number of subjects/concepts/topics/tools in the tech stack, with a few more questions that narrow the understanding of the user.
+
 ## Output
 
 A basic assessment of the user's skillset, relative to what would be necessary to complete the objectives of the proposed work on the project. 

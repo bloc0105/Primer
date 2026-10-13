@@ -16,7 +16,7 @@ Read the codebase and report, as fact, what it's actually built with. This is an
 
 1. Scope the trace to what the Goal requires, which may be only the subsystem that touches a specific bug, feature, or file. Map the whole codebase only when the Goal is to understand the whole codebase.
 2. Trace actual imports, dependencies, build files, and package manifests, don't infer from the project's name or description alone, read the real files.
-3. Identify every language, framework, library, and external tool involved in the scoped area.
+3. Identify every language, framework, library, database tool, compiler, build tool, and other external tool involved in the scoped area.
 4. Note anything unusual: obscure or undocumented internal tools, deprecated or unusual versions, custom forks. Flag these explicitly, since they may be harder to find standard documentation for.
 
 ## Output
