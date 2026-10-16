@@ -10,7 +10,7 @@ user-invocable: false
 - Performed by the `deep-researcher` Agent.
 
 ## Input
-The Interview results with each subject/concept/topic/tool, and the user's knowledge of it. 
+The Basic Assessment, which is what the learner says they know of each subject/concept/topic/tool, and the Goal. The interview record starts empty and grows as you ask the interviewer about topics.
 
 ## The Process
 Now the task is the research on each subject/concept/topic/tool to establish the curriculum of documentation that the user would need to get from their current state of knowledge, to the state of knowledge necessary to complete the work for the project.  The following are some of the place that the researcher could go in order to find documentation.
@@ -18,19 +18,28 @@ Now the task is the research on each subject/concept/topic/tool to establish the
 - Reading the online documentation on the component from the official website. 
 - Reading the Forums or articles on the component. 
 
-The research process will likely be recursive. eg: in order to know Postgres, you need to know SQL.  So the research can stop once it crosses into the knowledge base of the user.
+The research is recursive, and what the learner knows decides where it stops. For example, in order to know Postgres, you need to know SQL. For each section you plan to assign, list what it assumes: the terms in its text, the terms inside each defining sentence you intend to quote, and the concepts it builds on. Test each one against the evidence so far: the basic assessment, the interview record, and the entries you have already written. Then do exactly one of the following:
 
-It may be possible that the *Topic Research* process discovers further prerequisites to a given subject/concept/topic/tool.  This could be either a situation where a new prerequisite subject/concept/topic/tool is discovered, or there is simply more information about the subject/concept/topic/tool that wasn't assessed relative to the user's knowledge. In either case, it may be necessary to go back to the *User Interview* and ask more questions to the user. This loop-back shall resume the same `interviewer` agent instance used for the original interview, not spawn a new one — the agent needs the full history of prior answers to fold the new question into one coherent determination, rather than producing a second, disconnected assessment.
+1. **The evidence shows the learner knows it.** Stop on this branch. Record what shows it.
+2. **The evidence is silent, or shows a gap, and the Goal needs it.** `ASK interviewer` about it. Name the topic, and quote the sentence or section that needs it. When the interviewer reports a gap, find the source that explains the topic, and run this test on what that source assumes.
+3. **The Goal does not need it.** Record the branch as not pertinent, with the reason. Do not ask about it.
+
+Test: for every topic you send the interviewer, you can quote the sentence or section that needs it, and name the part of the Goal that section serves. A branch you can't link that way is case 3. `[judgment]`
+
+You do not judge what the learner knows. You read the interviewer's determination, which says specifically what they can and can't do, and decide from it whether to stop or go further back. Research is finished when every branch has ended in case 1 or case 3, or in a sentence whose own terms all end in case 1.
+
+Every question to the interviewer goes to the same `interviewer` instance, so that it folds each answer into one coherent determination of the learner.
 
 Another agent may ask you whether a topic can be practiced in the project, and where. Answer from the Tech Stack List and your research. When that isn't enough, `ASK code-reader` for the real location, and report what it found.
 
 ## Output
 The list of Documentation that is necessary to get the user from their current state to the state in which they know enough to complete the task for the project. This will be referred to as the curriculum. The curriculum shall be in an order in which the human user is expected to read the material. This means that no subject shall contain material that has not been learned in a previous subject.
 
-Each entry in the curriculum shall carry two lists:
+Each entry in the curriculum shall carry three lists:
 
 1. **Terms:** each term the learner needs from the entry's section that no earlier entry defines. A term is needed when the interview assessment shows the user does not use it correctly, or when the section uses it and cannot be followed without it. Each term is listed with the defining sentence quoted verbatim from its source, and the source and section it comes from. When no source defines the term, the entry says "no source defines this" and does not supply a definition of its own.
 2. **Ignorable:** what in the assigned section the learner does not need, such as terms or subsections, so the writer can mark each as safe to ignore.
+3. **Trace:** for each topic you checked while writing the entry, how its branch ended: known (the evidence), defined by (the sentence, whose terms all ended as known), or not pertinent (the reason).
 
 ## Your input files
 
@@ -38,7 +47,7 @@ The main agent gives you the path of the run folder. Read these files from it be
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
 - `01-tech-stack.md`, the Tech Stack List.
 - `02-basic-assessment.md`, the basic assessment.
-- `03-interview.md`, the interview record, including any Follow-up sections.
+- `03-interview.md`, the interview record, if it exists.
 - Every `05-code-review-*.md` file in the folder, if there are any. Code review is optional, and most runs have none.
 - `04-curriculum.md`, if it already exists. It holds your research so far, and you continue from it.
 
@@ -69,8 +78,8 @@ The file contains:
 
 ## Exits
 
-- `DONE → Write the Lesson Plan`: the research is compiled into the curriculum.
-- `ASK interviewer` (round trip, "Sub-Topic Discovered"): you found a prerequisite, or more about a subject/concept/topic/tool, that the interview did not assess. Name the sub-topic. The interviewer records the follow-up in the interview file and sends you its path, and you continue your research.
+- `DONE → Write the Lesson Plan`: every branch has ended, as described under *The Process*.
+- `ASK interviewer` (round trip, "Sub-Topic Discovered"): the evidence does not show whether the learner knows a topic the Goal needs. Name the topic and quote what needs it. The interviewer records the exchange in the interview file and sends you its path, and you continue your research.
 - `ASK code-reader` (round trip, "Something's wrong with Doc"): the documentation disagrees with itself or with how the subject/concept/topic/tool actually behaves. Name the repository (with a URL), the version or branch, and the exact claim to check. The code-reader sends you the path of its findings file, and you continue your research.
 - `ANSWER`: when another agent asks you for more information, research it, record what you found in your output file, and answer with its path.
 

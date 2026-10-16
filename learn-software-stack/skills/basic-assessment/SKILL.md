@@ -58,7 +58,7 @@ After each answer, also append an entry to `notes.md` under your step's heading,
 
 ## Exits
 
-- `DONE → User Interview`: the basic assessment of every item in the Tech Stack List is complete.
+- `DONE → Topic Research`: the basic assessment of every item in the Tech Stack List is complete.
 
 ## Reporting back
 

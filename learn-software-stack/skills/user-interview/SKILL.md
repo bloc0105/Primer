@@ -10,25 +10,23 @@ user-invocable: false
 - Performed by the `interviewer` Agent.
 
 ## Input
-The Basic Assessment of the learner's skill-set.
+The Basic Assessment of the learner's skill-set, plus the topic you were asked about and the sentence or section that needs it.
 
 ## The Process
 
-The purpose of the basic assessment was to determine roughly what the user knows about a subject. Now is the point to narrow that understanding with precision.
+The purpose of the basic assessment was to determine roughly what the user knows about a subject. Now is the point to narrow that understanding with precision, one topic at a time.
 
-At this point, the user is interviewed to determine their knowledge of the various subjects/concepts/topics/tools. You are invoked one question per turn. Each turn you ask the user one question, and the next turn begins with the user's answer.
-
-Since the basic assessment already covered some topics, the interview should account for this, which will expedite the interviewer process.  For instance, if the user explicitly said they know nothing about a certain subject/concept/topic/tool, it's probably not necessary to ask them about it.  
+The `deep-researcher` sends you one topic at a time. Establish what the learner specifically knows about it, using what the basic assessment and earlier answers already show before you ask anything new. For instance, if the user explicitly said they know nothing about a certain subject/concept/topic/tool, it's probably not necessary to ask them about it. Ask as many questions as that takes. You are invoked one question per turn. Each turn you ask the user one question, and the next turn begins with the user's answer.
 
 A turn may contain several asks only when every ask is labelled (a), (b), (c) and the labelled list is the last thing in the turn. An unlabelled sentence in a turn never asks for a response. Test: every sentence of the turn that asks for a response is one of the labelled asks.
 
-You choose what to ask, interpret each answer, and decide when the interview ends. No other agent does. You produce the final determination yourself, from having tracked the interview throughout, and not by reconstructing it afterward.
+You choose what to ask, interpret each answer, and decide when you can state what the learner knows about the topic. No other agent does. The researcher decides which topic comes next. You produce each determination yourself, from having tracked the interview throughout, and not by reconstructing it afterward.
 
 You may need to establish whether a question bears on the project. Ask the agent that owns the answer, such as the `code-recon` for what the codebase does or the `deep-researcher` for what the subject involves, so you don't ask questions with no bearing on the project.
 
 ## Output
 
-This will be the same list as the list that was established by the basic assessment, but with significantly more precision, describing exactly which sub-topics of a subject/concept/topic/tool the user is familiar with, and where the gaps lie. The user's conceptual knowledge will be separate from their vocabulary knowledge.  This means that if a user knows how to do something, but doesn't know the terminology for it, this is considered different from actually not knowing the subject/concept/tool/topic.  From this, the interview can tell exactly what things the user must learn in order to complete the work necessary to accomplish the objectives of the project.
+For each topic, a statement of what the learner specifically can and can't do or say about it, with the evidence: their own words where possible, and for each gap, what the question needed that they lacked. There are no fixed categories. The user's conceptual knowledge will be separate from their vocabulary knowledge.  This means that if a user knows how to do something, but doesn't know the terminology for it, this is considered different from actually not knowing the subject/concept/tool/topic.  From this, the researcher can tell whether to stop on the topic or go further back.
 
 ## Your input files
 
@@ -58,19 +56,15 @@ After the header, write the content described below. Keep this file to that cont
 
 Write the file so that an agent who has never seen this run could continue your step from the file alone.
 
-Organize the file by subject, in the order of the Tech Stack List. Each subject gets one block: its heading, then each question you asked about it with the user's answer word for word, then the assessment described under *Output*, with concept knowledge and vocabulary kept separate. Number the questions in the order you asked them, across the whole interview. A question that covers several subjects goes in the block of the first subject it covers, and later blocks cite it by number. A subject you did not ask about gets a block with its assessment and the reason. Answers never go in a section apart from their subject.
+Organize the file by topic, in the order the topics were asked. Each topic gets one block: its heading, who asked and the sentence or section that needs it, then each question you asked about it with the user's answer word for word, then the statement described under *Output*, with concept knowledge and vocabulary kept separate. Number the questions in the order you asked them, across the whole interview. A topic you answered from earlier evidence without asking gets a block with its statement and the evidence. Answers never go in a section apart from their topic. Add each new block to the end of the file, and keep everything above it exactly as it was.
 
-Write a subject's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. Update the assessment when you learn something new about the subject. The record then survives even if the run stops partway through.
+Write a topic's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. The record then survives even if the run stops partway through.
 
-After each answer, also append an entry to `notes.md` under your step's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, the Tech Stack item and the sub-topic the question checks, what that answer shows, kept separate for concept knowledge and for vocabulary and each part quoting the words it comes from, the concept-knowledge line and the vocabulary line you wrote for that item in the output file, and the next question. The list of remaining questions goes in `notes.md` too, as questions only. These entries stay out of the output file.
-
-The file contains, after the subject blocks:
-- One **Follow-up** section for each follow-up interview. Each one names the agent that asked and why, and holds its own questions, answers and updated determination. Add follow-ups to the end of the file, and keep everything above them exactly as it was.
+After each answer, also append an entry to `notes.md` under your step's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, the topic and the sub-topic the question checks, what that answer shows, kept separate for concept knowledge and for vocabulary and each part quoting the words it comes from, and the next question. These entries stay out of the output file.
 
 ## Exits
 
-- `DONE → Topic Research`: the interview is complete and the user is assessed.
-- `ANSWER`: when another agent asks you about a sub-topic, for example `deep-researcher` after finding a new prerequisite, interview the user about it with `ASK USER` turns. Record the exchange and your updated determination in a new Follow-up section, then answer with the path.
+- `ANSWER`: when the `deep-researcher` asks you about a topic, interview the user about it with `ASK USER` turns. Record the exchange and your statement in a new topic block, then answer with the path.
 
 ## Reporting back
 

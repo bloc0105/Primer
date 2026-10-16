@@ -55,14 +55,14 @@ stateDiagram-v2
 
     [*] --> task
     task --> assess: Task Scoped
-    assess --> interview: Basic Knowledge Gathered
-    interview --> Research: User Assessed
+    assess --> Research: Basic Knowledge Gathered
+    interview --> Research: Topic Assessed
     Research --> write: Research is compiled
     write --> matcher: Material Complete
     matcher --> [*]: Curriculum matches task
     matcher --> write: Problems with Curriculum
     write --> Research: Need more information
-    Research --> interview: Sub-Topic Discovered
+    Research --> interview: Need Interview Questions
     Research --> source: Something's wrong with Doc
     source --> Research: Adjudicated by code review
     
@@ -77,7 +77,7 @@ Each agent below starts with its state's skill already loaded, so starting or re
 |---|---|---|---|---|---|
 | 01 | Task Analysis | `code-recon` (Discovery Mode) or `stack-advisor` (Proposal Mode) | `discover-stack` / `propose-stack` | new | `01-tech-stack.md` |
 | 02 | Basic Assessment | `simple-interviewer` | `basic-assessment` | new | `02-basic-assessment.md` |
-| 03 | User Interview | `interviewer` | `user-interview` | persistent | `03-interview.md` |
+| 03 | User Interview | `interviewer` | `user-interview` | persistent, started by the researcher's first question | `03-interview.md` |
 | 04 | Topic Research | `deep-researcher` | `topic-research` | persistent | `04-curriculum.md` |
 | 05 | Topic Code Review | `code-reader` | `topic-code-review` | new each time | `05-code-review-<topic>.md` (optional: most runs have none) |
 | 06 | Write the Lesson Plan | `tech-writer` | `write-lesson-plan` | persistent | `06-lesson-plan-r<N>.md`, one per round |
@@ -127,7 +127,8 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
    - `--only <step> <source-run> [notes]`: run `<step>` alone, then stop.
    - Anything else is a **full** run, and the arguments are the user's request. A full run shall start from a goal: what the user wants to be able to do or have when the process ends, such as fixing a named bug, building a named thing, or changing a named behavior. Test: complete the sentence "The user wants to ___" using only the user's own words. The completed sentence shall name its target (the repo, branch, file or tool), because the agents read the goal and never the request. A named repo, branch, file or tool is a target, and "understand" or "learn" with no outcome stated is also a target, so neither completes the sentence. When the arguments are empty, or the sentence can't be completed, ask the user "What are you trying to do with `<target>`?" (or "What are you looking to do?" when there is no target) and repeat until it can be completed. Record the completed sentence as the goal.
 2. **For `--from` and `--only`, check the step and the source run:**
-   - `<step>` is one of these skill names, each with the number of its output file: `discover-stack` (01), `propose-stack` (01), `basic-assessment` (02), `user-interview` (03), `topic-research` (04), `write-lesson-plan` (06), `compare-curriculum` (07).
+   - `<step>` is one of these skill names, each with the number of its output file: `discover-stack` (01), `propose-stack` (01), `basic-assessment` (02), `topic-research` (04), `write-lesson-plan` (06), `compare-curriculum` (07).
+   - When `<step>` is `user-interview`, tell the user that the interview only happens when `deep-researcher` asks about a topic, so it can't be a starting step. They can start from `topic-research` instead. Stop there, without creating a run folder.
    - When `<step>` is `topic-code-review`, tell the user that code review only happens when `deep-researcher` asks for it, so it can't be a starting step. To tune it, they can run `--only topic-research` on a request where the documentation is known to be wrong. Stop there, without creating a run folder.
    - When `<step>` is any other name that isn't in the list, tell the user the valid step names and stop there.
    - `<source-run>` is a folder under `./runs/`, or a path to one. It contains a `run.md`. When it can't be found, tell the user and stop there.
