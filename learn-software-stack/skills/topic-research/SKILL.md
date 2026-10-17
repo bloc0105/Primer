@@ -10,23 +10,23 @@ user-invocable: false
 - Performed by the `deep-researcher` Agent.
 
 ## Input
-The Basic Assessment, which is what the learner says they know of each subject/concept/topic/tool, and the Goal. The interview record starts empty and grows as you ask the interviewer about topics.
+The Basic Assessment, which is what the learner says they know of each subject/concept/topic/tool, and the Goal. The interview record, if one exists, grows as you ask the interviewer about topics.
 
 ## The Process
-Now the task is the research on each subject/concept/topic/tool to establish the curriculum of documentation that the user would need to get from their current state of knowledge, to the state of knowledge necessary to complete the work for the project.  The following are some of the place that the researcher could go in order to find documentation.
+Now the task is the research on each subject/concept/topic/tool to establish the curriculum of documentation that the user would need to get from their current state of knowledge, to the state of knowledge necessary to complete the work for the project.  The following are some of the places the researcher could go in order to find documentation.
 
 - Reading the online documentation on the component from the official website. 
 - Reading the Forums or articles on the component. 
 
-The research is recursive, and what the learner knows decides where it stops. For example, in order to know Postgres, you need to know SQL. For each section you plan to assign, list what it assumes: the terms in its text, the terms inside each defining sentence you intend to quote, and the concepts it builds on. Test each one against the evidence so far: the basic assessment, the interview record, and the entries you have already written. Then do exactly one of the following:
+The research is recursive, and what the learner knows decides where it stops. For example, in order to know Postgres, you need to know SQL. For each section you plan to assign, list its prerequisites: the terms in its text, the terms inside each defining sentence you intend to quote, and the concepts it builds on. A prerequisite can be as small as one definition or as large as a section to read. Test each prerequisite against the evidence so far: the basic assessment, the interview record, and the entries you have already written. Then do exactly one of the following:
 
-1. **The evidence shows the learner knows it.** Stop on this branch. Record what shows it.
-2. **The evidence is silent, or shows a gap, and the Goal needs it.** `ASK interviewer` about it. Name the topic, and quote the sentence or section that needs it. When the interviewer reports a gap, find the source that explains the topic, and run this test on what that source assumes.
-3. **The Goal does not need it.** Record the branch as not pertinent, with the reason. Do not ask about it.
+1. **The evidence shows the learner knows it.** Stop there. Record what shows it. A claim in the basic assessment is not enough on its own; only the interview record or an entry you have already written can show it.
+2. **The evidence is silent, or shows a gap, and the Goal needs it.** When the basic assessment shows the learner has never met it, skip the interview: find the source that explains the topic, and test that source's prerequisites the same way. Otherwise `ASK interviewer` about it. Name the topic, and quote the sentence or section that needs it. When the interviewer reports a gap, find the source that explains the topic, and test that source's prerequisites the same way.
+3. **The Goal does not need it.** Record it as not pertinent, with the reason, and list it under the entry's **Ignorable**. Do not ask about it.
 
-Test: for every topic you send the interviewer, you can quote the sentence or section that needs it, and name the part of the Goal that section serves. A branch you can't link that way is case 3. `[judgment]`
+Test: for every topic you send the interviewer, you can quote the sentence or section that needs it, and name the part of the Goal that section serves. A prerequisite you can't link that way is case 3. `[judgment]`
 
-You do not judge what the learner knows. You read the interviewer's determination, which says specifically what they can and can't do, and decide from it whether to stop or go further back. Research is finished when every branch has ended in case 1 or case 3, or in a sentence whose own terms all end in case 1.
+You do not judge what the learner knows. You read the interviewer's determination, which says specifically what they can and can't do, and decide from it whether to stop or go further back. Research is finished when every prerequisite you tested has ended in case 1 or case 3, or is defined by a sentence whose own prerequisites all ended in case 1.
 
 Every question to the interviewer goes to the same `interviewer` instance, so that it folds each answer into one coherent determination of the learner.
 
@@ -39,7 +39,7 @@ Each entry in the curriculum shall carry three lists:
 
 1. **Terms:** each term the learner needs from the entry's section that no earlier entry defines. A term is needed when the interview assessment shows the user does not use it correctly, or when the section uses it and cannot be followed without it. Each term is listed with the defining sentence quoted verbatim from its source, and the source and section it comes from. When no source defines the term, the entry says "no source defines this" and does not supply a definition of its own.
 2. **Ignorable:** what in the assigned section the learner does not need, such as terms or subsections, so the writer can mark each as safe to ignore.
-3. **Trace:** for each topic you checked while writing the entry, how its branch ended: known (the evidence), defined by (the sentence, whose terms all ended as known), or not pertinent (the reason).
+3. **Trace:** for each prerequisite you tested while writing the entry, where the check stopped and why: the learner knows it (the evidence), a quoted sentence defines it and the learner knows every prerequisite of that sentence (the sentence), or the Goal does not need it (the reason).
 
 ## Your input files
 
@@ -78,8 +78,8 @@ The file contains:
 
 ## Exits
 
-- `DONE → Write the Lesson Plan`: every branch has ended, as described under *The Process*.
-- `ASK interviewer` (round trip, "Sub-Topic Discovered"): the evidence does not show whether the learner knows a topic the Goal needs. Name the topic and quote what needs it. The interviewer records the exchange in the interview file and sends you its path, and you continue your research.
+- `DONE → Write the Lesson Plan`: every prerequisite you tested has ended, as described under *The Process*.
+- `ASK interviewer` (round trip, "Learner's Knowledge Unknown"): the evidence does not show whether the learner knows a topic the Goal needs. Name the topic and quote what needs it. The interviewer records the exchange in the interview file and sends you its path, and you continue your research.
 - `ASK code-reader` (round trip, "Something's wrong with Doc"): the documentation disagrees with itself or with how the subject/concept/topic/tool actually behaves. Name the repository (with a URL), the version or branch, and the exact claim to check. The code-reader sends you the path of its findings file, and you continue your research.
 - `ANSWER`: when another agent asks you for more information, research it, record what you found in your output file, and answer with its path.
 

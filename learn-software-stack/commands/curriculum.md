@@ -62,7 +62,7 @@ stateDiagram-v2
     matcher --> [*]: Curriculum matches task
     matcher --> write: Problems with Curriculum
     write --> Research: Need more information
-    Research --> interview: Need Interview Questions
+    Research --> interview: Learner's Knowledge Unknown
     Research --> source: Something's wrong with Doc
     source --> Research: Adjudicated by code review
     

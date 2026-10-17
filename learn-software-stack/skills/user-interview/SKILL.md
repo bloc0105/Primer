@@ -22,7 +22,7 @@ A turn may contain several asks only when every ask is labelled (a), (b), (c) an
 
 You choose what to ask, interpret each answer, and decide when you can state what the learner knows about the topic. No other agent does. The researcher decides which topic comes next. You produce each determination yourself, from having tracked the interview throughout, and not by reconstructing it afterward.
 
-You may need to establish whether a question bears on the project. Ask the agent that owns the answer, such as the `code-recon` for what the codebase does or the `deep-researcher` for what the subject involves, so you don't ask questions with no bearing on the project.
+Each topic comes with the sentence or section that needs it, so its bearing on the project is already established. To anchor a question in what the codebase actually does, ask `code-recon`.
 
 ## Output
 
