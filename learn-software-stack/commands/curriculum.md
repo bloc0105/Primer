@@ -47,7 +47,7 @@ The process is diagrammed here in the following state chart:
 stateDiagram-v2
     state "Task Analysis" as task
     state "Basic Assessment" as assess
-    state "User Interview" as interview
+    state "Interview Question" as interview
     state "Topic Research" as Research
     state "Compare Curriculum to Task" as matcher
     state "Topic Code Review" as source
@@ -56,7 +56,7 @@ stateDiagram-v2
     [*] --> task
     task --> assess: Task Scoped
     assess --> Research: Basic Knowledge Gathered
-    interview --> Research: Topic Assessed
+    interview --> Research: Question Answered
     Research --> write: Research is compiled
     write --> matcher: Material Complete
     matcher --> [*]: Curriculum matches task
@@ -77,7 +77,7 @@ Each agent below starts with its state's skill already loaded, so starting or re
 |---|---|---|---|---|---|
 | Task Analysis | `code-recon` (Discovery Mode) or `stack-advisor` (Proposal Mode) | `discover-stack` / `propose-stack` | new | `tech-stack.md` | nothing |
 | Basic Assessment | `simple-interviewer` | `basic-assessment` | new | `basic-assessment.md` | `tech-stack.md` |
-| User Interview | `interviewer` | `user-interview` | persistent, started by the researcher's first question | `interview.md` | a run can't start here |
+| Interview Question | `interviewer` | `interview-question` | persistent, started by the researcher's first question | `interview.md` | a run can't start here |
 | Topic Research | `deep-researcher` | `topic-research` | persistent | `curriculum.md` | `tech-stack.md`, `basic-assessment.md` |
 | Topic Code Review | `code-reader` | `topic-code-review` | new each time | `code-review-<topic>.md` (optional: most runs have none) | a run can't start here |
 | Write the Lesson Plan | `tech-writer` | `write-lesson-plan` | persistent | `lesson-plan-r<N>.md`, one per round | `tech-stack.md`, `basic-assessment.md`, `interview.md`, `curriculum.md`, every `code-review-*.md` |
@@ -128,7 +128,6 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
    - Anything else is a **full** run, and the arguments are the user's request. A full run shall start from a goal: what the user wants to be able to do or have when the process ends, such as fixing a named bug, building a named thing, or changing a named behavior. Test: complete the sentence "The user wants to ___" using only the user's own words. The completed sentence shall name its target (the repo, branch, file or tool), because the agents read the goal and never the request. A named repo, branch, file or tool is a target, and "understand" or "learn" with no outcome stated is also a target, so neither completes the sentence. When the arguments are empty, or the sentence can't be completed, ask the user "What are you trying to do with `<target>`?" (or "What are you looking to do?" when there is no target) and repeat until it can be completed. Record the completed sentence as the goal.
 2. **For `--from` and `--only`, check the state and the source run:**
    - `<state>` is the skill name of one of these states: `discover-stack` or `propose-stack` (Task Analysis), `basic-assessment`, `topic-research`, `write-lesson-plan`, `compare-curriculum`.
-   - When `<state>` is `user-interview`, tell the user that the interview only happens when `deep-researcher` asks about a topic, so it can't be a starting state. They can start from `topic-research` instead. Stop there, without creating a run folder.
    - When `<state>` is `topic-code-review`, tell the user that code review only happens when `deep-researcher` asks for it, so it can't be a starting state. To tune it, they can run `--only topic-research` on a request where the documentation is known to be wrong. Stop there, without creating a run folder.
    - When `<state>` is any other name that isn't in the list, tell the user the valid state names and stop there.
    - `<source-run>` is a folder under `./runs/`, or a path to one. It contains a `run.md`. When it can't be found, tell the user and stop there.

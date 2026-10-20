@@ -4,7 +4,7 @@ description: Determines the user's level of knowledge and skill in a topic or su
 tools: WebFetch, WebSearch, Read, Write, Edit, Glob
 model: opus
 skills:
-  - user-interview
+  - interview-question
 ---
 
 # How you work

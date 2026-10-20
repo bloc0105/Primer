@@ -1,10 +1,10 @@
 ---
-name: user-interview
-description: The "User Interview" state of the /curriculum process. Load only when /curriculum has sent you into the "User Interview" state.
+name: interview-question
+description: The "Interview Question" state of the /curriculum process. Load only when /curriculum has sent you into the "Interview Question" state.
 user-invocable: false
 ---
 
-# User Interview
+# Interview Question
 
 ## Basics
 - Performed by the `interviewer` Agent.
@@ -44,7 +44,7 @@ Start the file with this header:
 
 ```
 ---
-state: User Interview
+state: Interview Question
 agent: interviewer
 run: <run folder name>
 inputs:

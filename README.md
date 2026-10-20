@@ -29,7 +29,7 @@ Primer moves between states. Each state hands off to another when its work is do
 
 - **Task Analysis.** Tell Primer what you want to do. It reads your codebase, or proposes a stack for a new project, and lists everything the work involves.
 - **Basic Assessment.** A quick, informal conversation about what you already know.
-- **Topic Research.** Works backward from what the task needs. Whenever it reaches something it can't tell whether you know, it calls on **User Interview**, which asks you pointed questions about just that, and research then goes further back or stops. When the docs disagree with each other or with reality, it calls on **Topic Code Review**, which reads the actual source code to settle it. Research ends where what the task needs meets what you already know.
+- **Topic Research.** Works backward from what the task needs. Whenever it reaches something it can't tell whether you know, it calls on **Interview Question**, which asks you one pointed question about it, and research then goes further back or stops. When the docs disagree with each other or with reality, it calls on **Topic Code Review**, which reads the actual source code to settle it. Research ends where what the task needs meets what you already know.
 - **Write the Lesson Plan.** Turns the research into lessons, each with an exercise in your project. When it needs more information, it asks Topic Research.
 - **Compare Curriculum to Task.** A skeptical reviewer checks the plan and sends it back to the writer until it's right.
 
