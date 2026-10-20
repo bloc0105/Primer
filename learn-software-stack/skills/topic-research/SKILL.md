@@ -18,15 +18,20 @@ Now the task is the research on each subject/concept/topic/tool to establish the
 - Reading the online documentation on the component from the official website. 
 - Reading the Forums or articles on the component. 
 
-The research is recursive, and what the learner knows decides where it stops. For example, in order to know Postgres, you need to know SQL. For each section you plan to assign, list its prerequisites: the terms in its text, the terms inside each defining sentence you intend to quote, and the concepts it builds on. A prerequisite can be as small as one definition or as large as a section to read. Test each prerequisite against the evidence so far: the basic assessment, the interview record, and the entries you have already written. Then do exactly one of the following:
+The research is recursive, and what the learner knows decides where it stops. For example, in order to know Postgres, you need to know SQL. Work one topic at a time, starting from what the Goal needs directly and working backward:
 
-1. **The evidence shows the learner knows it.** Stop there. Record what shows it. A claim in the basic assessment is not enough on its own; only the interview record or an entry you have already written can show it.
-2. **The evidence is silent, or shows a gap, and the Goal needs it.** When the basic assessment shows the learner has never met it, skip the interview: find the source that explains the topic, and test that source's prerequisites the same way. Otherwise `ASK interviewer` about it. Name the topic, and quote the sentence or section that needs it. When the interviewer reports a gap, find the source that explains the topic, and test that source's prerequisites the same way.
-3. **The Goal does not need it.** Record it as not pertinent, with the reason, and list it under the entry's **Ignorable**. Do not ask about it.
+1. Find the section that explains the topic, and list its prerequisites: the terms in its text, the terms inside each defining sentence you intend to quote, and the concepts it builds on. A prerequisite can be as small as one definition or as large as a section to read.
+2. Test each prerequisite against the evidence so far: the basic assessment, the interview record, and the entries you have already written. Then do exactly one of the following:
+
+   1. **The evidence shows the learner knows it.** Stop there. Record what shows it. A claim in the basic assessment is not enough on its own; only the interview record or an entry you have already written can show it.
+   2. **The evidence is silent, or shows a gap, and the Goal needs it.** When the basic assessment shows the learner has never met it, skip the interview: find the source that explains the topic, and test that source's prerequisites the same way. Otherwise `ASK interviewer` about it. Name the topic, and quote the sentence or section that needs it. When the interviewer reports a gap, find the source that explains the topic, and test that source's prerequisites the same way.
+   3. **The Goal does not need it.** Record it as not pertinent, with the reason, and list it under the entry's **Ignorable**. Do not ask about it.
+
+Each `ASK interviewer` names one topic and gets back one answered question. Read what the answer shows before your next move: ask another question about the same topic, go back to its source and that source's prerequisites, or stop going back on this topic because the learner knows it (case 1). Write each curriculum entry when every prerequisite of its section has ended; don't draft the curriculum ahead of the interview. Test: each `ASK interviewer` names one topic, and each one after the first was sent after you read the answer to the one before it.
 
 Test: for every topic you send the interviewer, you can quote the sentence or section that needs it, and name the part of the Goal that section serves. A prerequisite you can't link that way is case 3. `[judgment]`
 
-You do not judge what the learner knows. You read the interviewer's determination, which says specifically what they can and can't do, and decide from it whether to stop or go further back. Research is finished when every prerequisite you tested has ended in case 1 or case 3, or is defined by a sentence whose own prerequisites all ended in case 1.
+You do not judge what the learner knows. You read the interviewer's determination, which says specifically what they can and can't do, and decide from it whether to ask another question about the same topic, go further back, or stop going back on it. Research is finished when no topic is left open: every topic the Goal needs, and every prerequisite you found along the way, has ended in case 1 or case 3, or is defined by a sentence whose own prerequisites all ended in case 1.
 
 Every question to the interviewer goes to the same `interviewer` instance, so that it folds each answer into one coherent determination of the learner.
 
@@ -78,8 +83,8 @@ The file contains:
 
 ## Exits
 
-- `DONE → Write the Lesson Plan`: every prerequisite you tested has ended, as described under *The Process*.
-- `ASK interviewer` (round trip, "Learner's Knowledge Unknown"): the evidence does not show whether the learner knows a topic the Goal needs. Name the topic and quote what needs it. The interviewer records the exchange in the interview file and sends you its path, and you continue your research.
+- `DONE → Write the Lesson Plan`: no topic is left open, as described under *The Process*.
+- `ASK interviewer` (round trip, "Learner's Knowledge Unknown"): the evidence does not show whether the learner knows a topic the Goal needs. Name one topic, quote what needs it, and say what you need to find out about it. The interviewer records the exchange in the interview file and sends you its path, and you continue your research.
 - `ASK code-reader` (round trip, "Something's wrong with Doc"): the documentation disagrees with itself or with how the subject/concept/topic/tool actually behaves. Name the repository (with a URL), the version or branch, and the exact claim to check. The code-reader sends you the path of its findings file, and you continue your research.
 - `ANSWER`: when another agent asks you for more information, research it, record what you found in your output file, and answer with its path.
 

@@ -10,23 +10,23 @@ user-invocable: false
 - Performed by the `interviewer` Agent.
 
 ## Input
-The Basic Assessment of the learner's skill-set, plus the topic you were asked about and the sentence or section that needs it.
+The Basic Assessment of the learner's skill-set, the interview so far, and the researcher's request: the topic, the sentence or section that needs it, and what the researcher needs to find out about it.
 
 ## The Process
 
-The purpose of the basic assessment was to determine roughly what the user knows about a subject. Now is the point to narrow that understanding with precision, one topic at a time.
+The purpose of the basic assessment was to determine roughly what the user knows about a subject. Now is the point to narrow that understanding with precision, one question at a time.
 
-The `deep-researcher` sends you one topic at a time. Establish what the learner specifically knows about it, using what the basic assessment and earlier answers already show before you ask anything new. For instance, if the user explicitly said they know nothing about a certain subject/concept/topic/tool, it's probably not necessary to ask them about it. Ask as many questions as that takes. You are invoked one question per turn. Each turn you ask the user one question, and the next turn begins with the user's answer.
+Each time the `deep-researcher` calls on you, ask the user exactly one question about the topic it names, then report what the answer shows. The answer decides the researcher's next move, so a second question asked before the researcher has read the first answer would be asked blind.
 
-A turn may contain several asks only when every ask is labelled (a), (b), (c) and the labelled list is the last thing in the turn. An unlabelled sentence in a turn never asks for a response. Test: every sentence of the turn that asks for a response is one of the labelled asks.
+One question means one thing the user has to answer. In the same visit, the only other `ASK USER` turns are the ones *How you work* requires for that same question: asking it again when the user corrects or withdraws an answer, and asking the user to restate an answer that's ambiguous.
 
-You choose what to ask, interpret each answer, and decide when you can state what the learner knows about the topic. No other agent does. The researcher decides which topic comes next. You produce each determination yourself, from having tracked the interview throughout, and not by reconstructing it afterward.
+The researcher decides what needs to be known. You turn that into a question and interpret the answer, and no other agent does either. You produce each determination yourself, from having tracked the interview throughout, and not by reconstructing it afterward.
 
 Each topic comes with the sentence or section that needs it, so its bearing on the project is already established. To anchor a question in what the codebase actually does, ask `code-recon`.
 
 ## Output
 
-For each topic, a statement of what the learner specifically can and can't do or say about it, with the evidence: their own words where possible, and for each gap, what the question needed that they lacked. There are no fixed categories. The user's conceptual knowledge will be separate from their vocabulary knowledge.  This means that if a user knows how to do something, but doesn't know the terminology for it, this is considered different from actually not knowing the subject/concept/tool/topic.  From this, the researcher can tell whether to stop on the topic or go further back.
+For each question, what the answer shows the learner can and can't do or say, with the evidence: their own words where possible, and for a gap, what the question needed that they lacked. Then what the interview so far shows about the topic as a whole. There are no fixed categories. The user's conceptual knowledge will be separate from their vocabulary knowledge.  This means that if a user knows how to do something, but doesn't know the terminology for it, this is considered different from actually not knowing the subject/concept/tool/topic.  From this, the researcher can tell whether to ask another question about the same topic, go further back, or stop going back on this topic because the learner knows it.
 
 ## Your input files
 
@@ -56,15 +56,15 @@ After the header, write the content described below. Keep this file to that cont
 
 Write the file so that an agent who has never seen this run could continue your work in this state from the file alone.
 
-Organize the file by topic, in the order the topics were asked. Each topic gets one block: its heading, who asked and the sentence or section that needs it, then each question you asked about it with the user's answer word for word, then the statement described under *Output*, with concept knowledge and vocabulary kept separate. Number the questions in the order you asked them, across the whole interview. A topic you answered from earlier evidence without asking gets a block with its statement and the evidence. Answers never go in a section apart from their topic. Add each new block to the end of the file, and keep everything above it exactly as it was.
+Organize the file by question, in the order asked. Each question gets one block: who asked, the topic and the sentence or section that needs it, the question, the user's answer word for word, and what the answer shows, as described under *Output*, with concept knowledge and vocabulary kept separate. Number the questions in the order you asked them, across the whole interview. Add each new block to the end of the file, and keep everything above it exactly as it was.
 
-Write a topic's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. The record then survives even if the run stops partway through.
+Write the question into its block as soon as you ask it, and the answer as soon as it arrives. The record then survives even if the run stops partway through.
 
-After each answer, also append an entry to `notes.md` under your state's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, the topic and the sub-topic the question checks, what that answer shows, kept separate for concept knowledge and for vocabulary and each part quoting the words it comes from, and the next question. These entries stay out of the output file.
+After each answer, also append an entry to `notes.md` under your state's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, the topic and the sub-topic the question checks, what that answer shows, kept separate for concept knowledge and for vocabulary and each part quoting the words it comes from. These entries stay out of the output file.
 
 ## Exits
 
-- `ANSWER`: when the `deep-researcher` asks you about a topic, interview the user about it with `ASK USER` turns. Record the exchange and your statement in a new topic block, then answer with the path.
+- `ANSWER`: when the `deep-researcher` calls on you, ask the user one question with `ASK USER`. Record the question, the answer and what it shows in a new block, then answer with the path.
 
 ## Reporting back
 
