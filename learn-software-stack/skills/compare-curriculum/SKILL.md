@@ -28,12 +28,12 @@ The task is to check the work of the lesson plan against each rule below. Each r
 7. Does every practical avoid creating a scratch file, folder or throwaway edit?
 8. Does every practical use only concepts taught earlier, apart from later-unit code that the step names, with the unit, where the code appears?
 9. Does the plan begin with a unit whose practical is running the project unchanged, with setup steps included if and only if the interview assessment shows the user cannot run it already?
-10. Does every reading item that lists several sections name the parent section first, link to it, and then list the subsections to read?
+10. Is every reading item a linked page with its sections as a nested numbered list, subsections under their parent?
 11. Does every reading item name what to read by section number or heading, without describing how the page looks (a box, a sidebar, a table)?
-12. Is every term in an assigned reading that the learner needs defined in this unit's Vocabulary or an earlier unit's, or marked in its citation as safe to ignore?
+12. Is every term in an assigned reading that the learner needs defined in this unit's Vocabulary or an earlier unit's, or marked with a `Skip:` bullet in its citation?
 13. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
-14. Is every Vocabulary and Reading item one citation, with at most one sentence of the plan's own words?
-15. Is every Vocabulary and Reading sub-section free of any code, definition or analogy the plan wrote, apart from correction notes of two sentences or fewer that name the section they correct?
+14. Is every Vocabulary and Reading item one citation, with at most one `Covers:` line of the plan's own words?
+15. Is every Vocabulary and Reading sub-section free of any code, definition or analogy the plan wrote, apart from `Note:` bullets of two sentences or fewer, each under the section it corrects?
 16. Is every Vocabulary definition verbatim from its cited source? Fetch the page to check.
 17. From round 2: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
 

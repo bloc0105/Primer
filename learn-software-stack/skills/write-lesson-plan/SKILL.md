@@ -24,22 +24,43 @@ The lesson plan shall be a list of citations to documentation, plus a practical 
 1. It does not mention the interview, a review, a revision round, or how the plan was made.
 2. It does not contain "you" or "your", outside quotations.
 3. Every item in a Vocabulary or Reading sub-section is one citation.
-4. Each citation carries at most one sentence of the plan's own words, which says what the learner gets from it.
+4. Each citation carries at most one line of the plan's own words, a `Covers:` bullet saying what the learner gets from it.
 5. No Vocabulary or Reading sub-section contains a code block, definition or analogy that the plan wrote. A definition is quoted verbatim from its source, with a link.
 
-**One exception.** When the cited documentation is wrong for this project, or does not explain something the learner needs, a citation may carry a note of up to two sentences. The note says what is wrong or missing and what is true instead, and names the section it corrects. Your `notes.md` entry lists each note with the reason.
+**One exception.** When the cited documentation is wrong for this project, or does not explain something the learner needs, a citation may carry a `Note:` bullet of two sentences or fewer, placed under the section it corrects. The note says what is wrong or missing and what is true instead. Your `notes.md` entry lists each note with the reason.
 
 Each unit of the lesson shall contain three sub-sections, in this order:
 
-1. **Vocabulary:** each term that the unit's readings use, that the learner needs, and that the interview assessment does not show the user already using correctly. Each entry is the term, the defining sentence quoted from its source, and a link to that source, all taken from the Terms of the curriculum entries the unit covers. A term appears in the unit where it is first needed and nowhere else. When the curriculum has no source for a term, or says no source defines it, `ASK deep-researcher` for one before writing a correction note. A unit that needs no terms says so.
+1. **Vocabulary:** each term that the unit's readings use, that the learner needs, and that the interview assessment does not show the user already using correctly. Each entry is the term in bold, with the defining sentence quoted from its source and a link to that source as bullets under it, all taken from the Terms of the curriculum entries the unit covers. A second quote is a second bullet. A term appears in the unit where it is first needed and nowhere else. When the curriculum has no source for a term, or says no source defines it, `ASK deep-researcher` for one before writing a correction note. A unit that needs no terms says so.
 2. **Reading:** the documentation that the user needs to read in order to be effective with that subject. If only a specific section of a page is what the user doesn't already know, assign that section and not the whole page, and say which one.
 3. **Practical:** a practical application of the lesson in the project itself.  This will tell the user where the work is and what to fix or add, and not much more. The work should be pertinent to that section of the lesson.
 
 Each reading item shall satisfy every rule below, and each is a yes/no test:
 
-1. It names the parent section first, links to it, and then lists the subsections to read, such as "go to section X.1, read X.1.2, X.1.4 and X.1.5", with the link on the parent section.
+1. The page is a numbered item with its link. Under it, the sections to read are a nested numbered list, by heading or section number, with subsections nested under their parent.
 2. It names what to read by section number or heading, and does not describe how the page looks (a box, a sidebar, a table).
-3. It lists anything in the assigned sections that the learner does not need and that no Vocabulary entry defines, marked at the point where it appears as safe to ignore, such as "metaclasses appear here and can be ignored". The curriculum entry's Ignorable list is where to start.
+3. Anything in an assigned section that the learner does not need, and that no Vocabulary entry defines, is a `Skip:` bullet under that section. When it covers the whole page, the bullet goes under the page. The curriculum entry's Ignorable list is where to start.
+
+The Vocabulary and Reading sub-sections take this shape:
+
+```markdown
+### Vocabulary
+
+- **<term>**
+  - "<defining sentence, quoted verbatim>"
+  - [<Source>, <Page>](<link>)
+
+### Reading
+
+1. [<Source>, <Page>](<link>)
+   1. <Section heading or number>
+      1. <Subsection heading or number>
+      - Skip: <what in this section can be ignored>
+   2. <Section heading or number>
+      - Note: <what the documentation gets wrong or leaves out here, and what is true instead>
+   - Skip: <what on the whole page can be ignored>
+   - Covers: <what the learner gets from this reading>
+```
 
 The plan shall begin with Unit 0, whose practical is running the project as it stands and observing how it behaves, so that later results can be compared with it. Unit 0 includes the setup needed to run the project only when the interview assessment shows the user cannot run it already. Its Vocabulary and Reading sub-sections are whatever the user needs to run the project at all, and either may say that none is needed. Its outcome is that the project runs, so rule 2 below does not apply to it.
 

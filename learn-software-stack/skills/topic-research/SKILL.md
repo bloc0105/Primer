@@ -43,7 +43,7 @@ The list of Documentation that is necessary to get the user from their current s
 Each entry in the curriculum shall carry three lists:
 
 1. **Terms:** each term the learner needs from the entry's section that no earlier entry defines. A term is needed when the interview assessment shows the user does not use it correctly, or when the section uses it and cannot be followed without it. Each term is listed with the defining sentence quoted verbatim from its source, and the source and section it comes from. When no source defines the term, the entry says "no source defines this" and does not supply a definition of its own.
-2. **Ignorable:** what in the assigned section the learner does not need, such as terms or subsections, so the writer can mark each as safe to ignore.
+2. **Ignorable:** what in the assigned section the learner does not need, such as terms or subsections, so the writer can list each as a `Skip:` bullet.
 3. **Trace:** for each prerequisite you tested while writing the entry, where the check stopped and why: the learner knows it (the evidence), a quoted sentence defines it and the learner knows every prerequisite of that sentence (the sentence), or the Goal does not need it (the reason).
 
 ## Your input files
