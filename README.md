@@ -25,14 +25,15 @@ What you get at the end is a **lesson plan**. Every section pairs the reading yo
 
 ## How it works
 
-1. **Task Analysis.** Tell Primer what you want to do. It reads your codebase, or proposes a stack for a new project, and lists everything the work involves.
-2. **Basic Assessment.** A quick, informal conversation about what you already know.
-3. **Topic Research and User Interview.** Research works backward from what the task needs. Each time it reaches something it can't tell whether you know, the interviewer asks you pointed questions about just that, and research goes further back or stops. It ends where what the task needs meets what you already know.
-4. **Topic Code Review.** When the docs disagree with each other or with reality, Primer reads the actual source code to settle it.
-5. **Write the Lesson Plan.** Turns the research into lessons, each with an exercise in your project.
-6. **Compare Curriculum to Task.** A skeptical reviewer checks the plan and sends it back for fixes until it's right.
+Primer moves between states. Each state hands off to another when its work is done, or calls on another when it needs something.
 
-Each step is run by its own agent, so the agent that writes the lesson plan is never the one that approves it.
+- **Task Analysis.** Tell Primer what you want to do. It reads your codebase, or proposes a stack for a new project, and lists everything the work involves.
+- **Basic Assessment.** A quick, informal conversation about what you already know.
+- **Topic Research.** Works backward from what the task needs. Whenever it reaches something it can't tell whether you know, it calls on **User Interview**, which asks you pointed questions about just that, and research then goes further back or stops. When the docs disagree with each other or with reality, it calls on **Topic Code Review**, which reads the actual source code to settle it. Research ends where what the task needs meets what you already know.
+- **Write the Lesson Plan.** Turns the research into lessons, each with an exercise in your project. When it needs more information, it asks Topic Research.
+- **Compare Curriculum to Task.** A skeptical reviewer checks the plan and sends it back to the writer until it's right.
+
+Each state is run by its own agent, so the agent that writes the lesson plan is never the one that approves it.
 
 ## Installation
 
@@ -51,6 +52,6 @@ Then start a curriculum by describing what you want to do:
 
 ## Files
 
-- [Curriculum](learn-software-stack/commands/curriculum.md): the full process, and the rules for how the steps connect.
+- [Curriculum](learn-software-stack/commands/curriculum.md): the full process, and the rules for how the states connect.
 - [Agents](learn-software-stack/agents): one agent for each role in the process.
-- [Skills](learn-software-stack/skills): one skill for each step, holding the instructions its agent follows.
+- [Skills](learn-software-stack/skills): one skill for each state, holding the instructions its agent follows.

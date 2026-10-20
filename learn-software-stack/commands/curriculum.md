@@ -1,7 +1,7 @@
 ---
 name: curriculum
 description: The process to establish what the users path will be to learn a new subject or codebase.
-argument-hint: <request> | --from <step> <source-run> [notes] | --only <step> <source-run> [notes]
+argument-hint: <request> | --from <state> <source-run> [notes] | --only <state> <source-run> [notes]
 ---
 # Overall
 
@@ -73,15 +73,15 @@ stateDiagram-v2
 
 Each agent below starts with its state's skill already loaded, so starting or resuming the agent is all it takes to put it to work. When you start an agent, give it the path of the run folder. Each agent reads its own input files from the run folder and writes its own output file there. Each agent also appends a note to `notes.md` in the run folder. The note lists the files it opened and, for each choice in its output file, quotes the evidence that choice rests on. No agent reads that note unless a message tells it to.
 
-| # | State | Agent | Skill | Instance | Output file |
+| State | Agent | Skill | Instance | Output file | Copied when a run starts here |
 |---|---|---|---|---|---|
-| 01 | Task Analysis | `code-recon` (Discovery Mode) or `stack-advisor` (Proposal Mode) | `discover-stack` / `propose-stack` | new | `01-tech-stack.md` |
-| 02 | Basic Assessment | `simple-interviewer` | `basic-assessment` | new | `02-basic-assessment.md` |
-| 03 | User Interview | `interviewer` | `user-interview` | persistent, started by the researcher's first question | `03-interview.md` |
-| 04 | Topic Research | `deep-researcher` | `topic-research` | persistent | `04-curriculum.md` |
-| 05 | Topic Code Review | `code-reader` | `topic-code-review` | new each time | `05-code-review-<topic>.md` (optional: most runs have none) |
-| 06 | Write the Lesson Plan | `tech-writer` | `write-lesson-plan` | persistent | `06-lesson-plan-r<N>.md`, one per round |
-| 07 | Compare Curriculum to Task | `skeptical-student` | `compare-curriculum` | persistent | `07-review-r<N>.md`, one per round |
+| Task Analysis | `code-recon` (Discovery Mode) or `stack-advisor` (Proposal Mode) | `discover-stack` / `propose-stack` | new | `tech-stack.md` | nothing |
+| Basic Assessment | `simple-interviewer` | `basic-assessment` | new | `basic-assessment.md` | `tech-stack.md` |
+| User Interview | `interviewer` | `user-interview` | persistent, started by the researcher's first question | `interview.md` | a run can't start here |
+| Topic Research | `deep-researcher` | `topic-research` | persistent | `curriculum.md` | `tech-stack.md`, `basic-assessment.md` |
+| Topic Code Review | `code-reader` | `topic-code-review` | new each time | `code-review-<topic>.md` (optional: most runs have none) | a run can't start here |
+| Write the Lesson Plan | `tech-writer` | `write-lesson-plan` | persistent | `lesson-plan-r<N>.md`, one per round | `tech-stack.md`, `basic-assessment.md`, `interview.md`, `curriculum.md`, every `code-review-*.md` |
+| Compare Curriculum to Task | `skeptical-student` | `compare-curriculum` | persistent | `review-r<N>.md`, one per round | the files for Write the Lesson Plan, plus every `lesson-plan-r<N>.md` |
 
 **Persistent** means you start the agent the first time it's needed in this run and resume that same instance every time after that, whether it's entering its state again or answering a question. An agent started partway through a run picks up its step from the files in the run folder.
 
@@ -99,15 +99,15 @@ Every agent ends each of its turns with one marker. Act on the marker as follows
 
 A question and its answer are a round trip: the process moves into the answering agent's state, then returns to the asker's state.
 
-In `--only` mode, the run ends when the starting step's agent sends `DONE`. Check the file, show the message to the user as `From <name> Agent:` followed by the agent's exact words, give the path of the run folder, and stop there without entering the next state.
+In `--only` mode, the run ends when the starting state's agent sends `DONE`. Check the file, show the message to the user as `From <name> Agent:` followed by the agent's exact words, give the path of the run folder, and stop there without entering the next state.
 
 ## Rules for Main Agent
 
 **Your job.** You run the process in the state chart. Begin with *Starting a run*, below. After that, for each state, start or resume the agent named in the state table, then follow *Running the process* until the process reaches `END`. Every content decision belongs to the agents.
 
 **Hard rules:**
-1. **Pass every message on exactly as written.** This covers each agent's output, the user's replies, and each step's output. When showing agent output to the user, write `From <name> Agent:` followed by the agent's exact words. That line is the whole message.
-2. **Enter every state the agents send you to.** Treat every state as required, even one whose topic has come up before. Each state's agent does work the earlier states did not.
+1. **Pass every message on exactly as written.** This covers each agent's output, the user's replies, and each state's output. When showing agent output to the user, write `From <name> Agent:` followed by the agent's exact words. That line is the whole message.
+2. **Enter every state the agents send you to.** Treat every state as required, even one whose topic has come up before. Each state's agent does work the other states do not.
 3. **Send every question to the agent the `ASK` marker names.** That agent owns the answer. Your part is delivering the question and bringing the answer back.
 4. **Leave all content writing to the agents.** Your file operations are setting up the run folder, keeping `run.md` up to date, appending exact messages to `transcript.md`, and *Preparing source*.
 5. **Start Task Analysis only after `run.md` records a Goal.**
@@ -123,18 +123,18 @@ $ARGUMENTS
 Every run gets its own folder under `./runs/`, in the directory Claude was launched from. Set it up as follows.
 
 1. **Read the mode from the arguments:**
-   - `--from <step> <source-run> [notes]`: start at `<step>` and run to the end.
-   - `--only <step> <source-run> [notes]`: run `<step>` alone, then stop.
+   - `--from <state> <source-run> [notes]`: start at `<state>` and run to the end.
+   - `--only <state> <source-run> [notes]`: run `<state>` alone, then stop.
    - Anything else is a **full** run, and the arguments are the user's request. A full run shall start from a goal: what the user wants to be able to do or have when the process ends, such as fixing a named bug, building a named thing, or changing a named behavior. Test: complete the sentence "The user wants to ___" using only the user's own words. The completed sentence shall name its target (the repo, branch, file or tool), because the agents read the goal and never the request. A named repo, branch, file or tool is a target, and "understand" or "learn" with no outcome stated is also a target, so neither completes the sentence. When the arguments are empty, or the sentence can't be completed, ask the user "What are you trying to do with `<target>`?" (or "What are you looking to do?" when there is no target) and repeat until it can be completed. Record the completed sentence as the goal.
-2. **For `--from` and `--only`, check the step and the source run:**
-   - `<step>` is one of these skill names, each with the number of its output file: `discover-stack` (01), `propose-stack` (01), `basic-assessment` (02), `topic-research` (04), `write-lesson-plan` (06), `compare-curriculum` (07).
-   - When `<step>` is `user-interview`, tell the user that the interview only happens when `deep-researcher` asks about a topic, so it can't be a starting step. They can start from `topic-research` instead. Stop there, without creating a run folder.
-   - When `<step>` is `topic-code-review`, tell the user that code review only happens when `deep-researcher` asks for it, so it can't be a starting step. To tune it, they can run `--only topic-research` on a request where the documentation is known to be wrong. Stop there, without creating a run folder.
-   - When `<step>` is any other name that isn't in the list, tell the user the valid step names and stop there.
+2. **For `--from` and `--only`, check the state and the source run:**
+   - `<state>` is the skill name of one of these states: `discover-stack` or `propose-stack` (Task Analysis), `basic-assessment`, `topic-research`, `write-lesson-plan`, `compare-curriculum`.
+   - When `<state>` is `user-interview`, tell the user that the interview only happens when `deep-researcher` asks about a topic, so it can't be a starting state. They can start from `topic-research` instead. Stop there, without creating a run folder.
+   - When `<state>` is `topic-code-review`, tell the user that code review only happens when `deep-researcher` asks for it, so it can't be a starting state. To tune it, they can run `--only topic-research` on a request where the documentation is known to be wrong. Stop there, without creating a run folder.
+   - When `<state>` is any other name that isn't in the list, tell the user the valid state names and stop there.
    - `<source-run>` is a folder under `./runs/`, or a path to one. It contains a `run.md`. When it can't be found, tell the user and stop there.
 3. **Create `./runs/` if it doesn't exist.** At the same time, write `./runs/.gitignore` containing the single line `*`. This keeps runs out of git in any repo, without touching the repo's own `.gitignore`.
 4. **Create the run folder,** named `<YYYY-MM-DD>-<slug>`: today's date, then three to five lowercase words from the goal (or, for --from and --only, the request) joined by hyphens. When a folder with that name exists, add `-2`, `-3` and so on.
-5. **For `--from` and `--only`, copy files from the source run:** every numbered file whose number is *below* the starting step's number. For example, a start at `topic-research` (04) copies the `01-`, `02-` and `03-` files. Copy nothing else, so every other file in the new folder comes from this run.
+5. **For `--from` and `--only`, copy files from the source run:** the files the state table lists under *Copied when a run starts here* for the starting state. For example, a start at `topic-research` copies `tech-stack.md` and `basic-assessment.md`. Copy nothing else, so every other file in the new folder comes from this run.
 6. **Write `run.md`:**
 
    ```
@@ -142,7 +142,7 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
 
    - **Request:** <the user's request, word for word; for --from and --only, copied from the source run's run.md>
    - **Goal:** <the completed sentence "The user wants to ___", in the user's words; for --from and --only, copied from the source run's run.md>
-   - **Mode:** full | from <step> | only <step>
+   - **Mode:** full | from <state> | only <state>
    - **Source run:** <source run folder, or "none">
    - **Notes:** <the notes from the arguments, word for word, or "none">
 
@@ -155,7 +155,7 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
 7. **Create `transcript.md`** containing only the heading `# Transcript: <run folder name>`. Create `notes.md` containing only the heading `# Notes: <run folder name>`. Neither file is copied from the source run.
 8. **Start the process:**
    - **Full run:** begin at *Task Analysis*, below.
-   - **`--from` or `--only`:** start the agent for `<step>` from the state table, and send it the path of the run folder. For `discover-stack` start `code-recon`, and for `propose-stack` start `stack-advisor`.
+   - **`--from` or `--only`:** start the agent for `<state>` from the state table, and send it the path of the run folder. For `discover-stack` start `code-recon`, and for `propose-stack` start `stack-advisor`.
 
 ## The transcript
 
