@@ -71,7 +71,7 @@ stateDiagram-v2
 
 ## State table
 
-Each agent below starts with its state's skill already loaded, so starting or resuming the agent is all it takes to put it to work. When you start an agent, give it the path of the run folder. Each agent reads its own input files from the run folder and writes its own output file there. Each agent also appends a note to `notes.md` in the run folder. The note lists the files it opened and, for each choice in its output file, quotes the evidence that choice rests on. No agent reads that note unless a message tells it to.
+Each agent below starts with its state's skill already loaded, so starting or resuming the agent is all it takes to put it to work. When you start an agent, give it the path of the run folder. Each agent reads its own input files from the run folder and writes its own output file there. Each agent also appends a note to `notes.md` in the run folder, except the `skeptical-student`, which writes its notes to `notes-review-r<N>.md`. The note lists the files it opened and, for each choice in its output file, quotes the evidence that choice rests on. No agent reads that note unless a message tells it to.
 
 | State | Agent | Skill | Instance | Output file | Copied when a run starts here |
 |---|---|---|---|---|---|
@@ -81,7 +81,7 @@ Each agent below starts with its state's skill already loaded, so starting or re
 | Topic Research | `deep-researcher` | `topic-research` | persistent | `curriculum.md` | `tech-stack.md`, `basic-assessment.md` |
 | Topic Code Review | `code-reader` | `topic-code-review` | new each time | `code-review-<topic>.md` (optional: most runs have none) | a run can't start here |
 | Write the Lesson Plan | `tech-writer` | `write-lesson-plan` | persistent | `lesson-plan-r<N>.md`, one per round | `tech-stack.md`, `basic-assessment.md`, `interview.md`, `curriculum.md`, every `code-review-*.md` |
-| Compare Curriculum to Task | `skeptical-student` | `compare-curriculum` | persistent | `review-r<N>.md`, one per round | the files for Write the Lesson Plan, plus every `lesson-plan-r<N>.md` |
+| Compare Curriculum to Task | `skeptical-student` | `compare-curriculum` | persistent | `review-r<N>.md` and `notes-review-r<N>.md`, one of each per round | the files for Write the Lesson Plan, plus every `lesson-plan-r<N>.md` |
 
 **Persistent** means you start the agent the first time it's needed in this run and resume that same instance every time after that, whether it's entering its state again or answering a question. An agent started partway through a run picks up its step from the files in the run folder.
 
@@ -89,7 +89,7 @@ Each agent below starts with its state's skill already loaded, so starting or re
 
 Every agent ends each of its turns with one marker. Act on the marker as follows. Append every message you handle to `transcript.md`, as described in *The transcript*, before acting on it.
 
-1. **`ASK USER:`** Show the text to the user as `From <name> Agent:` followed by the agent's exact words. Send the user's reply, exactly as written, to the same agent instance.
+1. **`ASK USER:`** Show the text to the user as `From <name> Agent:` followed by the agent's exact words. Send the user's reply to the same agent instance as `The user's reply:` followed by their exact words.
 2. **`ASK <agent>:`** Add the asking agent to the end of your list of waiting askers. Then send the question, exactly as written, to the named agent, together with the path of the run folder: resume the agent if it exists, or start it if it doesn't. Handle that agent's turns with these same steps.
 3. **`ANSWER: <path>`** Check the file (see step 7). Remove the last agent from your list of waiting askers, and send it the whole `ANSWER` message exactly as written. That agent reads the file and continues from where it stopped.
 4. **`DONE → <state>: <path>`** Check the file (see step 7). Move to that state. Start or resume its agent as the state table says, and send it the run folder path and the whole `DONE` message exactly as written.

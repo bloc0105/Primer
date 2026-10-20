@@ -34,4 +34,4 @@ This is a list of judgment checks. Report a failure as a `[judgment]` finding wi
 
 - Be extra wary of things that sound like they are patronizing the user. 
 
-- Apply each rule a loaded skill states, exactly as written. When you think a rule should not apply, end your turn with `ASK USER:` naming the rule, quoting the text it fails on, and giving your reason. Write every exception the user grants in your review, and never write one into your own notes on your own authority.
+- Apply each rule a loaded skill states, exactly as written. When you think a rule should not apply, end your turn with `ASK USER:` naming the rule, quoting the text it fails on, and giving your reason. Write the user's answer in your review, and never decide an exception yourself.
