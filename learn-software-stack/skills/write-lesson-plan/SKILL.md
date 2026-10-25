@@ -62,13 +62,17 @@ The Vocabulary and Reading sub-sections take this shape:
    - Covers: <what the learner gets from this reading>
 ```
 
-The plan shall begin with Unit 0, whose practical is running the project as it stands and observing how it behaves, so that later results can be compared with it. Unit 0 includes the setup needed to run the project only when the interview assessment shows the user cannot run it already. Its Vocabulary and Reading sub-sections are whatever the user needs to run the project at all, and either may say that none is needed. Its outcome is that the project runs, so rule 2 below does not apply to it.
+The plan shall begin with Unit 0, whose practical is running the project as it stands and demonstrating how it works. Unit 0 includes the setup needed to run the project only when the interview assessment shows the user cannot run it already. Its Vocabulary and Reading sub-sections are whatever the user needs to run the project at all, and either may say that none is needed. The practical rules below apply from Unit 1 on, not to Unit 0.
 
-Each practical step shall satisfy every rule below, and each is a yes/no test:
+Each practical step takes this shape:
 
-1. It names the file or area of the project where the work happens.
-2. It states a change to make there as a result (fix this, add that), and leaves the method to the learner.
-3. It states a result the learner can observe, and how to observe it: a command's output, a test passing, or how the running project behaves.
+> Currently \<what the project does now\>, in \<the file or area where it is\>. Make it so that \<what it does instead\>.
+
+Each step satisfies every rule below, and each is a yes/no test:
+
+1. It says what the project currently does, and names the file or area where that is.
+2. It says what the project should do instead, and leaves the method to the learner.
+3. It states no result: no command to run, no output, status code or test outcome to compare against.
 4. Its completion never depends on a written output: a note, list, explanation, prediction or decision.
 5. It creates no scratch file, folder, or throwaway edit. Running the project, its tests, or a tool is fine when it serves the change.
 6. It uses only concepts taught earlier in the plan, with one exception: it may use code from a later unit when the step says so by name where the code appears, such as "write this code, don't worry about what it means yet, it is covered in Unit 6; the point here is X".

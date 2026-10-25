@@ -19,11 +19,14 @@ The lesson plan that was written.
 The task is to check the work of the lesson plan against each rule below. Each rule is a yes/no test. When the answer to any test is no, withhold approval and list the failure as a change-request that quotes the failing text. A plan that fails a rule is not approved, and no failure is excused as acceptable, minor, or fine here. When you believe a rule should not apply, end your turn with `ASK USER:` naming the rule, quoting the failing text, and giving your reason. The plan stays unapproved until the user answers, and you record their answer in your review.
 
 **Rules:**
+
+Rules 3 to 8 check practicals from Unit 1 on. Unit 0's practical is checked only by rule 9.
+
 1. Does every unit have Vocabulary, Reading and Practical sub-sections, in that order? (Vocabulary and Reading may state that none are needed.)
 2. Does every Vocabulary and Reading item depend only on knowledge taught earlier in the plan?
 3. Does every practical name a concept from its own unit's Vocabulary or Reading sub-section?
-4. Does every practical (Unit 0 excepted) name the file or area of the project where the work happens and state a change to make there?
-5. Does every practical state a result the learner can observe, and how to observe it?
+4. Does every practical say what the project currently does, name the file or area where it is, and say what it should do instead?
+5. Does every practical leave out any result: a command to run, an output, a status code or a test outcome?
 6. Is every practical's completion independent of any written output (a note, list, explanation, prediction or decision)?
 7. Does every practical avoid creating a scratch file, folder or throwaway edit?
 8. Does every practical use only concepts taught earlier, apart from later-unit code that the step names, with the unit, where the code appears?
