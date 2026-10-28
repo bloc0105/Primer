@@ -38,7 +38,7 @@ Rules 3 to 9 check practicals from Unit 1 on. Unit 0's practical is checked only
 14. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
 15. Is every Vocabulary and Reading item one citation, with at most one `Covers:` line of the plan's own words?
 16. Is every Vocabulary and Reading sub-section free of any code, definition or analogy the plan wrote, apart from `Note:` bullets of two sentences or fewer, each under the section it corrects?
-17. Is every Vocabulary definition verbatim from its cited source? Fetch the page to check.
+17. Is every Vocabulary definition verbatim from its cited source, and is that source the documentation of the language or tool the term belongs to? Fetch the page to check.
 18. When reviewing a revision: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
 
 **Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical suits the user's knowledge level, whether any item is worded incorrectly, whether each correction note fixes something the cited documentation really gets wrong or omits, whether any Vocabulary list is too long to read before its unit, and any judgment checks in your own guidelines. Apply the split-attention check in your guidelines to the Practical sub-sections, which are the plan's own writing.
