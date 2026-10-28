@@ -17,23 +17,25 @@ There should be a better way.
 
 ## The Fill
 
-**Primer** is a *Claude* based tool that reads over a codebase, and will discuss a potential task or project with you, establish the Tech stack needed to accomplish it, then works out what you need to learn, asking you about your knowledge along the way, and finds the documentation that fills in the gaps.  It's like having a private Documentation librarian that knows exactly what will help you.  
+**Primer** is a *Claude* based tool that reads over a codebase and works out, with you, exactly what has to change to get you what you want. Once you've agreed on those changes, it works out what you need to learn to make them yourself, asking you about your knowledge along the way, and finds the documentation that fills in the gaps. It's like having a private Documentation librarian that knows exactly what will help you.
 
-It works whether you're diving into an existing codebase or starting something new. If there's no code yet, Primer recommends a tech stack for your idea first.
+It works whether you're diving into an existing codebase or starting something new. If there's no code yet, Primer chooses the tools as part of planning the changes.
 
-What you get at the end is a **lesson plan**. Every section pairs the reading you actually need with a hands-on exercise in *your* project, so you're moving your real work forward while you learn. Before you see it, a separate reviewer checks the plan: is everything in the right order, does each exercise use what you just read, and is it pitched at your level?
+What you get at the end is a **lesson plan**. Every unit pairs the reading you actually need with a step of the changes you agreed to, in *your* project, so you're moving your real work forward while you learn. Before you see it, a separate reviewer checks the plan: is everything in the right order, does each exercise use what you just read, and is it pitched at your level?
 
 ## How it works
 
 Primer moves between states. Each state hands off to another when its work is done, or calls on another when it needs something.
 
-- **Task Analysis.** Tell Primer what you want to do. It reads your codebase, or proposes a stack for a new project, and lists everything the work involves.
-- **Basic Assessment.** A quick, informal conversation about what you already know.
-- **Topic Research.** Works backward from what the task needs. Whenever it reaches something it can't tell whether you know, it calls on **Interview Question**, which asks you one pointed question about it, and research then goes further back or stops. When the docs disagree with each other or with reality, it calls on **Topic Code Review**, which reads the actual source code to settle it. Research ends where what the task needs meets what you already know.
-- **Write the Lesson Plan.** Turns the research into lessons, each with an exercise in your project. When it needs more information, it asks Topic Research.
+- **Task Analysis.** Tell Primer what you want to do. If there's a codebase, it reads what the code does now.
+- **Define Product Changes.** Plans what the finished product does, and the changes that get there. Only what your goal needs, plus anything it recommends for security.
+- **Basic Assessment.** A quick, informal conversation about the tools and ideas those changes involve.
+- **Confirm Product Changes.** Explains the changes in your words and waits. If they're not what you want, say so, and they're revised.
+- **Topic Research.** Works backward from what the changes need. Whenever it reaches something it can't tell whether you know, it calls on **Interview Question**, which asks you one pointed question about it, and research then goes further back or stops. When the docs disagree with each other or with reality, it calls on **Topic Code Review**, which reads the actual source code to settle it. Research ends where what the task needs meets what you already know.
+- **Write the Lesson Plan.** Turns the research into lessons, each one a step of the agreed changes. When it needs more information, it asks Topic Research.
 - **Compare Curriculum to Task.** A skeptical reviewer checks the plan and sends it back to the writer until it's right.
 
-Each state is run by its own agent, so the agent that writes the lesson plan is never the one that approves it.
+The agent that plans the changes is never the one that explains them to you, and the agent that writes the lesson plan is never the one that approves it.
 
 ## Installation
 

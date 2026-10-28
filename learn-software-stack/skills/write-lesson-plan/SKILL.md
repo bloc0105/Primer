@@ -12,12 +12,13 @@ user-invocable: false
 
 ## Input
 
-- The curriculum from the Research State.
+- The accepted changes.
+- The curriculum from the Research State, with each change's subject list.
 - The interview assessment of the user.
 
 ## The Process
 
-This is where the lesson plan is actually created.  Everything from the curriculum must have a practical application to the project. 
+This is where the lesson plan is actually created.
 
 The lesson plan shall be a list of citations to documentation, plus a practical for each unit. The documentation teaches, and the plan says what to read. Each of these shall be true of the plan file, and each can be checked by searching it:
 
@@ -33,7 +34,7 @@ Each unit of the lesson shall contain three sub-sections, in this order:
 
 1. **Vocabulary:** each term that the unit's readings use, that the learner needs, and that the interview assessment does not show the user already using correctly. Each entry is the term in bold, with the defining sentence quoted from its source and a link to that source as bullets under it, all taken from the Terms of the curriculum entries the unit covers. A second quote is a second bullet. A term appears in the unit where it is first needed and nowhere else. When the curriculum has no source for a term, or says no source defines it, `ASK deep-researcher` for one before writing a correction note. A unit that needs no terms says so.
 2. **Reading:** the documentation that the user needs to read in order to be effective with that subject. If only a specific section of a page is what the user doesn't already know, assign that section and not the whole page, and say which one.
-3. **Practical:** a practical application of the lesson in the project itself.  This will tell the user where the work is and what to fix or add, and not much more. The work should be pertinent to that section of the lesson.
+3. **Practical:** the steps of the accepted changes that the unit's last entry completes, as described below.
 
 Each reading item shall satisfy every rule below, and each is a yes/no test:
 
@@ -64,28 +65,28 @@ The Vocabulary and Reading sub-sections take this shape:
 
 The plan shall begin with Unit 0, whose practical is running the project as it stands and demonstrating how it works. Unit 0 includes the setup needed to run the project only when the interview assessment shows the user cannot run it already. Its Vocabulary and Reading sub-sections are whatever the user needs to run the project at all, and either may say that none is needed. The practical rules below apply from Unit 1 on, not to Unit 0.
 
-Each practical step takes this shape:
+Units follow the curriculum's order. A unit ends at an entry that completes at least one step, and teaches that entry together with every earlier entry no unit has taught yet. Its practical holds every step that entry completes.
+
+Each practical step is part of an accepted change, and takes this shape:
 
 > Currently \<what the project does now\>, in \<the file or area where it is\>. Make it so that \<what it does instead\>.
+> - Change: \<the accepted change it is part of\>
 
 Each step satisfies every rule below, and each is a yes/no test:
 
-1. It says what the project currently does, and names the file or area where that is.
-2. It says what the project should do instead, and leaves the method to the learner.
-3. It states no result: no command to run, no output, status code or test outcome to compare against.
-4. Its completion never depends on a written output: a note, list, explanation, prediction or decision.
-5. It creates no scratch file, folder, or throwaway edit. Running the project, its tests, or a tool is fine when it serves the change.
-6. It uses only concepts taught earlier in the plan, with one exception: it may use code from a later unit when the step says so by name where the code appears, such as "write this code, don't worry about what it means yet, it is covered in Unit 6; the point here is X".
+1. It is part of one accepted change, and names it.
+2. It is in the unit whose last entry completes its needs.
+3. It says what the project currently does, names the file or area, and says what it does instead, leaving the method to the learner.
+4. Its "Make it so that" names something the running project then does that the learner can see, with this step alone. A step whose effect can only be seen after a later step is combined with that step, in that step's unit.
+5. It states no result: no command to run, no output, status code or test outcome to compare against.
+6. It uses only subjects taught in this unit or earlier.
 
-One more check cannot be made yes/no, so it is a stated judgment: the change should move the project toward the Goal. In your `notes.md` entry, record for each practical which part of the Goal it advances.
-
-When a topic in the curriculum has no project change to practice, ask whether it belongs and where it can be practiced. Never drop it silently, and never invent a practical for it.
+The steps of each accepted change together make the whole change, and no more. By the last unit, every accepted change is complete.
 
 ## Other Considerations
 
-- Exercises should default toward open-ended framing. Rather than handing the learner a fully-specified function signature and skeleton body, prefer pointing at a real file and a real-world scenario and letting them work out the shape — e.g. "apply what you learned about `except ... as e` to `main.py`".
 - Tune each unit to the user's knowledge by what it assigns, lists and skips: which terms, which sections, where to stop, what to ignore. Never by writing explanation, and never by addressing the reader or retelling what they said.
-- Stay inside the curriculum. If you notice something else worth teaching or fixing that the curriculum does not contain, it is not yours to add or to silently drop. Ask, using the exits below: the `deep-researcher` for a fact, a source, or whether the user already knows a topic, and `ASK USER` for whether something belongs in the project. Asking costs nothing, and guessing does.
+- Stay inside the curriculum and the accepted changes. Something worth teaching or fixing that no accepted change needs stays out. When an accepted change can't be made with what the curriculum teaches, `ASK deep-researcher`. Ask the `deep-researcher` too for a fact, a source, or whether the user already knows a topic. Asking costs nothing, and guessing does.
 - The `tech-writer` may have questions during writing.  It is up to the main agent to decide which agent to pass the questions to.
 
 ## Output
@@ -95,10 +96,12 @@ The completed lesson plan for the user
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
-- `tech-stack.md`, `basic-assessment.md` and `interview.md`, for the project and the user's knowledge.
+- The `product-changes-r<N>.md` and `product-changes-explained-r<N>.md` with the highest round number: the accepted changes, minus any recommended change the user dropped.
+- `current-code.md`, when there is a codebase.
+- `basic-assessment.md` and `interview.md`, for the user's knowledge.
 - `curriculum.md`, the curriculum.
 - Every `code-review-*.md` file in the folder, if there are any.
-- From round 2 on: the previous lesson plan, `lesson-plan-r<N-1>.md`, and the review that sent it back, `review-r<N-1>.md`.
+- When a review has sent the plan back: the previous lesson plan, `lesson-plan-r<N-1>.md`, and the review that sent it back, `review-r<N-1>.md`.
 
 ## Your output file
 
@@ -122,15 +125,14 @@ Write the file so that an agent who has never seen this run could continue your 
 
 Append the rest to `notes.md` in the run folder, under the heading `## Write the Lesson Plan, tech-writer, round <N>`. Read `notes.md` only when the main agent's message tells you to. The entry contains:
 - The files you opened.
-- For each practical, the part of the Goal it advances.
-- From round 2 on: a **Changes made** list. It names each change-request from `review-r<N-1>.md` and the text you changed in the plan.
+- When a review has sent the plan back: a **Changes made** list. It names each change-request from `review-r<N-1>.md` and the text you changed in the plan.
 - One section for each question you asked another agent, naming who you asked, what you asked, and the file their answer is in.
 - When you answer a question as `ANSWER`, the answer goes in this entry and not in the plan file.
 
 ## Exits
 
 - `DONE → Compare Curriculum to Task`: the lesson plan for this round is written.
-- `ASK <agent>` (round trip): you need an answer to write a section. Ask the agent that owns it: the `deep-researcher` for a fact, a source, a place in the project where a practical can apply, or whether the user already knows a topic. The agent sends you the path of its answer, and you continue writing.
+- `ASK <agent>` (round trip): you need an answer to write a section. Ask the agent that owns it: the `deep-researcher` for a fact, a source, or whether the user already knows a topic. The agent sends you the path of its answer, and you continue writing.
 
 ## Reporting back
 

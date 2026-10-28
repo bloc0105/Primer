@@ -10,25 +10,29 @@ user-invocable: false
 - Performed by the `simple-interviewer` Agent.
 
 ## Input
-The Tech Stack List from the Task Analysis
+The tools and concepts the change list involves.
 
 ## The Process
 
-This is an informal assessment of the skill level on the tech stack of the learner. It's simply meant to establish the level of knowledge that the user feels they have about a subject. 
+This is an informal assessment of the learner's skill level in the tools and concepts the changes involve. It's simply meant to establish the level of knowledge that the user feels they have about each one.
 
-Ask as many questions as it takes to establish the user's knowledge. It's probably going to be close to the number of subjects/concepts/topics/tools in the tech stack, with a few more questions that narrow the understanding of the user.
+Ask as many questions as it takes to establish what the user knows of each tool and concept the changes involve, with a few more that narrow it down.
+
+Ask about the tools and concepts, not about the changes. The changes are shown to the user in *Confirm Product Changes*.
+
+When `basic-assessment.md` already exists, ask only about the tools and concepts it doesn't cover yet, and add their blocks to the end of the file. Leave the earlier blocks as they are.
 
 ## Output
 
-A basic assessment of the user's skillset, relative to what would be necessary to complete the objectives of the proposed work on the project. 
+A basic assessment of the user's skillset, relative to what the changes need.
 
-Therefore, the List is now each subject/concept/topic/tool, plus a paragraph about how much it is used in the project, and another paragraph about how much the user knows about the subject.
+For each tool or concept, a paragraph about how much the user knows of it.
 
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
-- `tech-stack.md`, the Tech Stack List.
+- `product-changes-r<N>.md` with the highest round number, for its Tools list and its Involves lines.
 
 ## Your output file
 
@@ -50,15 +54,15 @@ After the header, write the content described below. Keep this file to that cont
 
 Write the file so that an agent who has never seen this run could continue your work in this state from the file alone.
 
-Organize the file by subject, in the order of the Tech Stack List. Each subject gets one block: its heading, then each question you asked about it with the user's answer word for word, then the assessment described under *Output*. Number the questions in the order you asked them, across the whole interview. A question that covers several subjects goes in the block of the first subject it covers, and later blocks cite it by number. A subject you did not ask about gets a block with its assessment and the reason, for example "not asked: covered by item 5". Answers never go in a section apart from their subject.
+Organize the file by tool or concept, in the order the change list first names them. Each one gets one block: its heading, then each question you asked about it with the user's answer word for word, then the assessment described under *Output*. Number the questions in the order you asked them, across the whole interview. A question that covers several tools or concepts goes in the block of the first one it covers, and later blocks cite it by number. A tool or concept you did not ask about gets a block with its assessment and the reason, for example "not asked: covered by item 5". Answers never go in a section apart from their tool or concept.
 
-Write a subject's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. Write the assessment when you finish the subject. The record then survives even if the run stops partway through.
+Write a tool or concept's heading, and each question and answer, into its block as soon as the answer arrives, before you ask the next question. Write the assessment when you finish it. The record then survives even if the run stops partway through.
 
-After each answer, also append an entry to `notes.md` under your state's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, the Tech Stack item the question checks, one sentence of what that answer shows about what the user knows (quote the words it comes from, as in "from this answer, the user can write a SELECT with a WHERE clause"), the assessment sentence you wrote for that item in the output file, and the next question. These entries stay out of the output file.
+After each answer, also append an entry to `notes.md` under your state's heading, labelled with the question number (for example "Q4"), holding in this order: the question, the user's answer word for word, the tool or concept the question checks, one sentence of what that answer shows about what the user knows (quote the words it comes from, as in "from this answer, the user can write a SELECT with a WHERE clause"), the assessment sentence you wrote for it in the output file, and the next question. These entries stay out of the output file.
 
 ## Exits
 
-- `DONE → Topic Research`: the basic assessment of every item in the Tech Stack List is complete.
+- `DONE → Confirm Product Changes`: the basic assessment of every tool and concept the changes involve is complete.
 
 ## Reporting back
 

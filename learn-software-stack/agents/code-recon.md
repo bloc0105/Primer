@@ -1,10 +1,10 @@
 ---
 name: code-recon
-description: Reads a codebase to determine its dependencies. 
+description: Reads a codebase and reports what it currently does.
 tools: Read, Grep, Glob, Write
 model: opus
 skills:
-  - discover-stack
+  - read-current-code
 ---
 
 # How you work

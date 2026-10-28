@@ -1,30 +1,20 @@
 ---
-name: propose-stack
-description: The "Task Analysis" state of the /curriculum process (Proposal Mode), run by stack-advisor. Recommend a tech stack for a user's stated goal when no existing code exists yet.
+name: read-current-code
+description: The "Task Analysis" state of the /curriculum process, run by code-recon. Load only when /curriculum has sent you into the "Task Analysis" state.
 user-invocable: false
 ---
 
-# Propose Stack
+# Read Current Code
 
 ## Job
 
-Recommend a concrete, sensible tech stack for the user's goal. This is a judgment task, not an observation task, there is no single correct answer, so the recommendation should be confident and specific rather than a menu of options to research.
+Read the codebase and report, as fact, what it currently does in the areas the Goal involves. This is an observation task: report what is there, including bugs, deprecated patterns, and constructs that don't do what they look like they do. Don't propose changes. Deciding what changes is the `stack-advisor`'s job.
 
 ## Process
 
-1. Take the Goal from `run.md` and put it in concrete terms: what is the user actually trying to build, and what does it need to do (e.g. "needs a GUI," "needs to store user data," "needs real-time messaging").
-2. Propose one concrete stack, don't present a long list of alternatives to choose between. Give a specific recommendation the way an experienced engineer would if asked directly.
-3. Briefly justify each major choice, one or two sentences per component is enough. The user should understand *why*, not just *what*.
-4. Favor well-documented, mainstream, actively maintained tools over obscure ones, since the user will need to learn them from scratch, and better documentation means a better learning experience later.
-5. Present the proposed stack to the user and get their confirmation or pushback before proceeding. They may know a constraint you don't (e.g. "I already know Python, avoid making me learn a new language").
-
-## Output
-
-A Tech Stack List: each component in the proposed stack. For each component, note:
-- What role it plays in the planned application
-- Why it was chosen over likely alternatives
-
-This output must be confirmed by the user before proceeding, since it's a recommendation, so if you need to, ask further questions of the user as things arise.
+1. Find the areas the Goal involves: the files, functions, configuration and tools that the Goal's outcome would touch or rely on.
+2. Read the real files: manifests, imports and the code itself. Don't infer from names or descriptions.
+3. For each area, record what it does now, the files that show it, and the tools it uses there, with their versions and the parts it uses.
 
 ## Your input files
 
@@ -33,14 +23,14 @@ The main agent gives you the path of the run folder. Read these files from it be
 
 ## Your output file
 
-Write your output to `tech-stack.md` in the run folder the main agent gave you. Update it as the user responds, so it always shows the latest version of the proposal.
+Write your output to `current-code.md` in the run folder the main agent gave you.
 
 Start the file with this header:
 
 ```
 ---
 state: Task Analysis
-agent: stack-advisor
+agent: code-recon
 run: <run folder name>
 inputs:
   - <each file you read>
@@ -51,14 +41,17 @@ After the header, write the content described below. Keep this file to that cont
 
 Write the file so that an agent who has never seen this run could continue your work in this state from the file alone.
 
-The file contains:
-- The Tech Stack List, as described under *Output*, and no summary paragraph or table of packages.
-- The user's confirmations and objections, word for word, and what you changed in response.
+The file contains only:
+- One line stating the scope you read.
+- One block per area, with a heading and these parts:
+  - **Files:** the files that show it.
+  - **What it does now:** in this codebase specifically.
+  - **Uses:** each tool and version, and the parts of it used here.
+- **Problems:** every bug, deprecated pattern or misleading construct in those areas.
 
 ## Exits
 
-- `ASK USER`: present the proposed stack, and ask any further questions, until the user confirms it.
-- `DONE → Basic Assessment`: the user has confirmed the Tech Stack List.
+- `DONE → Define Product Changes`: every area the Goal involves is recorded.
 
 ## Reporting back
 

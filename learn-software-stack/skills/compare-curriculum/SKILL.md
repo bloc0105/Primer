@@ -20,27 +20,28 @@ The task is to check the work of the lesson plan against each rule below. Each r
 
 **Rules:**
 
-Rules 3 to 8 check practicals from Unit 1 on. Unit 0's practical is checked only by rule 9.
+Rules 3 to 9 check practicals from Unit 1 on. Unit 0's practical is checked only by rule 10.
 
 1. Does every unit have Vocabulary, Reading and Practical sub-sections, in that order? (Vocabulary and Reading may state that none are needed.)
 2. Does every Vocabulary and Reading item depend only on knowledge taught earlier in the plan?
-3. Does every practical name a concept from its own unit's Vocabulary or Reading sub-section?
+3. Does every unit end at an entry that completes at least one step, and is every step in the unit whose last entry completes its needs?
 4. Does every practical say what the project currently does, name the file or area where it is, and say what it should do instead?
 5. Does every practical leave out any result: a command to run, an output, a status code or a test outcome?
-6. Is every practical's completion independent of any written output (a note, list, explanation, prediction or decision)?
-7. Does every practical avoid creating a scratch file, folder or throwaway edit?
-8. Does every practical use only concepts taught earlier, apart from later-unit code that the step names, with the unit, where the code appears?
-9. Does the plan begin with a unit whose practical is running the project unchanged, with setup steps included if and only if the interview assessment shows the user cannot run it already?
-10. Is every reading item a linked page with its sections as a nested numbered list, subsections under their parent?
-11. Does every reading item name what to read by section number or heading, without describing how the page looks (a box, a sidebar, a table)?
-12. Is every term in an assigned reading that the learner needs defined in this unit's Vocabulary or an earlier unit's, or marked with a `Skip:` bullet in its citation?
-13. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
-14. Is every Vocabulary and Reading item one citation, with at most one `Covers:` line of the plan's own words?
-15. Is every Vocabulary and Reading sub-section free of any code, definition or analogy the plan wrote, apart from `Note:` bullets of two sentences or fewer, each under the section it corrects?
-16. Is every Vocabulary definition verbatim from its cited source? Fetch the page to check.
-17. From round 2: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
+6. Does every step name one accepted change, and does every accepted change have steps?
+7. Does every step's "Make it so that" name something the running project then does that the learner can see, with that step alone?
+8. Does every step use only subjects taught in its unit or earlier?
+9. Do each change's steps together make the whole change and no more, and is every accepted change complete by the last unit?
+10. Does the plan begin with a unit whose practical is running the project unchanged, with setup steps included if and only if the interview assessment shows the user cannot run it already?
+11. Is every reading item a linked page with its sections as a nested numbered list, subsections under their parent?
+12. Does every reading item name what to read by section number or heading, without describing how the page looks (a box, a sidebar, a table)?
+13. Is every term in an assigned reading that the learner needs defined in this unit's Vocabulary or an earlier unit's, or marked with a `Skip:` bullet in its citation?
+14. Does the plan pass each voice rule stated in the lesson-plan writing instructions? Search the plan file for each one.
+15. Is every Vocabulary and Reading item one citation, with at most one `Covers:` line of the plan's own words?
+16. Is every Vocabulary and Reading sub-section free of any code, definition or analogy the plan wrote, apart from `Note:` bullets of two sentences or fewer, each under the section it corrects?
+17. Is every Vocabulary definition verbatim from its cited source? Fetch the page to check.
+18. When reviewing a revision: was each of your earlier change-requests addressed, and does the plan change nothing you did not ask for?
 
-**Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical moves the project toward the Goal (the writer records the intended link in its `notes.md` entry), whether each practical suits the user's knowledge level, whether any item is worded incorrectly, whether each correction note fixes something the cited documentation really gets wrong or omits, whether any Vocabulary list is too long to read before its unit, and any judgment checks in your own guidelines. Apply the split-attention check in your guidelines to the Practical sub-sections, which are the plan's own writing.
+**Judgment checks:** some qualities can't be made yes/no. For each of these, make a finding when you judge it fails, label it `[judgment]`, and say why: whether each practical suits the user's knowledge level, whether any item is worded incorrectly, whether each correction note fixes something the cited documentation really gets wrong or omits, whether any Vocabulary list is too long to read before its unit, and any judgment checks in your own guidelines. Apply the split-attention check in your guidelines to the Practical sub-sections, which are the plan's own writing.
 
 This agent has no shell or git access — if verifying sufficiency requires checking the user's own project source, that source must already be materialized as plain, readable files (see *Topic Code Review*) before this agent is invoked.
 
@@ -52,7 +53,9 @@ Final approval on the curriculum for the user to follow, or — if approval is w
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
-- `tech-stack.md`, `basic-assessment.md` and `interview.md`, for the project and the user's knowledge.
+- The `product-changes-r<N>.md` and `product-changes-explained-r<N>.md` with the highest round number: the accepted changes, minus any recommended change the user dropped.
+- `current-code.md`, when there is a codebase.
+- `basic-assessment.md` and `interview.md`, for the user's knowledge.
 - `curriculum.md`, the curriculum.
 - Every `code-review-*.md` file in the folder, if there are any.
 - The lesson plan with the highest round number, `lesson-plan-r<N>.md`.
@@ -80,7 +83,7 @@ Write the file so that an agent who has never seen this run could continue your 
 
 The file contains:
 - Approval, or the list of change-requests, as described under *Output*.
-- From round 2 on: for each change-request in your previous review, whether it was addressed.
+- When reviewing a revision: for each change-request in your previous review, whether it was addressed.
 - The user's answer to each exception you asked about.
 
 ## Exits

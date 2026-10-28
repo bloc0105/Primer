@@ -46,16 +46,24 @@ The process is diagrammed here in the following state chart:
 ```mermaid
 stateDiagram-v2
     state "Task Analysis" as task
+    state "Define Product Changes" as define
     state "Basic Assessment" as assess
+    state "Confirm Product Changes" as confirm
     state "Interview Question" as interview
     state "Topic Research" as Research
     state "Compare Curriculum to Task" as matcher
     state "Topic Code Review" as source
     state "Write the Lesson Plan" as write
 
-    [*] --> task
-    task --> assess: Task Scoped
-    assess --> Research: Basic Knowledge Gathered
+    [*] --> task: Existing codebase
+    [*] --> define: No codebase
+    task --> define: Code Read
+    define --> assess: New Tools or Concepts
+    define --> confirm: Already Assessed
+    assess --> confirm: Basic Knowledge Gathered
+    confirm --> define: Changes Rejected
+    confirm --> Research: Changes Accepted
+    Research --> define: Change Needs More Work
     interview --> Research: Question Answered
     Research --> write: Research is compiled
     write --> matcher: Material Complete
@@ -65,8 +73,6 @@ stateDiagram-v2
     Research --> interview: Learner's Knowledge Unknown
     Research --> source: Something's wrong with Doc
     source --> Research: Adjudicated by code review
-    
-    
 ```
 
 ## State table
@@ -75,12 +81,14 @@ Each agent below starts with its state's skill already loaded, so starting or re
 
 | State | Agent | Skill | Instance | Output file | Copied when a run starts here |
 |---|---|---|---|---|---|
-| Task Analysis | `code-recon` (Discovery Mode) or `stack-advisor` (Proposal Mode) | `discover-stack` / `propose-stack` | new | `tech-stack.md` | nothing |
-| Basic Assessment | `simple-interviewer` | `basic-assessment` | new | `basic-assessment.md` | `tech-stack.md` |
+| Task Analysis | `code-recon` | `read-current-code` | new | `current-code.md` | nothing |
+| Define Product Changes | `stack-advisor` | `define-product-changes` | persistent | `product-changes-r<N>.md`, one per round | `current-code.md`, if the source run has one |
+| Basic Assessment | `simple-interviewer` | `basic-assessment` | persistent | `basic-assessment.md` | `current-code.md`, if any, and every `product-changes-r<N>.md` |
+| Confirm Product Changes | `simple-interviewer` | `confirm-product-changes` | persistent | `product-changes-explained-r<N>.md`, one per round | the files for Basic Assessment, plus `basic-assessment.md` |
 | Interview Question | `interviewer` | `interview-question` | persistent, started by the researcher's first question | `interview.md` | a run can't start here |
-| Topic Research | `deep-researcher` | `topic-research` | persistent | `curriculum.md` | `tech-stack.md`, `basic-assessment.md` |
+| Topic Research | `deep-researcher` | `topic-research` | persistent | `curriculum.md` | the files for Confirm Product Changes, plus every `product-changes-explained-r<N>.md` |
 | Topic Code Review | `code-reader` | `topic-code-review` | new each time | `code-review-<topic>.md` (optional: most runs have none) | a run can't start here |
-| Write the Lesson Plan | `tech-writer` | `write-lesson-plan` | persistent | `lesson-plan-r<N>.md`, one per round | `tech-stack.md`, `basic-assessment.md`, `interview.md`, `curriculum.md`, every `code-review-*.md` |
+| Write the Lesson Plan | `tech-writer` | `write-lesson-plan` | persistent | `lesson-plan-r<N>.md`, one per round | the files for Topic Research, plus `interview.md`, `curriculum.md` and every `code-review-*.md` |
 | Compare Curriculum to Task | `skeptical-student` | `compare-curriculum` | persistent | `review-r<N>.md` and `notes-review-r<N>.md`, one of each per round | the files for Write the Lesson Plan, plus every `lesson-plan-r<N>.md` |
 
 **Persistent** means you start the agent the first time it's needed in this run and resume that same instance every time after that, whether it's entering its state again or answering a question. An agent started partway through a run picks up its step from the files in the run folder.
@@ -110,7 +118,7 @@ In `--only` mode, the run ends when the starting state's agent sends `DONE`. Che
 2. **Enter every state the agents send you to.** Treat every state as required, even one whose topic has come up before. Each state's agent does work the other states do not.
 3. **Send every question to the agent the `ASK` marker names.** That agent owns the answer. Your part is delivering the question and bringing the answer back.
 4. **Leave all content writing to the agents.** Your file operations are setting up the run folder, keeping `run.md` up to date, appending exact messages to `transcript.md`, and *Preparing source*.
-5. **Start Task Analysis only after `run.md` records a Goal.**
+5. **Start the first state only after `run.md` records a Goal.**
 
 # Starting a run
 
@@ -127,13 +135,13 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
    - `--only <state> <source-run> [notes]`: run `<state>` alone, then stop.
    - Anything else is a **full** run, and the arguments are the user's request. A full run shall start from a goal: what the user wants to be able to do or have when the process ends, such as fixing a named bug, building a named thing, or changing a named behavior. Test: complete the sentence "The user wants to ___" using only the user's own words. The completed sentence shall name its target (the repo, branch, file or tool), because the agents read the goal and never the request. A named repo, branch, file or tool is a target, and "understand" or "learn" with no outcome stated is also a target, so neither completes the sentence. When the arguments are empty, or the sentence can't be completed, ask the user "What are you trying to do with `<target>`?" (or "What are you looking to do?" when there is no target) and repeat until it can be completed. Record the completed sentence as the goal.
 2. **For `--from` and `--only`, check the state and the source run:**
-   - `<state>` is the skill name of one of these states: `discover-stack` or `propose-stack` (Task Analysis), `basic-assessment`, `topic-research`, `write-lesson-plan`, `compare-curriculum`.
+   - `<state>` is the skill name of one of these states: `read-current-code` (Task Analysis), `define-product-changes`, `basic-assessment`, `confirm-product-changes`, `topic-research`, `write-lesson-plan`, `compare-curriculum`.
    - When `<state>` is `topic-code-review`, tell the user that code review only happens when `deep-researcher` asks for it, so it can't be a starting state. To tune it, they can run `--only topic-research` on a request where the documentation is known to be wrong. Stop there, without creating a run folder.
    - When `<state>` is any other name that isn't in the list, tell the user the valid state names and stop there.
    - `<source-run>` is a folder under `./runs/`, or a path to one. It contains a `run.md`. When it can't be found, tell the user and stop there.
 3. **Create `./runs/` if it doesn't exist.** At the same time, write `./runs/.gitignore` containing the single line `*`. This keeps runs out of git in any repo, without touching the repo's own `.gitignore`.
 4. **Create the run folder,** named `<YYYY-MM-DD>-<slug>`: today's date, then three to five lowercase words from the goal (or, for --from and --only, the request) joined by hyphens. When a folder with that name exists, add `-2`, `-3` and so on.
-5. **For `--from` and `--only`, copy files from the source run:** the files the state table lists under *Copied when a run starts here* for the starting state. For example, a start at `topic-research` copies `tech-stack.md` and `basic-assessment.md`. Copy nothing else, so every other file in the new folder comes from this run.
+5. **For `--from` and `--only`, copy files from the source run:** the files the state table lists under *Copied when a run starts here* for the starting state. For example, a start at `basic-assessment` copies `current-code.md`, if the source run has one, and every `product-changes-r<N>.md`. Copy nothing else, so every other file in the new folder comes from this run.
 6. **Write `run.md`:**
 
    ```
@@ -154,7 +162,7 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
 7. **Create `transcript.md`** containing only the heading `# Transcript: <run folder name>`. Create `notes.md` containing only the heading `# Notes: <run folder name>`. Neither file is copied from the source run.
 8. **Start the process:**
    - **Full run:** begin at *Task Analysis*, below.
-   - **`--from` or `--only`:** start the agent for `<state>` from the state table, and send it the path of the run folder. For `discover-stack` start `code-recon`, and for `propose-stack` start `stack-advisor`.
+   - **`--from` or `--only`:** start the agent for `<state>` from the state table, and send it the path of the run folder.
 
 ## The transcript
 
@@ -171,7 +179,7 @@ The sender or receiver is an agent's name or `user`. The user's replies are logg
 # Task Analysis
 
 ## Basics
-- Performed by the main Agent, which determines the mode and starts `code-recon` or `stack-advisor`.
+- Performed by the main Agent, which determines the mode and starts the first state.
 
 ## The Process
 
@@ -187,15 +195,13 @@ The user's goal, established in *Starting a run*, is referred to as the **projec
 
 **First, determine the mode:**
 
-- If the user references existing code (a repo, a file path, a specific bug, "help me understand/fix X"), this is **Discovery Mode**. Start `code-recon`, which runs the `discover-stack` skill, and give it the path of the run folder.
-- If the user describes a goal with no existing code ("I want to build X"), this is **Proposal Mode**. Start `stack-advisor`, which runs the `propose-stack` skill, and give it the path of the run folder.
+- If the user references existing code (a repo, a file path, a specific bug, "help me understand/fix X"), this is **Discovery Mode**. Start `code-recon` in *Task Analysis*, and give it the path of the run folder.
+- If the user describes a goal with no existing code ("I want to build X"), this is **Proposal Mode**. There is no code to read, so start `stack-advisor` in *Define Product Changes*, and give it the path of the run folder.
 - If the request is ambiguous, ask the user directly which situation applies before proceeding.
-
-Both skills produce the same output: a **Tech Stack List**, the set of subjects, concepts, Topics, and tools that make up the system, i.e. everything someone would need to know in order to work on it. 
 
 ## Output
 
-The output of the initial assessment should be the **Tech Stack list.**  This is the list of subject/concept/topic/tools that are used in the project.  Each subject/concept/topic/tool should be listed, followed by a brief paragraph describing how that tool is used in the project.
+In Discovery Mode, Task Analysis writes `current-code.md`: what the codebase currently does in the areas the Goal involves, the tools it uses there, and the problems found in those areas.
 
 # Preparing source
 

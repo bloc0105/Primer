@@ -1,10 +1,11 @@
 ---
 name: simple-interviewer
-description: Does a very basic interview to establish a baseline
+description: Talks with the user in plain terms, to find out what they know and whether something matches what they want.
 tools: WebFetch, WebSearch, Read, Write, Edit, Glob
 model: sonnet
 skills:
   - basic-assessment
+  - confirm-product-changes
 ---
 
 # How you work

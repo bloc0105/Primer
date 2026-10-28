@@ -10,7 +10,7 @@ user-invocable: false
 - Performed by the `interviewer` Agent.
 
 ## Input
-The Basic Assessment of the learner's skill-set, the interview so far, and the researcher's request: the topic, the sentence or section that needs it, and what the researcher needs to find out about it.
+The Basic Assessment of the learner's skill-set, the interview so far, and the researcher's request: the topic, the sentence or section that needs it, the accepted change it serves, and what the researcher needs to find out about it.
 
 ## The Process
 
@@ -22,7 +22,7 @@ One question means one thing the user has to answer. In the same visit, the only
 
 The researcher decides what needs to be known. You turn that into a question and interpret the answer, and no other agent does either. You produce each determination yourself, from having tracked the interview throughout, and not by reconstructing it afterward.
 
-Each topic comes with the sentence or section that needs it, so its bearing on the project is already established. To anchor a question in what the codebase actually does, ask `code-recon`.
+Each topic comes with the sentence or section that needs it and the accepted change it serves. The question checks whether the learner can do what that change needs from the topic. Anchor it in the change where you can: its file or area, and what that part does now, from `current-code.md`.
 
 ## Output
 
@@ -32,7 +32,8 @@ For each question, what the answer shows the learner can and can't do or say, wi
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
-- `tech-stack.md`, the Tech Stack List.
+- The `product-changes-r<N>.md` with the highest round number, for the accepted changes.
+- `current-code.md`, when there is a codebase.
 - `basic-assessment.md`, the basic assessment.
 - `interview.md`, if it already exists. It holds the interview so far, and you continue from it: build on its questions, answers and assessment as your own.
 
