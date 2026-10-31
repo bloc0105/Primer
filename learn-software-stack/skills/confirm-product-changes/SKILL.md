@@ -17,26 +17,29 @@ user-invocable: false
 
 ## The Process
 
-The user can't write the change list, but they can tell whether it describes what they want. Your job is to show them the list in words they have, and find out.
+The user can't judge whether a technical change is needed; the `auditor` has already checked that. The user can judge two things: whether the end-state is what they want, and whether to accept the risk a recommended change protects against. Your job is to show them the list in words they have, and ask about those two things only. For an amendment that leaves the end-state as it was, only the second applies.
 
-Explain the end-state, the tools and each change in words the basic assessment shows the user has. The explanation is a rendering of the list, not a replacement: every change keeps its file or area and what it does. Don't add, drop, merge or reword what a change does. Name a recommended change as recommended, and say what it protects against.
+Explain the end-state, the tools and each change in words the basic assessment shows the user has. For an amendment that leaves the end-state as it was, explain only what the last paragraph below names. The explanation is a rendering of the list, not a replacement: every change keeps its file or area and what it does. Don't add, drop, merge or reword what a change does. Name a recommended change as recommended, and say what happens if it's left out, in terms of what someone could do or see.
 
-When the list is an amendment, say what it changes and the reason research gave, before asking whether it describes what the user wants.
+The changes are shown so the user knows what they will build. Don't ask the user to judge them.
 
-Show the explanation, and ask whether it describes what the user wants.
+Ask about the end-state for every list except an amendment that leaves the end-state as it was. For those lists, show the explanation, and ask whether the end-state describes what the user wants. When the list is an amendment that changes the end-state, first say what it changes in what the product does, and the reason research gave.
 - When the user accepts it, ask about each recommended change, one per turn: keep it or drop it.
 - When the user rejects it, record their words. They go back to the `stack-advisor` as they are.
 - When the user asks about the list, answer from the list, and ask again.
 
+When the list is an amendment that leaves the end-state as it was, the `auditor` sent it here only because a recommended change has no decision yet. Explain only the recommended changes with no decision, and ask keep or drop for each, one per turn. Don't ask about the end-state.
+
 ## Output
 
-The explanation, the user's replies, and whether the list was accepted.
+The explanation, the user's replies, and, except for an amendment that leaves the end-state as it was, whether the list was accepted.
 
 ## Your input files
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
 - The `product-changes-r<N>.md` with the highest round number.
+- Every `product-changes-explained-r<N>.md`, if there are any, for the decisions already made on recommended changes.
 - `basic-assessment.md`, the basic assessment.
 
 ## Your output file
@@ -64,13 +67,14 @@ The file contains:
 - Each of the user's replies, word for word.
 - **Outcome:** accepted or rejected.
 - When accepted: each recommended change, and whether the user kept or dropped it.
+- For an amendment that leaves the end-state as it was: no outcome, only each recommended change you asked about and whether the user kept or dropped it.
 
 Write each reply into the file as soon as it arrives, before your next turn.
 
 ## Exits
 
 - `ASK USER`: show the explanation, ask about a recommended change, or answer a question about the list.
-- `DONE → Topic Research`: the user accepted the list and decided on each recommended change.
+- `DONE → Topic Research`: the user accepted the list and decided on each recommended change, or, for an amendment that leaves the end-state as it was, decided on each recommended change that had no decision.
 - `DONE → Define Product Changes`: the user rejected the list. Their words are in the file.
 
 ## Reporting back
@@ -78,7 +82,7 @@ Write each reply into the file as soon as it arrives, before your next turn.
 You are working inside the `/curriculum` process. The main agent passes your messages on exactly as you write them, and it acts only on the marker that ends your turn. End every turn with exactly one of these markers, on its own line, followed by the content that goes with it:
 
 - `ASK USER:` followed by one question or message for the user. The main agent shows it to the user and sends you their reply word for word. That reply is the user's answer: record it as theirs.
-- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
+- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `auditor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
 - `ANSWER: <path>` followed, on the next line, by a one-line summary. Use this to finish every exchange that began with a question to you. First record your answer in your own output file, in a new section that names who asked and what they asked. Before answering, you may ask the user or another agent for what you need.
 - `DONE → <next state>: <path>` followed, on the next line, by a one-line summary. The path is the output file you wrote in this state. Choose the next state from the Exits above, or `END` when your Exits say the process is complete.
 

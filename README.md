@@ -21,7 +21,7 @@ There should be a better way.
 
 It works whether you're diving into an existing codebase or starting something new. If there's no code yet, Primer chooses the tools as part of planning the changes.
 
-What you get at the end is a **lesson plan**. Every unit pairs the reading you actually need with a step of the changes you agreed to, in *your* project, so you're moving your real work forward while you learn. Before you see it, a separate reviewer checks the plan: is everything in the right order, does each exercise use what you just read, and is it pitched at your level?
+What you get at the end is a **lesson plan**. Every unit pairs the reading you actually need with a step of the changes you agreed to, in *your* project, so you're moving your real work forward while you learn. Before you see it, a separate reviewer checks the plan: is everything in the right order, does each step use what you just read, does every step belong to a change you agreed to, and is it pitched at your level?
 
 ## How it works
 
@@ -29,13 +29,14 @@ Primer moves between states. Each state hands off to another when its work is do
 
 - **Task Analysis.** Tell Primer what you want to do. If there's a codebase, it reads what the code does now.
 - **Define Product Changes.** Plans what the finished product does, and the changes that get there. Only what your goal needs, plus anything it recommends for security.
-- **Basic Assessment.** A quick, informal conversation about the tools and ideas those changes involve.
-- **Confirm Product Changes.** Explains the changes in your words and waits. If they're not what you want, say so, and they're revised.
-- **Topic Research.** Works backward from what the changes need. Whenever it reaches something it can't tell whether you know, it calls on **Interview Question**, which asks you one pointed question about it, and research then goes further back or stops. When the docs disagree with each other or with reality, it calls on **Topic Code Review**, which reads the actual source code to settle it. Research ends where what the task needs meets what you already know.
-- **Write the Lesson Plan.** Turns the research into lessons, each one a step of the agreed changes. When it needs more information, it asks Topic Research.
-- **Compare Curriculum to Task.** A skeptical reviewer checks the plan and sends it back to the writer until it's right.
+- **Review Product Changes.** A separate reviewer checks that every change is needed for that finished product, so nothing extra reaches you or the lessons.
+- **Basic Assessment.** A quick, informal conversation about the tools and ideas those changes involve. If a revised list brings in something new, it asks about just that.
+- **Confirm Product Changes.** Explains the finished product and the changes in your words, and asks you the two things only you can decide: is that finished product what you want, and do you want each security recommendation, explained by what could happen without it. You aren't asked to judge the technical changes; the reviewer already has. If the finished product isn't what you want, say so, and the list is revised.
+- **Topic Research.** Works backward from what the changes need. Whenever it reaches something it can't tell whether you know, it calls on **Interview Question**, which asks you one pointed question about it, and research then goes further back or stops. When the docs disagree with each other or with reality, it calls on **Topic Code Review**, which reads the actual source code to settle it. If it finds a change can't be made as planned, the list goes back to be amended and reviewed, and comes back to you only if what the finished product does would change. Research ends where what the changes need meets what you already know.
+- **Write the Lesson Plan.** Turns the research into lessons. Each lesson ends with a step of the agreed changes, one you can see working on its own, and builds as much as its reading allows. When it needs more information, it asks Topic Research.
+- **Compare Curriculum to Task.** A skeptical reviewer checks the plan against the agreed changes and sends it back to the writer until it's right.
 
-The agent that plans the changes is never the one that explains them to you, and the agent that writes the lesson plan is never the one that approves it.
+The agent that plans the changes is never the one that checks them or explains them to you, and the agent that writes the lesson plan is never the one that approves it.
 
 ## Installation
 

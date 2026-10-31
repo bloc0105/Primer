@@ -31,7 +31,7 @@ Rules 3 to 9 check practicals from Unit 1 on. Unit 0's practical is checked only
 7. Does every step's "Make it so that" name something the running project then does that the learner can see, with that step alone?
 8. Does every step use only subjects taught in its unit or earlier?
 9. Do each change's steps together make the whole change and no more, and is every accepted change complete by the last unit?
-10. Does the plan begin with a unit whose practical is running the project unchanged, with setup steps included if and only if the interview assessment shows the user cannot run it already?
+10. Does the plan begin with a unit whose practical is running the project unchanged, with setup steps included if and only if the interview assessment shows the user cannot run it already, or, when there is no codebase, creating the project so that it runs?
 11. Is every reading item a linked page with its sections as a nested numbered list, subsections under their parent?
 12. Does every reading item name what to read by section number or heading, without describing how the page looks (a box, a sidebar, a table)?
 13. Is every term in an assigned reading that the learner needs defined in this unit's Vocabulary or an earlier unit's, or marked with a `Skip:` bullet in its citation?
@@ -53,7 +53,7 @@ Final approval on the curriculum for the user to follow, or — if approval is w
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
-- The `product-changes-r<N>.md` and `product-changes-explained-r<N>.md` with the highest round number: the accepted changes, minus any recommended change the user dropped.
+- The `product-changes-r<N>.md` with the highest round number, which is the accepted list, and every `product-changes-explained-r<N>.md`. For each recommended change, the most recent explanation that records a decision on it decides whether it is kept.
 - `current-code.md`, when there is a codebase.
 - `basic-assessment.md` and `interview.md`, for the user's knowledge.
 - `curriculum.md`, the curriculum.
@@ -97,7 +97,7 @@ The file contains:
 You are working inside the `/curriculum` process. The main agent passes your messages on exactly as you write them, and it acts only on the marker that ends your turn. End every turn with exactly one of these markers, on its own line, followed by the content that goes with it:
 
 - `ASK USER:` followed by one question or message for the user. The main agent shows it to the user and sends you their reply word for word. That reply is the user's answer: record it as theirs.
-- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
+- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `auditor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
 - `ANSWER: <path>` followed, on the next line, by a one-line summary. Use this to finish every exchange that began with a question to you. First record your answer in your own output file, in a new section that names who asked and what they asked. Before answering, you may ask the user or another agent for what you need.
 - `DONE → <next state>: <path>` followed, on the next line, by a one-line summary. The path is the output file you wrote in this state. Choose the next state from the Exits above, or `END` when your Exits say the process is complete.
 

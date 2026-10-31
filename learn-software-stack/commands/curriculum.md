@@ -26,6 +26,7 @@ classDiagram
   class tech-writer
   class simple-interviewer
   class stack-advisor
+  class auditor
   class code-reader
 
   person -- main-agent
@@ -34,6 +35,7 @@ classDiagram
   main-agent -- simple-interviewer
   main-agent --> code-recon
   main-agent -- stack-advisor
+  main-agent -- auditor
   main-agent --> code-reader
   main-agent -- deep-researcher
   main-agent -- skeptical-student
@@ -47,6 +49,7 @@ The process is diagrammed here in the following state chart:
 stateDiagram-v2
     state "Task Analysis" as task
     state "Define Product Changes" as define
+    state "Review Product Changes" as review
     state "Basic Assessment" as assess
     state "Confirm Product Changes" as confirm
     state "Interview Question" as interview
@@ -58,8 +61,12 @@ stateDiagram-v2
     [*] --> task: Existing codebase
     [*] --> define: No codebase
     task --> define: Code Read
-    define --> assess: New Tools or Concepts
-    define --> confirm: Already Assessed
+    define --> review: Changes Proposed
+    review --> define: Changes Not Needed
+    review --> assess: New Tools or Concepts
+    review --> confirm: Already Assessed
+    review --> confirm: Amendment Has Undecided Recommendation
+    review --> Research: Amendment Approved, All Decided
     assess --> confirm: Basic Knowledge Gathered
     confirm --> define: Changes Rejected
     confirm --> Research: Changes Accepted
@@ -83,6 +90,7 @@ Each agent below starts with its state's skill already loaded, so starting or re
 |---|---|---|---|---|---|
 | Task Analysis | `code-recon` | `read-current-code` | new | `current-code.md` | nothing |
 | Define Product Changes | `stack-advisor` | `define-product-changes` | persistent | `product-changes-r<N>.md`, one per round | `current-code.md`, if the source run has one |
+| Review Product Changes | `auditor` | `review-product-changes` | persistent | `review-product-changes-r<N>.md`, one per round | the files for Define Product Changes, plus every `product-changes-r<N>.md`, `basic-assessment.md` if any, and every `product-changes-explained-r<N>.md` |
 | Basic Assessment | `simple-interviewer` | `basic-assessment` | persistent | `basic-assessment.md` | `current-code.md`, if any, and every `product-changes-r<N>.md` |
 | Confirm Product Changes | `simple-interviewer` | `confirm-product-changes` | persistent | `product-changes-explained-r<N>.md`, one per round | the files for Basic Assessment, plus `basic-assessment.md` |
 | Interview Question | `interviewer` | `interview-question` | persistent, started by the researcher's first question | `interview.md` | a run can't start here |
@@ -100,8 +108,8 @@ Every agent ends each of its turns with one marker. Act on the marker as follows
 1. **`ASK USER:`** Show the text to the user as `From <name> Agent:` followed by the agent's exact words. Send the user's reply to the same agent instance as `The user's reply:` followed by their exact words.
 2. **`ASK <agent>:`** Add the asking agent to the end of your list of waiting askers. Then send the question, exactly as written, to the named agent, together with the path of the run folder: resume the agent if it exists, or start it if it doesn't. Handle that agent's turns with these same steps.
 3. **`ANSWER: <path>`** Check the file (see step 7). Remove the last agent from your list of waiting askers, and send it the whole `ANSWER` message exactly as written. That agent reads the file and continues from where it stopped.
-4. **`DONE → <state>: <path>`** Check the file (see step 7). Move to that state. Start or resume its agent as the state table says, and send it the run folder path and the whole `DONE` message exactly as written.
-5. **`DONE → END: <path>`** Check the file (see step 7). Show the message to the user as `From <name> Agent:` followed by the agent's exact words, then give the path of the run folder. The process is complete.
+4. **`DONE → <state>: <path>`** A `DONE` is not an answer. If your list of waiting askers isn't empty, remove every agent on it. The next time you start or resume each of them, begin your message by saying that its question was not answered, because `<name>` sent `DONE` instead. Then check the file (see step 7). Move to that state. Start or resume its agent as the state table says, and send it the run folder path and the whole `DONE` message exactly as written.
+5. **`DONE → END: <path>`** Clear the list of waiting askers as in step 4. Check the file (see step 7). Show the message to the user as `From <name> Agent:` followed by the agent's exact words, then give the path of the run folder. The process is complete.
 6. **A turn with no marker:** send the agent a message saying its turn had no marker, so it can finish the turn with one.
 7. **Checking the file:** before passing on an `ANSWER` or `DONE`, confirm that the file at its path exists. If it exists, add it to the Files list in `run.md` as produced by this run, unless it's already listed. If it doesn't exist, send the agent a message saying the file is missing, so it can write the file and send its marker again.
 
@@ -135,7 +143,7 @@ Every run gets its own folder under `./runs/`, in the directory Claude was launc
    - `--only <state> <source-run> [notes]`: run `<state>` alone, then stop.
    - Anything else is a **full** run, and the arguments are the user's request. A full run shall start from a goal: what the user wants to be able to do or have when the process ends, such as fixing a named bug, building a named thing, or changing a named behavior. Test: complete the sentence "The user wants to ___" using only the user's own words. The completed sentence shall name its target (the repo, branch, file or tool), because the agents read the goal and never the request. A named repo, branch, file or tool is a target, and "understand" or "learn" with no outcome stated is also a target, so neither completes the sentence. When the arguments are empty, or the sentence can't be completed, ask the user "What are you trying to do with `<target>`?" (or "What are you looking to do?" when there is no target) and repeat until it can be completed. Record the completed sentence as the goal.
 2. **For `--from` and `--only`, check the state and the source run:**
-   - `<state>` is the skill name of one of these states: `read-current-code` (Task Analysis), `define-product-changes`, `basic-assessment`, `confirm-product-changes`, `topic-research`, `write-lesson-plan`, `compare-curriculum`.
+   - `<state>` is the skill name of one of these states: `read-current-code` (Task Analysis), `define-product-changes`, `review-product-changes`, `basic-assessment`, `confirm-product-changes`, `topic-research`, `write-lesson-plan`, `compare-curriculum`.
    - When `<state>` is `topic-code-review`, tell the user that code review only happens when `deep-researcher` asks for it, so it can't be a starting state. To tune it, they can run `--only topic-research` on a request where the documentation is known to be wrong. Stop there, without creating a run folder.
    - When `<state>` is any other name that isn't in the list, tell the user the valid state names and stop there.
    - `<source-run>` is a folder under `./runs/`, or a path to one. It contains a `run.md`. When it can't be found, tell the user and stop there.

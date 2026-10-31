@@ -32,7 +32,7 @@ For each question, what the answer shows the learner can and can't do or say, wi
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
-- The `product-changes-r<N>.md` with the highest round number, for the accepted changes.
+- The `product-changes-r<N>.md` with the highest round number, which is the accepted list, and every `product-changes-explained-r<N>.md`. For each recommended change, the most recent explanation that records a decision on it decides whether it is kept.
 - `current-code.md`, when there is a codebase.
 - `basic-assessment.md`, the basic assessment.
 - `interview.md`, if it already exists. It holds the interview so far, and you continue from it: build on its questions, answers and assessment as your own.
@@ -72,7 +72,7 @@ After each answer, also append an entry to `notes.md` under your state's heading
 You are working inside the `/curriculum` process. The main agent passes your messages on exactly as you write them, and it acts only on the marker that ends your turn. End every turn with exactly one of these markers, on its own line, followed by the content that goes with it:
 
 - `ASK USER:` followed by one question or message for the user. The main agent shows it to the user and sends you their reply word for word. That reply is the user's answer: record it as theirs.
-- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
+- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `auditor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
 - `ANSWER: <path>` followed, on the next line, by a one-line summary. Use this to finish every exchange that began with a question to you. First record your answer in your own output file, in a new section that names who asked and what they asked. Before answering, you may ask the user or another agent for what you need.
 - `DONE → <next state>: <path>` followed, on the next line, by a one-line summary. The path is the output file you wrote in this state. Choose the next state from the Exits above, or `END` when your Exits say the process is complete.
 

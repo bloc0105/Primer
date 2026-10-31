@@ -37,12 +37,14 @@ Every question to the interviewer goes to the same `interviewer` instance, so th
 
 Research adds what the learner must learn, never what the product does. A knowledge gap can add a prerequisite entry; it can't add a change. When an accepted change can't be made as written, or needs a change the list doesn't have, take the `DONE → Define Product Changes` exit below.
 
+When you resume after an amendment, update the subject list of each change the amendment changed or added, write the entries those lists need, and remove every entry that only a removed change needed.
+
 ## Output
 The list of Documentation that is necessary to get the user from their current state to the state in which they know enough to make the accepted changes. This will be referred to as the curriculum. The curriculum shall be in an order in which the human user is expected to read the material. This means that no subject shall contain material that has not been learned in a previous subject.
 
 For each accepted change, its subject list: every subject the learner must learn to make it, prerequisites included. The curriculum is the union of those lists, each subject once, in reading order. Each entry names every accepted change it serves, and shall carry three lists:
 
-1. **Terms:** each term the learner needs from the entry's section that no earlier entry defines. A term is needed when the interview assessment shows the user does not use it correctly, or when the section uses it and cannot be followed without it. Each term is listed with the defining sentence quoted verbatim from its source, and the source and section it comes from. The definition comes from the documentation of the language or tool the term belongs to, and lets the learner understand how the step that needs it uses the term. Quote exactly one, whole and word for word. When no source defines the term, the entry says "no source defines this" and does not supply a definition of its own.
+1. **Terms:** each term the learner needs from the entry's section that no earlier entry defines. A term is needed when the interview assessment shows the user does not use it correctly, or when the section uses it and cannot be followed without it. Each term is listed with the defining sentence quoted verbatim from its source, and the source and section it comes from. The definition comes from the documentation of the language or tool the term belongs to, and lets the learner understand how the change that needs it uses the term. Quote exactly one, whole and word for word. When no source defines the term, the entry says "no source defines this" and does not supply a definition of its own.
 2. **Ignorable:** what in the assigned section the learner does not need, such as terms or subsections, so the writer can list each as a `Skip:` bullet.
 3. **Trace:** for each prerequisite you tested while writing the entry, where the check stopped and why: the learner knows it (the evidence), a quoted sentence defines it and the learner knows every prerequisite of that sentence (the sentence), or no accepted change needs it (the reason).
 
@@ -50,7 +52,7 @@ For each accepted change, its subject list: every subject the learner must learn
 
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
-- The `product-changes-r<N>.md` and `product-changes-explained-r<N>.md` with the highest round number: the accepted changes, minus any recommended change the user dropped.
+- The `product-changes-r<N>.md` with the highest round number, which is the accepted list, and every `product-changes-explained-r<N>.md`. For each recommended change, the most recent explanation that records a decision on it decides whether it is kept.
 - `basic-assessment.md`, the basic assessment.
 - `interview.md`, the interview record, if it exists.
 - Every `code-review-*.md` file in the folder, if there are any. Code review is optional, and most runs have none.
@@ -96,7 +98,7 @@ The file contains:
 You are working inside the `/curriculum` process. The main agent passes your messages on exactly as you write them, and it acts only on the marker that ends your turn. End every turn with exactly one of these markers, on its own line, followed by the content that goes with it:
 
 - `ASK USER:` followed by one question or message for the user. The main agent shows it to the user and sends you their reply word for word. That reply is the user's answer: record it as theirs.
-- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
+- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `auditor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
 - `ANSWER: <path>` followed, on the next line, by a one-line summary. Use this to finish every exchange that began with a question to you. First record your answer in your own output file, in a new section that names who asked and what they asked. Before answering, you may ask the user or another agent for what you need.
 - `DONE → <next state>: <path>` followed, on the next line, by a one-line summary. The path is the output file you wrote in this state. Choose the next state from the Exits above, or `END` when your Exits say the process is complete.
 

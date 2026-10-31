@@ -16,10 +16,11 @@ user-invocable: false
 - When there is a codebase: `current-code.md`, and the code itself.
 - When the user has rejected a list: that list, and the user's words rejecting it.
 - When research found that an accepted change needs more work: the accepted list, and the researcher's finding in `curriculum.md`.
+- When the `auditor` sent the list back: its findings.
 
 ## The Process
 
-The user can state what they want, but not the work that would get them there. You determine that work. Everything after this state serves it, and nothing after it can add to it.
+The user can state what they want, but not the work that would get them there. You determine that work. Everything after this state serves it. Nothing adds to the list except a return to this state, for a research finding or for the user's rejection.
 
 Write the list the way you would write a plan for making these changes yourself: file by file, what each part does now and what it must do instead. Stop before the code. The user makes these changes, during the lessons.
 
@@ -27,13 +28,13 @@ Write the list the way you would write a plan for making these changes yourself:
 
 **The tools.** When there is no codebase, choose the tools the changes need: one concrete choice for each need, mainstream and well documented. When there is a codebase, use what it already uses, and add a tool only when no existing one can do the job.
 
-**The change list.** The changes that reach the end-state. Each change says what the project does now, where, and what it does instead, and lists the tools and concepts it involves. Read the code before you name a file or area. When there is no codebase, the areas are the ones the end-state will need. Don't write the new code; the user writes it during the lessons.
+**The change list.** The changes that reach the end-state. Each change says what the project does now, where, and what it does instead, names the end-state outcome it is needed for, and lists the tools and concepts it involves. A recommended change says what happens if it's left out in place of the outcome it is needed for. Read the code before you name a file or area. When there is no codebase, the areas are the ones the end-state will need. Don't write the new code; the user writes it during the lessons.
 
 Keep a change only when the end-state is impossible without it. A change that is usual, that makes the product feel complete, that a tutorial starts with, or that only improves how the code looks, stays off the list. A problem in `current-code.md` goes on the list only when the end-state is impossible without fixing it.
 
-A vulnerability in what the end-state exposes, such as a secret stored or sent unprotected, goes on the list as a recommended change, marked **Recommended: security**, with one sentence saying what it protects against. The user keeps or drops it in *Confirm Product Changes*.
+A vulnerability in what the end-state exposes, such as a secret stored or sent unprotected, goes on the list as a recommended change, marked **Recommended: security**, with one sentence saying what happens if it's left out, in terms of what someone could do or see. The user keeps or drops it in *Confirm Product Changes*.
 
-When revising a rejected list, change only what the user's words ask for, and leave every other change as it was. When amending a list after a research finding, amend only what the finding requires.
+When revising a rejected list, change only what the user's words ask for, and leave every other change as it was. When amending a list after a research finding, amend only what the finding requires, and leave out every recommended change whose latest decision was drop. When the `auditor` sent the list back, fix only what its findings name.
 
 ## Output
 
@@ -44,9 +45,9 @@ The end-state, the tools, and the change list.
 The main agent gives you the path of the run folder. Read these files from it before you begin:
 - `run.md`, for the **Goal** (the **project**) and any notes about this run.
 - `current-code.md`, when there is a codebase.
-- `basic-assessment.md`, when it exists, to choose your exit.
-- When the user has rejected a list, or research found that an accepted change needs more work: the `product-changes-r<N>.md` and `product-changes-explained-r<N>.md` with the highest round number.
+- When the user has rejected a list, or research found that an accepted change needs more work: the `product-changes-r<N>.md` with the highest round number, and every `product-changes-explained-r<N>.md`. For each recommended change, the most recent explanation that records a decision on it decides whether it is kept.
 - When research found that an accepted change needs more work: `curriculum.md`, for the finding.
+- When the `auditor` sent the list back: the `review-product-changes-r<N>.md` with the highest round number.
 
 ## Your output file
 
@@ -64,7 +65,7 @@ inputs:
 ---
 ```
 
-After the header, write the content described below. Keep this file to that content. In `notes.md`, under the heading `## <state>, <agent>, round <N>` (leave out the round for a state that has none), list the files and sources you opened. For each choice in the output file, quote the evidence it rests on — a path and the passage you used, a source, or the user's words — and state what that evidence shows. For each change, also say why the end-state is impossible without it. Read `notes.md` only when the main agent's message tells you to.
+After the header, write the content described below. Keep this file to that content. In `notes.md`, under the heading `## <state>, <agent>, round <N>` (leave out the round for a state that has none), list the files and sources you opened. For each choice in the output file, quote the evidence it rests on — a path and the passage you used, a source, or the user's words — and state what that evidence shows. For each change not marked recommended, also say why the end-state is impossible without it. For each recommended change, say what it exposes. Read `notes.md` only when the main agent's message tells you to.
 
 Write the file so that an agent who has never seen this run could continue your work in this state from the file alone.
 
@@ -75,20 +76,26 @@ The file contains:
 
   ```
   Currently <what the project does now>, in <the file or area where it is>. Make it so that <what it does instead>.
+  - Needed for: <the end-state outcome that is impossible without it>
   - Involves: <tools and concepts>
+  ```
+
+  A recommended change replaces its `Needed for:` line with:
+
+  ```
+  - Recommended: security. <what happens if it's left out, in terms of what someone could do or see>
   ```
 
 ## Exits
 
-- `DONE → Basic Assessment`: the list involves a tool or concept `basic-assessment.md` doesn't cover yet, including when there is no `basic-assessment.md`.
-- `DONE → Confirm Product Changes`: `basic-assessment.md` covers every tool and concept the list involves.
+- `DONE → Review Product Changes`: the list is written.
 
 ## Reporting back
 
 You are working inside the `/curriculum` process. The main agent passes your messages on exactly as you write them, and it acts only on the marker that ends your turn. End every turn with exactly one of these markers, on its own line, followed by the content that goes with it:
 
 - `ASK USER:` followed by one question or message for the user. The main agent shows it to the user and sends you their reply word for word. That reply is the user's answer: record it as theirs.
-- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
+- `ASK <agent-name>:` followed by a question for another agent in the process: `code-recon`, `stack-advisor`, `auditor`, `simple-interviewer`, `interviewer`, `deep-researcher`, `code-reader`, `tech-writer` or `skeptical-student`. Name the agent that owns the answer. The answering agent records its answer in its own output file and sends you that file's path. Read the file, then continue from where you stopped.
 - `ANSWER: <path>` followed, on the next line, by a one-line summary. Use this to finish every exchange that began with a question to you. First record your answer in your own output file, in a new section that names who asked and what they asked. Before answering, you may ask the user or another agent for what you need.
 - `DONE → <next state>: <path>` followed, on the next line, by a one-line summary. The path is the output file you wrote in this state. Choose the next state from the Exits above, or `END` when your Exits say the process is complete.
 
